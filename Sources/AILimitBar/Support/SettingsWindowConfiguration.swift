@@ -7,7 +7,7 @@ struct SettingsWindowPlacementGeometry: Equatable {
 
 enum SettingsWindowConfiguration {
     static let id = "settings"
-    static let title = "AI Limitbar Settings"
+    static let title = "Bairometer Settings"
     static let preferredSize = CGSize(width: 840, height: 560)
 
     static func defaultSize(contentSize: CGSize, visibleRect: CGRect) -> CGSize {

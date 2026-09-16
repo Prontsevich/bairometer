@@ -5,7 +5,7 @@
 "menu_bar.action.about" = "О приложении";
 
 /* Tooltip and accessibility label for the About action */
-"menu_bar.action.about_ai_limitbar" = "О AI Limitbar";
+"menu_bar.action.about_ai_limitbar" = "О Биирометре";
 
 /* Menu bar footer action */
 "menu_bar.action.quit" = "Выйти";
@@ -47,7 +47,7 @@
 "settings.language.choice.system_default" = "Как в системе";
 
 /* Description below the app language selector */
-"settings.language.description" = "Выберите язык интерфейса AI Limitbar.";
+"settings.language.description" = "Выберите язык интерфейса Биирометра.";
 
 /* Accessibility label for the app language selector */
 "settings.language.selection" = "Язык приложения";
@@ -133,9 +133,9 @@
 "dashboard.accessibility.error_summary" = "Ошибка: одному или нескольким включённым аккаунтам нужно внимание. %@";
 "dashboard.diagnostics.source_unsupported" = "Этот режим источника не поддерживается адаптером провайдера.";
 "dashboard.diagnostics.last_refresh_failed" = "Последнее обновление не удалось.";
-"dashboard.diagnostics.connect_before_refresh" = "Подключите этот аккаунт через AI Limitbar перед обновлением.";
+"dashboard.diagnostics.connect_before_refresh" = "Подключите этот аккаунт через Биирометр перед обновлением.";
 "dashboard.diagnostics.source_supported" = "Настроенный источник поддерживается.";
-"dashboard.diagnostics.ollama_source_summary" = "Данные о лимитах читаются со страницы настроек авторизованного Ollama в AI Limitbar.";
+"dashboard.diagnostics.ollama_source_summary" = "Данные о лимитах читаются со страницы настроек авторизованного Ollama в Биирометре.";
 "dashboard.diagnostics.claude_status_line_summary" = "Данные rate limit читаются из управляемого снимка statusLine Claude Code.";
 "dashboard.diagnostics.claude_usage_summary" = "Лимиты плана читаются локальной командой Claude Code /usage.";
 "dashboard.diagnostics.codex_source_summary" = "Текущие окна rate limit читаются из локального app-server Codex.";
@@ -149,14 +149,14 @@
 "storage.refresh_state_save" = "Не удалось сохранить состояние обновления провайдера.";
 "storage.legacy_migration" = "Не удалось перенести прежние данные JSON. Существующие данные базы остаются доступны.";
 "storage.temporary_storage" = "Application Support недоступен. Активно временное хранилище.";
-"storage.unavailable" = "Хранилище AI Limitbar недоступно. Изменения не будут сохранены.";
+"storage.unavailable" = "Хранилище Биирометра недоступно. Изменения не будут сохранены.";
 
 "settings.navigation.label" = "Раздел настроек";
 "settings.navigation.general" = "Основные";
 "settings.navigation.accounts" = "Аккаунты";
 "settings.navigation.provider_setup" = "Провайдеры";
 "settings.general.title" = "ОСНОВНЫЕ";
-"settings.general.description" = "Настройте параметры, общие для всех аккаунтов AI Limitbar.";
+"settings.general.description" = "Настройте параметры, общие для всех аккаунтов Биирометра.";
 "settings.schedule.title" = "РАСПИСАНИЕ";
 "settings.schedule.interval" = "Интервал";
 "settings.schedule.accessibility" = "Интервал обновления";
@@ -170,8 +170,8 @@
 "settings.dashboard.display_limits_help" = "Задаёт default для окон, использующих глобальный режим отображения.";
 "settings.accounts.title" = "АККАУНТЫ";
 "settings.accounts.delete_title" = "Удалить аккаунт?";
-"settings.accounts.delete_message" = "Это удалит %@ и его сохранённый снимок из AI Limitbar.";
-"settings.accounts.delete_openrouter_message" = "Это безопасно удалит %@, все сохранённые для него ключи OpenRouter и данные capacity из AI Limitbar.";
+"settings.accounts.delete_message" = "Это удалит %@ и его сохранённый снимок из Биирометра.";
+"settings.accounts.delete_openrouter_message" = "Это безопасно удалит %@, все сохранённые для него ключи OpenRouter и данные capacity из Биирометра.";
 "settings.accounts.move_up" = "Переместить выше";
 "settings.accounts.move_down" = "Переместить ниже";
 "settings.accounts.add" = "Добавить аккаунт";
@@ -211,14 +211,14 @@
 "settings.editor.source" = "ИСТОЧНИК";
 "settings.editor.mode" = "Режим";
 "settings.editor.provider" = "Провайдер";
-"settings.editor.manual_source_description" = "Ручной источник: открывайте страницу лимитов Claude, когда нужно проверить лимиты плана. В этом режиме AI Limitbar не запускает Claude Code и не сохраняет вывод провайдера.";
+"settings.editor.manual_source_description" = "Ручной источник: открывайте страницу лимитов Claude, когда нужно проверить лимиты плана. В этом режиме Биирометр не запускает Claude Code и не сохраняет вывод провайдера.";
 "settings.editor.status_line_title" = "Помощник statusLine Claude Code";
-"settings.editor.status_line_description" = "Помощник читает официальный JSON statusLine Claude Code и записывает локальную оценку rate limit в управляемую базу AI Limitbar. Путь к JSON не настраивается и не сохраняется.";
+"settings.editor.status_line_description" = "Помощник читает официальный JSON statusLine Claude Code и записывает локальную оценку rate limit в управляемую базу Биирометра. Путь к JSON не настраивается и не сохраняется.";
 "settings.editor.install_helper" = "Установить или восстановить помощник";
 "settings.editor.save_first" = "Сначала сохраните этот аккаунт, затем установите его конфигурацию помощника.";
-"settings.editor.usage_cli_description" = "Экспериментальный источник: AI Limitbar запускает аутентифицированный локальный CLI Claude Code в безопасном неинтерактивном режиме и сохраняет только нормализованные окна лимитов плана. Не сохраняются raw output, атрибуция активности, stderr и метаданные сессии.";
-"settings.editor.ollama_source_description" = "Экспериментальный источник: AI Limitbar открывает изолированную сессию WebKit для https://ollama.com/settings. Сессия никогда не копируется из другого браузера, а raw content страницы не сохраняется.";
-"settings.editor.codex_source_description" = "Экспериментальный источник: AI Limitbar запускает краткоживущий локальный app-server Codex для чтения текущих окон rate limit. Он не читает credentials Codex, файлы сессии, данные браузера или вывод терминала.";
+"settings.editor.usage_cli_description" = "Экспериментальный источник: Биирометр запускает аутентифицированный локальный CLI Claude Code в безопасном неинтерактивном режиме и сохраняет только нормализованные окна лимитов плана. Не сохраняются raw output, атрибуция активности, stderr и метаданные сессии.";
+"settings.editor.ollama_source_description" = "Экспериментальный источник: Биирометр открывает изолированную сессию WebKit для https://ollama.com/settings. Сессия никогда не копируется из другого браузера, а raw content страницы не сохраняется.";
+"settings.editor.codex_source_description" = "Экспериментальный источник: Биирометр запускает краткоживущий локальный app-server Codex для чтения текущих окон rate limit. Он не читает credentials Codex, файлы сессии, данные браузера или вывод терминала.";
 "settings.editor.leave_blank_claude" = "Оставьте пустым, чтобы найти Claude автоматически.";
 "settings.editor.leave_blank_codex" = "Оставьте пустым, чтобы найти Codex автоматически.";
 "settings.editor.browse" = "Выбрать…";
@@ -239,10 +239,10 @@
 
 "ollama.connection.title" = "Подключение Ollama";
 "ollama.connection.unavailable" = "Подключение Ollama недоступно.";
-"ollama.connection.save_before_connecting" = "Сохраните аккаунт перед подключением Ollama через AI Limitbar.";
+"ollama.connection.save_before_connecting" = "Сохраните аккаунт перед подключением Ollama через Биирометр.";
 "ollama.connection.connect" = "Подключить Ollama";
 "ollama.connection.reconnect" = "Подключить Ollama заново";
-"ollama.connection.description" = "Войдите в Ollama прямо в этом изолированном окне AI Limitbar. Cookies, tokens, passwords и raw content страницы остаются внутри WebKit и никогда не экспортируются в хранилище AI Limitbar.";
+"ollama.connection.description" = "Войдите в Ollama прямо в этом изолированном окне Биирометра. Cookies, tokens, passwords и raw content страницы остаются внутри WebKit и никогда не экспортируются в хранилище Биирометра.";
 "ollama.connection.profile_unavailable" = "Профиль подключения недоступен";
 "ollama.connection.save_before_opening" = "Сохраните этот аккаунт перед открытием сценария подключения Ollama.";
 "ollama.connection.try_again" = "Повторить";
@@ -254,18 +254,18 @@
 
 "about.build_information" = "Информация о сборке";
 "about.open_github" = "Открыть GitHub";
-"about.open_github_accessibility" = "Открыть AI Limitbar на GitHub";
+"about.open_github_accessibility" = "Открыть Биирометр на GitHub";
 "about.feedback" = "Обратная связь";
 "about.report_issue" = "Сообщить о проблеме";
-"about.report_issue_accessibility" = "Сообщить о проблеме AI Limitbar на GitHub";
+"about.report_issue_accessibility" = "Сообщить о проблеме Биирометра на GitHub";
 "about.email" = "Электронная почта";
-"about.email_accessibility" = "Написать разработчику AI Limitbar";
+"about.email_accessibility" = "Написать разработчику Биирометра";
 "about.telegram" = "Telegram";
-"about.telegram_accessibility" = "Написать разработчику AI Limitbar в Telegram";
-"about.support_text" = "Если AI Limitbar полезен вам, спасибо за поддержку его разработки.";
+"about.telegram_accessibility" = "Написать разработчику Биирометра в Telegram";
+"about.support_text" = "Если Биирометр полезен вам, спасибо за поддержку его разработки.";
 "about.support_boosty" = "Поддержать на Boosty";
-"about.support_boosty_accessibility" = "Поддержать AI Limitbar на Boosty";
-"about.accessibility" = "О AI Limitbar";
+"about.support_boosty_accessibility" = "Поддержать Биирометр на Boosty";
+"about.accessibility" = "О Биирометре";
 "about.development_build" = "Сборка для разработки";
 "about.version" = "Версия %@ (сборка %@)";
 
@@ -297,9 +297,9 @@
 "account_details.succeeded_at" = "Успешно в %@";
 "account_details.failed_at" = "Не удалось в %@";
 
-"window.settings.title" = "Настройки AI Limitbar";
+"window.settings.title" = "Настройки Биирометра";
 "window.ollama.title" = "Подключить Ollama";
-"window.about.title" = "О AI Limitbar";
+"window.about.title" = "О Биирометре";
 "common.status.unlimited" = "Без ограничений";
 "storage.openrouter_credentials" = "Не удалось загрузить metadata ключей OpenRouter.";
 "openrouter.shared_credits" = "ОБЩИЕ КРЕДИТЫ";
@@ -371,7 +371,7 @@
 "openrouter.settings.remove" = "Удалить";
 "openrouter.settings.management_credential" = "Management-ключ";
 "openrouter.settings.stored_securely" = "Сохранённые ключи остаются в macOS Data Protection Keychain и больше никогда не показываются.";
-"openrouter.settings.management_disclosure" = "Опциональный ключ с повышенными правами. AI Limitbar использует его только для чтения общих кредитов аккаунта через /api/v1/credits. Он никогда не используется для обновления метрик отдельных ключей.";
+"openrouter.settings.management_disclosure" = "Опциональный ключ с повышенными правами. Биирометр использует его только для чтения общих кредитов аккаунта через /api/v1/credits. Он никогда не используется для обновления метрик отдельных ключей.";
 "openrouter.settings.ordinary_disclosure" = "Этот ключ с локальным именем обновляется независимо через /api/v1/key.";
 "openrouter.settings.delete_title" = "Удалить ключ?";
 "openrouter.settings.delete_message" = "%@ будет безопасно удалён из Keychain вместе с локальным capacity context.";
@@ -384,7 +384,7 @@
 "openrouter.editor.key_name" = "Имя";
 "openrouter.editor.credential" = "Ключ";
 "openrouter.editor.credential_placeholder" = "Вставьте ключ";
-"openrouter.editor.no_readback" = "Введённый ключ записывается прямо в Keychain. AI Limitbar не покажет сохранённый ключ после закрытия этого окна.";
+"openrouter.editor.no_readback" = "Введённый ключ записывается прямо в Keychain. Биирометр не покажет сохранённый ключ после закрытия этого окна.";
 "openrouter.error.title" = "Ошибка ключа OpenRouter";
 "openrouter.error.invalid_account" = "Аккаунт OpenRouter недоступен.";
 "openrouter.error.invalid_name" = "Введите локальное имя этого API-ключа.";

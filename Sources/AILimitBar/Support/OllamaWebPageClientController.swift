@@ -12,7 +12,7 @@ final class OllamaWebPageClientController: NSObject, OllamaWebPageClient, @unche
             throw ProviderAdapterError(
                 providerID: "ollama-cloud",
                 message: "Ollama session is not connected.",
-                recoverySuggestion: "Choose Connect Ollama and sign in through AI Limitbar."
+                recoverySuggestion: "Choose Connect Ollama and sign in through Bairometer."
             )
         }
         return try await session(for: account).loadUsage(interactive: false)
@@ -45,7 +45,7 @@ final class OllamaWebPageClientController: NSObject, OllamaWebPageClient, @unche
             throw ProviderAdapterError(
                 providerID: "ollama-cloud",
                 message: "Ollama session is not connected.",
-                recoverySuggestion: "Choose Connect Ollama and sign in through AI Limitbar."
+                recoverySuggestion: "Choose Connect Ollama and sign in through Bairometer."
             )
         }
 
@@ -216,7 +216,7 @@ private final class OllamaWebPageSession: NSObject, WKNavigationDelegate {
                 failure: ProviderAdapterError(
                     providerID: "ollama-cloud",
                     message: "Ollama session is missing or expired.",
-                    recoverySuggestion: "Reconnect Ollama through AI Limitbar."
+                    recoverySuggestion: "Reconnect Ollama through Bairometer."
                 )
             )
             return
@@ -228,7 +228,7 @@ private final class OllamaWebPageSession: NSObject, WKNavigationDelegate {
                 failure: ProviderAdapterError(
                     providerID: "ollama-cloud",
                     message: "Ollama session is missing or expired.",
-                    recoverySuggestion: "Reconnect Ollama through AI Limitbar."
+                    recoverySuggestion: "Reconnect Ollama through Bairometer."
                 )
             )
             return

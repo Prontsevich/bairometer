@@ -296,7 +296,7 @@ public struct ProcessCodexAppServerClient: CodexAppServerClient {
             "params": [
                 "clientInfo": [
                     "name": "ai_limitbar",
-                    "title": "AI Limitbar",
+                    "title": "Bairometer",
                     "version": Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "dev"
                 ]
             ]

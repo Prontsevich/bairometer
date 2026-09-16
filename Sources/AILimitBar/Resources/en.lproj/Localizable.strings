@@ -5,7 +5,7 @@
 "menu_bar.action.about" = "About";
 
 /* Tooltip and accessibility label for the About action */
-"menu_bar.action.about_ai_limitbar" = "About AI Limitbar";
+"menu_bar.action.about_ai_limitbar" = "About Bairometer";
 
 /* Menu bar footer action */
 "menu_bar.action.quit" = "Quit";
@@ -47,7 +47,7 @@
 "settings.language.choice.system_default" = "System Default";
 
 /* Description below the app language selector */
-"settings.language.description" = "Choose the language used by AI Limitbar.";
+"settings.language.description" = "Choose the language used by Bairometer.";
 
 /* Accessibility label for the app language selector */
 "settings.language.selection" = "App language";
@@ -133,9 +133,9 @@
 "dashboard.accessibility.error_summary" = "Error: one or more enabled accounts need attention. %@";
 "dashboard.diagnostics.source_unsupported" = "This source mode is not supported by the provider adapter.";
 "dashboard.diagnostics.last_refresh_failed" = "The last refresh failed.";
-"dashboard.diagnostics.connect_before_refresh" = "Connect this account through AI Limitbar before refreshing.";
+"dashboard.diagnostics.connect_before_refresh" = "Connect this account through Bairometer before refreshing.";
 "dashboard.diagnostics.source_supported" = "The configured source is supported.";
-"dashboard.diagnostics.ollama_source_summary" = "Read usage from the authenticated Ollama settings page in AI Limitbar.";
+"dashboard.diagnostics.ollama_source_summary" = "Read usage from the authenticated Ollama settings page in Bairometer.";
 "dashboard.diagnostics.claude_status_line_summary" = "Read rate-limit data from Claude Code's managed statusLine snapshot.";
 "dashboard.diagnostics.claude_usage_summary" = "Read plan limits from the local Claude Code /usage command.";
 "dashboard.diagnostics.codex_source_summary" = "Read current rate-limit windows from the local Codex app-server.";
@@ -149,14 +149,14 @@
 "storage.refresh_state_save" = "Provider refresh state could not be saved.";
 "storage.legacy_migration" = "Legacy JSON data could not be migrated. Existing database data remains available.";
 "storage.temporary_storage" = "Application Support is unavailable. Temporary storage is active.";
-"storage.unavailable" = "AI Limitbar storage is unavailable. Changes cannot be saved.";
+"storage.unavailable" = "Bairometer storage is unavailable. Changes cannot be saved.";
 
 "settings.navigation.label" = "Settings Section";
 "settings.navigation.general" = "General";
 "settings.navigation.accounts" = "Accounts";
 "settings.navigation.provider_setup" = "Providers";
 "settings.general.title" = "GENERAL";
-"settings.general.description" = "Configure preferences that apply across AI Limitbar accounts.";
+"settings.general.description" = "Configure preferences that apply across Bairometer accounts.";
 "settings.schedule.title" = "SCHEDULE";
 "settings.schedule.interval" = "Interval";
 "settings.schedule.accessibility" = "Refresh interval";
@@ -170,8 +170,8 @@
 "settings.dashboard.display_limits_help" = "Sets the default for windows that use the global display mode.";
 "settings.accounts.title" = "ACCOUNTS";
 "settings.accounts.delete_title" = "Remove Account?";
-"settings.accounts.delete_message" = "This removes %@ and its stored snapshot from AI Limitbar.";
-"settings.accounts.delete_openrouter_message" = "This securely removes %@, every stored OpenRouter key for it, and its capacity data from AI Limitbar.";
+"settings.accounts.delete_message" = "This removes %@ and its stored snapshot from Bairometer.";
+"settings.accounts.delete_openrouter_message" = "This securely removes %@, every stored OpenRouter key for it, and its capacity data from Bairometer.";
 "settings.accounts.move_up" = "Move Up";
 "settings.accounts.move_down" = "Move Down";
 "settings.accounts.add" = "Add account";
@@ -211,14 +211,14 @@
 "settings.editor.source" = "SOURCE";
 "settings.editor.mode" = "Mode";
 "settings.editor.provider" = "Provider";
-"settings.editor.manual_source_description" = "Manual source: open the Claude usage page when you need to check plan limits. AI Limitbar does not start Claude Code or retain provider output in this mode.";
+"settings.editor.manual_source_description" = "Manual source: open the Claude usage page when you need to check plan limits. Bairometer does not start Claude Code or retain provider output in this mode.";
 "settings.editor.status_line_title" = "Claude Code statusLine helper";
-"settings.editor.status_line_description" = "The helper reads Claude Code's official statusLine JSON and writes local-estimate rate-limit data to AI Limitbar's managed database. No JSON path is configured or retained.";
+"settings.editor.status_line_description" = "The helper reads Claude Code's official statusLine JSON and writes local-estimate rate-limit data to Bairometer's managed database. No JSON path is configured or retained.";
 "settings.editor.install_helper" = "Install or Repair Helper";
 "settings.editor.save_first" = "Save this account first, then install its helper configuration.";
-"settings.editor.usage_cli_description" = "Experimental source: AI Limitbar runs the authenticated local Claude Code CLI in safe non-interactive mode and retains only normalized plan-limit windows. Raw output, activity attribution, stderr, and session metadata are discarded.";
-"settings.editor.ollama_source_description" = "Experimental source: AI Limitbar opens an isolated WebKit session for https://ollama.com/settings. The session is never copied from another browser, and raw page content is not stored.";
-"settings.editor.codex_source_description" = "Experimental source: AI Limitbar starts a short-lived local Codex app-server to read current rate-limit windows. It never reads Codex credentials, session files, browser data, or terminal output.";
+"settings.editor.usage_cli_description" = "Experimental source: Bairometer runs the authenticated local Claude Code CLI in safe non-interactive mode and retains only normalized plan-limit windows. Raw output, activity attribution, stderr, and session metadata are discarded.";
+"settings.editor.ollama_source_description" = "Experimental source: Bairometer opens an isolated WebKit session for https://ollama.com/settings. The session is never copied from another browser, and raw page content is not stored.";
+"settings.editor.codex_source_description" = "Experimental source: Bairometer starts a short-lived local Codex app-server to read current rate-limit windows. It never reads Codex credentials, session files, browser data, or terminal output.";
 "settings.editor.leave_blank_claude" = "Leave blank to locate Claude automatically.";
 "settings.editor.leave_blank_codex" = "Leave blank to locate Codex automatically.";
 "settings.editor.browse" = "Browse…";
@@ -239,10 +239,10 @@
 
 "ollama.connection.title" = "Ollama Connection";
 "ollama.connection.unavailable" = "Ollama connection is unavailable.";
-"ollama.connection.save_before_connecting" = "Save the account before connecting Ollama through AI Limitbar.";
+"ollama.connection.save_before_connecting" = "Save the account before connecting Ollama through Bairometer.";
 "ollama.connection.connect" = "Connect Ollama";
 "ollama.connection.reconnect" = "Reconnect Ollama";
-"ollama.connection.description" = "Sign in directly with Ollama in this isolated AI Limitbar window. Cookies, tokens, passwords, and raw page content stay inside WebKit and are never exported to AI Limitbar storage.";
+"ollama.connection.description" = "Sign in directly with Ollama in this isolated Bairometer window. Cookies, tokens, passwords, and raw page content stay inside WebKit and are never exported to Bairometer storage.";
 "ollama.connection.profile_unavailable" = "Connection Profile Unavailable";
 "ollama.connection.save_before_opening" = "Save this account before opening the Ollama connection flow.";
 "ollama.connection.try_again" = "Try Again";
@@ -254,18 +254,18 @@
 
 "about.build_information" = "Build information";
 "about.open_github" = "Open GitHub";
-"about.open_github_accessibility" = "Open AI Limitbar on GitHub";
+"about.open_github_accessibility" = "Open Bairometer on GitHub";
 "about.feedback" = "Feedback";
 "about.report_issue" = "Report an issue";
-"about.report_issue_accessibility" = "Report an AI Limitbar issue on GitHub";
+"about.report_issue_accessibility" = "Report a Bairometer issue on GitHub";
 "about.email" = "Email";
-"about.email_accessibility" = "Email the AI Limitbar developer";
+"about.email_accessibility" = "Email the Bairometer developer";
 "about.telegram" = "Telegram";
-"about.telegram_accessibility" = "Message the AI Limitbar developer on Telegram";
-"about.support_text" = "If AI Limitbar is useful, thank you for supporting its development.";
+"about.telegram_accessibility" = "Message the Bairometer developer on Telegram";
+"about.support_text" = "If Bairometer is useful, thank you for supporting its development.";
 "about.support_boosty" = "Support on Boosty";
-"about.support_boosty_accessibility" = "Support AI Limitbar on Boosty";
-"about.accessibility" = "About AI Limitbar";
+"about.support_boosty_accessibility" = "Support Bairometer on Boosty";
+"about.accessibility" = "About Bairometer";
 "about.development_build" = "Development build";
 "about.version" = "Version %@ (build %@)";
 
@@ -297,9 +297,9 @@
 "account_details.succeeded_at" = "Succeeded at %@";
 "account_details.failed_at" = "Failed at %@";
 
-"window.settings.title" = "AI Limitbar Settings";
+"window.settings.title" = "Bairometer Settings";
 "window.ollama.title" = "Connect Ollama";
-"window.about.title" = "About AI Limitbar";
+"window.about.title" = "About Bairometer";
 "common.status.unlimited" = "Unlimited";
 "storage.openrouter_credentials" = "OpenRouter key metadata could not be loaded.";
 "openrouter.shared_credits" = "SHARED CREDITS";
@@ -371,7 +371,7 @@
 "openrouter.settings.remove" = "Remove";
 "openrouter.settings.management_credential" = "Management key";
 "openrouter.settings.stored_securely" = "Stored keys stay in the macOS Data Protection Keychain and are never shown again.";
-"openrouter.settings.management_disclosure" = "Optional elevated key. AI Limitbar uses it only to read shared account credits through /api/v1/credits. It is never used to refresh per-key capacity.";
+"openrouter.settings.management_disclosure" = "Optional elevated key. Bairometer uses it only to read shared account credits through /api/v1/credits. It is never used to refresh per-key capacity.";
 "openrouter.settings.ordinary_disclosure" = "This locally named key is refreshed independently through /api/v1/key.";
 "openrouter.settings.delete_title" = "Remove Key?";
 "openrouter.settings.delete_message" = "This securely removes %@ from Keychain and removes its local capacity context.";
@@ -384,7 +384,7 @@
 "openrouter.editor.key_name" = "Name";
 "openrouter.editor.credential" = "Key";
 "openrouter.editor.credential_placeholder" = "Paste key";
-"openrouter.editor.no_readback" = "The entered key is written directly to Keychain. AI Limitbar will not display the stored key after this sheet closes.";
+"openrouter.editor.no_readback" = "The entered key is written directly to Keychain. Bairometer will not display the stored key after this sheet closes.";
 "openrouter.error.title" = "OpenRouter Key Error";
 "openrouter.error.invalid_account" = "The OpenRouter account is unavailable.";
 "openrouter.error.invalid_name" = "Enter a local name for this API key.";

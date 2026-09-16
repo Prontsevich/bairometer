@@ -11,7 +11,7 @@ public struct UnavailableOllamaWebPageClient: OllamaWebPageClient {
         throw ProviderAdapterError(
             providerID: "ollama-cloud",
             message: "Ollama experimental web source is unavailable in this app session.",
-            recoverySuggestion: "Open the Settings connection flow and reconnect Ollama through AI Limitbar."
+            recoverySuggestion: "Open the Settings connection flow and reconnect Ollama through Bairometer."
         )
     }
 }
@@ -115,7 +115,7 @@ public struct OllamaCloudProviderAdapter: ProviderAdapter {
         ProviderSourceCapability(
             mode: .ollamaWebPage,
             kind: .live,
-            summary: "Read usage from the authenticated Ollama settings page in AI Limitbar."
+            summary: "Read usage from the authenticated Ollama settings page in Bairometer."
         )
     ])
 
@@ -137,7 +137,7 @@ public struct OllamaCloudProviderAdapter: ProviderAdapter {
             throw ProviderAdapterError(
                 providerID: id,
                 message: "Ollama experimental web source is not connected.",
-                recoverySuggestion: "Choose Connect Ollama in Settings and sign in through AI Limitbar."
+                recoverySuggestion: "Choose Connect Ollama in Settings and sign in through Bairometer."
             )
         }
 
@@ -156,7 +156,7 @@ public struct OllamaCloudProviderAdapter: ProviderAdapter {
             throw ProviderAdapterError(
                 providerID: id,
                 message: "Ollama settings page could not be read.",
-                recoverySuggestion: "Reconnect Ollama through AI Limitbar and try again.",
+                recoverySuggestion: "Reconnect Ollama through Bairometer and try again.",
                 isTransient: true
             )
         }

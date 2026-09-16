@@ -101,9 +101,9 @@ extension AppStrings {
         static let errorSummary = AppString("dashboard.accessibility.error_summary", defaultValue: "Error: one or more enabled accounts need attention. %@", comment: "Menu bar accessibility error summary")
         static let sourceUnsupported = AppString("dashboard.diagnostics.source_unsupported", defaultValue: "This source mode is not supported by the provider adapter.", comment: "Unsupported source diagnostic summary")
         static let lastRefreshFailed = AppString("dashboard.diagnostics.last_refresh_failed", defaultValue: "The last refresh failed.", comment: "Failed refresh diagnostic summary")
-        static let connectBeforeRefresh = AppString("dashboard.diagnostics.connect_before_refresh", defaultValue: "Connect this account through AI Limitbar before refreshing.", comment: "Connect before refreshing diagnostic summary")
+        static let connectBeforeRefresh = AppString("dashboard.diagnostics.connect_before_refresh", defaultValue: "Connect this account through Bairometer before refreshing.", comment: "Connect before refreshing diagnostic summary")
         static let sourceSupported = AppString("dashboard.diagnostics.source_supported", defaultValue: "The configured source is supported.", comment: "Supported source diagnostic summary")
-        static let ollamaSourceSummary = AppString("dashboard.diagnostics.ollama_source_summary", defaultValue: "Read usage from the authenticated Ollama settings page in AI Limitbar.", comment: "Ollama source summary")
+        static let ollamaSourceSummary = AppString("dashboard.diagnostics.ollama_source_summary", defaultValue: "Read usage from the authenticated Ollama settings page in Bairometer.", comment: "Ollama source summary")
         static let claudeStatusLineSummary = AppString("dashboard.diagnostics.claude_status_line_summary", defaultValue: "Read rate-limit data from Claude Code's managed statusLine snapshot.", comment: "Claude statusLine source summary")
         static let claudeUsageSummary = AppString("dashboard.diagnostics.claude_usage_summary", defaultValue: "Read plan limits from the local Claude Code /usage command.", comment: "Claude usage CLI source summary")
         static let codexSourceSummary = AppString("dashboard.diagnostics.codex_source_summary", defaultValue: "Read current rate-limit windows from the local Codex app-server.", comment: "Codex app-server source summary")
@@ -119,7 +119,7 @@ extension AppStrings {
         static let refreshStateSave = AppString("storage.refresh_state_save", defaultValue: "Provider refresh state could not be saved.", comment: "Provider refresh state persistence warning")
         static let legacyMigration = AppString("storage.legacy_migration", defaultValue: "Legacy JSON data could not be migrated. Existing database data remains available.", comment: "Legacy migration warning")
         static let temporaryStorage = AppString("storage.temporary_storage", defaultValue: "Application Support is unavailable. Temporary storage is active.", comment: "Temporary storage warning")
-        static let storageUnavailable = AppString("storage.unavailable", defaultValue: "AI Limitbar storage is unavailable. Changes cannot be saved.", comment: "Storage unavailable warning")
+        static let storageUnavailable = AppString("storage.unavailable", defaultValue: "Bairometer storage is unavailable. Changes cannot be saved.", comment: "Storage unavailable warning")
         static let openRouterCredentials = AppString("storage.openrouter_credentials", defaultValue: "OpenRouter key metadata could not be loaded.", comment: "OpenRouter key metadata storage warning")
     }
 
@@ -141,7 +141,7 @@ extension AppStrings.Settings {
 
         enum General {
             static let title = AppString("settings.general.title", defaultValue: "GENERAL", comment: "General settings page title")
-            static let description = AppString("settings.general.description", defaultValue: "Configure preferences that apply across AI Limitbar accounts.", comment: "General settings page description")
+            static let description = AppString("settings.general.description", defaultValue: "Configure preferences that apply across Bairometer accounts.", comment: "General settings page description")
             static let scheduleTitle = AppString("settings.schedule.title", defaultValue: "SCHEDULE", comment: "Refresh schedule section title")
             static let interval = AppString("settings.schedule.interval", defaultValue: "Interval", comment: "Refresh interval field label")
             static let refreshInterval = AppString("settings.schedule.accessibility", defaultValue: "Refresh interval", comment: "Refresh interval selector accessibility label")
@@ -158,8 +158,8 @@ extension AppStrings.Settings {
         enum Accounts {
             static let title = AppString("settings.accounts.title", defaultValue: "ACCOUNTS", comment: "Accounts page title")
             static let deleteTitle = AppString("settings.accounts.delete_title", defaultValue: "Remove Account?", comment: "Remove locally configured account alert title")
-            static let deleteMessage = AppString("settings.accounts.delete_message", defaultValue: "This removes %@ and its stored snapshot from AI Limitbar.", comment: "Delete account alert message")
-            static let deleteOpenRouterMessage = AppString("settings.accounts.delete_openrouter_message", defaultValue: "This securely removes %@, every stored OpenRouter key for it, and its capacity data from AI Limitbar.", comment: "Remove locally configured OpenRouter account alert message")
+            static let deleteMessage = AppString("settings.accounts.delete_message", defaultValue: "This removes %@ and its stored snapshot from Bairometer.", comment: "Delete account alert message")
+            static let deleteOpenRouterMessage = AppString("settings.accounts.delete_openrouter_message", defaultValue: "This securely removes %@, every stored OpenRouter key for it, and its capacity data from Bairometer.", comment: "Remove locally configured OpenRouter account alert message")
             static let moveUp = AppString("settings.accounts.move_up", defaultValue: "Move Up", comment: "Move account up action")
             static let moveDown = AppString("settings.accounts.move_down", defaultValue: "Move Down", comment: "Move account down action")
             static let addAccount = AppString("settings.accounts.add", defaultValue: "Add account", comment: "Add account tooltip and accessibility label")
@@ -207,14 +207,14 @@ extension AppStrings.Settings {
             static let source = AppString("settings.editor.source", defaultValue: "SOURCE", comment: "Source editor section title")
             static let mode = AppString("settings.editor.mode", defaultValue: "Mode", comment: "Source mode field label")
             static let provider = AppString("settings.editor.provider", defaultValue: "Provider", comment: "Provider field label")
-            static let manualSourceDescription = AppString("settings.editor.manual_source_description", defaultValue: "Manual source: open the Claude usage page when you need to check plan limits. AI Limitbar does not start Claude Code or retain provider output in this mode.", comment: "Manual Claude source description")
+            static let manualSourceDescription = AppString("settings.editor.manual_source_description", defaultValue: "Manual source: open the Claude usage page when you need to check plan limits. Bairometer does not start Claude Code or retain provider output in this mode.", comment: "Manual Claude source description")
             static let statusLineTitle = AppString("settings.editor.status_line_title", defaultValue: "Claude Code statusLine helper", comment: "Claude statusLine helper title")
-            static let statusLineDescription = AppString("settings.editor.status_line_description", defaultValue: "The helper reads Claude Code's official statusLine JSON and writes local-estimate rate-limit data to AI Limitbar's managed database. No JSON path is configured or retained.", comment: "Claude statusLine helper description")
+            static let statusLineDescription = AppString("settings.editor.status_line_description", defaultValue: "The helper reads Claude Code's official statusLine JSON and writes local-estimate rate-limit data to Bairometer's managed database. No JSON path is configured or retained.", comment: "Claude statusLine helper description")
             static let installHelper = AppString("settings.editor.install_helper", defaultValue: "Install or Repair Helper", comment: "Install Claude statusLine helper action")
             static let saveFirst = AppString("settings.editor.save_first", defaultValue: "Save this account first, then install its helper configuration.", comment: "Save account before helper installation message")
-            static let usageCLI = AppString("settings.editor.usage_cli_description", defaultValue: "Experimental source: AI Limitbar runs the authenticated local Claude Code CLI in safe non-interactive mode and retains only normalized plan-limit windows. Raw output, activity attribution, stderr, and session metadata are discarded.", comment: "Claude usage CLI source description")
-            static let ollamaSource = AppString("settings.editor.ollama_source_description", defaultValue: "Experimental source: AI Limitbar opens an isolated WebKit session for https://ollama.com/settings. The session is never copied from another browser, and raw page content is not stored.", comment: "Ollama source description")
-            static let codexSource = AppString("settings.editor.codex_source_description", defaultValue: "Experimental source: AI Limitbar starts a short-lived local Codex app-server to read current rate-limit windows. It never reads Codex credentials, session files, browser data, or terminal output.", comment: "Codex app-server source description")
+            static let usageCLI = AppString("settings.editor.usage_cli_description", defaultValue: "Experimental source: Bairometer runs the authenticated local Claude Code CLI in safe non-interactive mode and retains only normalized plan-limit windows. Raw output, activity attribution, stderr, and session metadata are discarded.", comment: "Claude usage CLI source description")
+            static let ollamaSource = AppString("settings.editor.ollama_source_description", defaultValue: "Experimental source: Bairometer opens an isolated WebKit session for https://ollama.com/settings. The session is never copied from another browser, and raw page content is not stored.", comment: "Ollama source description")
+            static let codexSource = AppString("settings.editor.codex_source_description", defaultValue: "Experimental source: Bairometer starts a short-lived local Codex app-server to read current rate-limit windows. It never reads Codex credentials, session files, browser data, or terminal output.", comment: "Codex app-server source description")
             static let leaveBlankForClaude = AppString("settings.editor.leave_blank_claude", defaultValue: "Leave blank to locate Claude automatically.", comment: "Claude executable path help")
             static let leaveBlankForCodex = AppString("settings.editor.leave_blank_codex", defaultValue: "Leave blank to locate Codex automatically.", comment: "Codex executable path help")
             static let browse = AppString("settings.editor.browse", defaultValue: "Browse…", comment: "Browse executable action")
@@ -239,10 +239,10 @@ extension AppStrings {
     enum Ollama {
         static let connectionTitle = AppString("ollama.connection.title", defaultValue: "Ollama Connection", comment: "Ollama connection alert title")
         static let unavailable = AppString("ollama.connection.unavailable", defaultValue: "Ollama connection is unavailable.", comment: "Ollama connection fallback")
-        static let saveBeforeConnecting = AppString("ollama.connection.save_before_connecting", defaultValue: "Save the account before connecting Ollama through AI Limitbar.", comment: "Save account before connecting Ollama")
+        static let saveBeforeConnecting = AppString("ollama.connection.save_before_connecting", defaultValue: "Save the account before connecting Ollama through Bairometer.", comment: "Save account before connecting Ollama")
         static let connect = AppString("ollama.connection.connect", defaultValue: "Connect Ollama", comment: "Ollama connection window title")
         static let reconnect = AppString("ollama.connection.reconnect", defaultValue: "Reconnect Ollama", comment: "Ollama reconnect window title")
-        static let description = AppString("ollama.connection.description", defaultValue: "Sign in directly with Ollama in this isolated AI Limitbar window. Cookies, tokens, passwords, and raw page content stay inside WebKit and are never exported to AI Limitbar storage.", comment: "Ollama connection privacy description")
+        static let description = AppString("ollama.connection.description", defaultValue: "Sign in directly with Ollama in this isolated Bairometer window. Cookies, tokens, passwords, and raw page content stay inside WebKit and are never exported to Bairometer storage.", comment: "Ollama connection privacy description")
         static let profileUnavailable = AppString("ollama.connection.profile_unavailable", defaultValue: "Connection Profile Unavailable", comment: "Unavailable Ollama connection profile title")
         static let saveBeforeOpening = AppString("ollama.connection.save_before_opening", defaultValue: "Save this account before opening the Ollama connection flow.", comment: "Save account before opening Ollama connection")
         static let tryAgain = AppString("ollama.connection.try_again", defaultValue: "Try Again", comment: "Retry Ollama connection action")
@@ -256,18 +256,18 @@ extension AppStrings {
     enum About {
         static let buildInformation = AppString("about.build_information", defaultValue: "Build information", comment: "Build information accessibility label")
         static let openGitHub = AppString("about.open_github", defaultValue: "Open GitHub", comment: "Open GitHub action")
-        static let openGitHubAccessibility = AppString("about.open_github_accessibility", defaultValue: "Open AI Limitbar on GitHub", comment: "Open GitHub accessibility label")
+        static let openGitHubAccessibility = AppString("about.open_github_accessibility", defaultValue: "Open Bairometer on GitHub", comment: "Open GitHub accessibility label")
         static let feedback = AppString("about.feedback", defaultValue: "Feedback", comment: "Feedback section title")
         static let reportIssue = AppString("about.report_issue", defaultValue: "Report an issue", comment: "Report issue action")
-        static let reportIssueAccessibility = AppString("about.report_issue_accessibility", defaultValue: "Report an AI Limitbar issue on GitHub", comment: "Report issue accessibility label")
+        static let reportIssueAccessibility = AppString("about.report_issue_accessibility", defaultValue: "Report a Bairometer issue on GitHub", comment: "Report issue accessibility label")
         static let email = AppString("about.email", defaultValue: "Email", comment: "Email feedback action")
-        static let emailAccessibility = AppString("about.email_accessibility", defaultValue: "Email the AI Limitbar developer", comment: "Email feedback accessibility label")
+        static let emailAccessibility = AppString("about.email_accessibility", defaultValue: "Email the Bairometer developer", comment: "Email feedback accessibility label")
         static let telegram = AppString("about.telegram", defaultValue: "Telegram", comment: "Telegram feedback action")
-        static let telegramAccessibility = AppString("about.telegram_accessibility", defaultValue: "Message the AI Limitbar developer on Telegram", comment: "Telegram feedback accessibility label")
-        static let supportText = AppString("about.support_text", defaultValue: "If AI Limitbar is useful, thank you for supporting its development.", comment: "Support message")
+        static let telegramAccessibility = AppString("about.telegram_accessibility", defaultValue: "Message the Bairometer developer on Telegram", comment: "Telegram feedback accessibility label")
+        static let supportText = AppString("about.support_text", defaultValue: "If Bairometer is useful, thank you for supporting its development.", comment: "Support message")
         static let supportBoosty = AppString("about.support_boosty", defaultValue: "Support on Boosty", comment: "Boosty support action")
-        static let supportBoostyAccessibility = AppString("about.support_boosty_accessibility", defaultValue: "Support AI Limitbar on Boosty", comment: "Boosty support accessibility label")
-        static let accessibilityLabel = AppString("about.accessibility", defaultValue: "About AI Limitbar", comment: "About window accessibility label")
+        static let supportBoostyAccessibility = AppString("about.support_boosty_accessibility", defaultValue: "Support Bairometer on Boosty", comment: "Boosty support accessibility label")
+        static let accessibilityLabel = AppString("about.accessibility", defaultValue: "About Bairometer", comment: "About window accessibility label")
         static let developmentBuild = AppString("about.development_build", defaultValue: "Development build", comment: "Development build fallback")
         static let version = AppString("about.version", defaultValue: "Version %@ (build %@)", comment: "App version and build text")
     }
@@ -372,7 +372,7 @@ extension AppStrings {
         static let removeCredential = AppString("openrouter.settings.remove", defaultValue: "Remove", comment: "Remove OpenRouter credential action")
         static let managementCredential = AppString("openrouter.settings.management_credential", defaultValue: "Management key", comment: "OpenRouter management key local label")
         static let storedSecurely = AppString("openrouter.settings.stored_securely", defaultValue: "Stored keys stay in the macOS Data Protection Keychain and are never shown again.", comment: "OpenRouter key storage disclosure")
-        static let managementDisclosure = AppString("openrouter.settings.management_disclosure", defaultValue: "Optional elevated key. AI Limitbar uses it only to read shared account credits through /api/v1/credits. It is never used to refresh per-key capacity.", comment: "OpenRouter elevated key disclosure")
+        static let managementDisclosure = AppString("openrouter.settings.management_disclosure", defaultValue: "Optional elevated key. Bairometer uses it only to read shared account credits through /api/v1/credits. It is never used to refresh per-key capacity.", comment: "OpenRouter elevated key disclosure")
         static let ordinaryDisclosure = AppString("openrouter.settings.ordinary_disclosure", defaultValue: "This locally named key is refreshed independently through /api/v1/key.", comment: "OpenRouter per-key refresh disclosure")
         static let deleteCredentialTitle = AppString("openrouter.settings.delete_title", defaultValue: "Remove Key?", comment: "OpenRouter key delete confirmation title")
         static let deleteCredentialMessage = AppString("openrouter.settings.delete_message", defaultValue: "This securely removes %@ from Keychain and removes its local capacity context.", comment: "OpenRouter key removal confirmation message")
@@ -385,7 +385,7 @@ extension AppStrings {
         static let keyName = AppString("openrouter.editor.key_name", defaultValue: "Name", comment: "OpenRouter local key name field")
         static let credential = AppString("openrouter.editor.credential", defaultValue: "Key", comment: "OpenRouter key secure field")
         static let credentialPlaceholder = AppString("openrouter.editor.credential_placeholder", defaultValue: "Paste key", comment: "OpenRouter key secure field placeholder")
-        static let saveWithoutReadback = AppString("openrouter.editor.no_readback", defaultValue: "The entered key is written directly to Keychain. AI Limitbar will not display the stored key after this sheet closes.", comment: "OpenRouter no key read-back notice")
+        static let saveWithoutReadback = AppString("openrouter.editor.no_readback", defaultValue: "The entered key is written directly to Keychain. Bairometer will not display the stored key after this sheet closes.", comment: "OpenRouter no key read-back notice")
         static let errorTitle = AppString("openrouter.error.title", defaultValue: "OpenRouter Key Error", comment: "OpenRouter key error alert title")
         static let invalidAccountError = AppString("openrouter.error.invalid_account", defaultValue: "The OpenRouter account is unavailable.", comment: "OpenRouter invalid account error")
         static let invalidNameError = AppString("openrouter.error.invalid_name", defaultValue: "Enter a local name for this API key.", comment: "OpenRouter invalid local name error")
@@ -445,8 +445,8 @@ extension AppStrings {
             russian: "Граница аккаунта"
         )
         static let boundaryDescription = MiniMaxLocalizedString(
-            english: "Global · personal Default Team · locally configured. AI Limitbar does not verify this boundary upstream.",
-            russian: "Global · личная Default Team · настроено локально. AI Limitbar не проверяет эту границу на стороне MiniMax."
+            english: "Global · personal Default Team · locally configured. Bairometer does not verify this boundary upstream.",
+            russian: "Global · личная Default Team · настроено локально. Биирометр не проверяет эту границу на стороне MiniMax."
         )
         static let keyLabel = MiniMaxLocalizedString(
             english: "Subscription Key",
@@ -549,8 +549,8 @@ extension AppStrings {
             russian: "Вставьте ключ подписки"
         )
         static let storageDisclosure = MiniMaxLocalizedString(
-            english: "The entered key is written directly to Keychain. AI Limitbar never reads it back into Settings or exposes it to accessibility.",
-            russian: "Введённый ключ записывается напрямую в Keychain. AI Limitbar не возвращает его в Settings и не передаёт через accessibility."
+            english: "The entered key is written directly to Keychain. Bairometer never reads it back into Settings or exposes it to accessibility.",
+            russian: "Введённый ключ записывается напрямую в Keychain. Биирометр не возвращает его в Settings и не передаёт через accessibility."
         )
         static let errorTitle = MiniMaxLocalizedString(
             english: "MiniMax Key Error",
@@ -587,8 +587,8 @@ extension AppStrings {
     }
 
     enum Window {
-        static let settingsTitle = AppString("window.settings.title", defaultValue: "AI Limitbar Settings", comment: "Settings window title")
+        static let settingsTitle = AppString("window.settings.title", defaultValue: "Bairometer Settings", comment: "Settings window title")
         static let ollamaTitle = AppString("window.ollama.title", defaultValue: "Connect Ollama", comment: "Ollama connection window title")
-        static let aboutTitle = AppString("window.about.title", defaultValue: "About AI Limitbar", comment: "About window title")
+        static let aboutTitle = AppString("window.about.title", defaultValue: "About Bairometer", comment: "About window title")
     }
 }

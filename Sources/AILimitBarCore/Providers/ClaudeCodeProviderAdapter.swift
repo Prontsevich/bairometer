@@ -69,7 +69,7 @@ public struct ClaudeCodeProviderAdapter: ProviderAdapter {
             throw ProviderAdapterError(
                 providerID: id,
                 message: "Claude Code managed statusLine storage is unavailable.",
-                recoverySuggestion: "Open AI Limitbar and install the bundled statusLine helper from this account's settings."
+                recoverySuggestion: "Open Bairometer and install the bundled statusLine helper from this account's settings."
             )
         }
         guard let snapshot = try snapshotStore.snapshot(providerID: id, accountID: account.accountID) else {

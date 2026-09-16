@@ -22,7 +22,7 @@ do {
     }
     print(values.isEmpty ? "AI Limits unavailable" : "AI Limits · \(values.joined(separator: " · "))")
 } catch {
-    fputs("AI Limitbar: \(error.localizedDescription)\n", stderr)
+    fputs("Bairometer: \(error.localizedDescription)\n", stderr)
     print("AI Limits unavailable")
     exit(EXIT_FAILURE)
 }

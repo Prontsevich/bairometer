@@ -5,7 +5,7 @@ PRODUCTION_APP_NAME="AILimitBar"
 HOST_APP_NAME="AILimitBarUITestHost"
 HOST_EXECUTABLE="AILimitBarTest"
 HOST_BUNDLE_ID="io.github.Prontsevich.AILimitBar.UITestHost"
-HOST_DISPLAY_NAME="AI Limitbar UI Test Host"
+HOST_DISPLAY_NAME="Bairometer UI Test Host"
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 DIST_DIR="$ROOT_DIR/dist"
@@ -24,7 +24,7 @@ mv "$HOST_MACOS/$PRODUCTION_APP_NAME" "$HOST_MACOS/$HOST_EXECUTABLE"
 /usr/libexec/PlistBuddy -c "Set :CFBundleExecutable $HOST_EXECUTABLE" "$HOST_INFO_PLIST"
 /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier $HOST_BUNDLE_ID" "$HOST_INFO_PLIST"
 /usr/libexec/PlistBuddy -c "Set :CFBundleName $HOST_APP_NAME" "$HOST_INFO_PLIST"
-/usr/libexec/PlistBuddy -c "Add :CFBundleDisplayName string $HOST_DISPLAY_NAME" "$HOST_INFO_PLIST"
+/usr/libexec/PlistBuddy -c "Set :CFBundleDisplayName $HOST_DISPLAY_NAME" "$HOST_INFO_PLIST"
 /usr/libexec/PlistBuddy -c "Set :LSUIElement false" "$HOST_INFO_PLIST"
 
 /usr/bin/plutil -lint "$HOST_INFO_PLIST" >/dev/null

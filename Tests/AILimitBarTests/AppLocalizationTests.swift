@@ -176,7 +176,7 @@ final class AppLocalizationTests: XCTestCase {
         XCTAssertEqual(AppStrings.Dashboard.used.formatted(locale: locale, "35,4 %"), "Ушло 35,4 %")
         XCTAssertEqual(AppStrings.Dashboard.left.formatted(locale: locale, "35,4 %"), "Ещё 35,4 %")
         XCTAssertEqual(AppStrings.DisplayMode.useGlobal.localized(locale: locale), "Как в общих")
-        XCTAssertEqual(AppStrings.Window.settingsTitle.localized(locale: locale), "Настройки AI Limitbar")
+        XCTAssertEqual(AppStrings.Window.settingsTitle.localized(locale: locale), "Настройки Биирометра")
     }
 
     func testOpenRouterUserFacingTerminologyUsesKeysInBothCatalogs() throws {

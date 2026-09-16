@@ -22,7 +22,7 @@ struct AILimitBarApp: App {
     var body: some Scene {
 #if DEBUG
         Window(
-            "AI Limitbar UI Test Host — \(runtime.uiTestHostConfiguration?.scenario.rawValue ?? "disabled")",
+            "Bairometer UI Test Host — \(runtime.uiTestHostConfiguration?.scenario.rawValue ?? "disabled")",
             id: UITestHostConfiguration.windowID
         ) {
             if let configuration = runtime.uiTestHostConfiguration,

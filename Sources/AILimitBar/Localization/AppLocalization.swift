@@ -135,7 +135,7 @@ enum AppStrings {
         )
         static let aboutAILimitbar = AppString(
             "menu_bar.action.about_ai_limitbar",
-            defaultValue: "About AI Limitbar",
+            defaultValue: "About Bairometer",
             comment: "Tooltip and accessibility label for the About action"
         )
         static let quit = AppString(
@@ -174,7 +174,7 @@ enum AppStrings {
             )
             static let description = AppString(
                 "settings.language.description",
-                defaultValue: "Choose the language used by AI Limitbar.",
+                defaultValue: "Choose the language used by Bairometer.",
                 comment: "Description below the app language selector"
             )
             static let systemDefault = AppString(

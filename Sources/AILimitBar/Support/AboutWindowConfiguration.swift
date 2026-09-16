@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum AboutWindowConfiguration {
-    static let title = "About AI Limitbar"
+    static let title = "About Bairometer"
     static let preferredSize = CGSize(width: 360, height: 410)
 
     static func centeredWindowFrame(_ windowFrame: CGRect, in visibleRect: CGRect) -> CGRect {

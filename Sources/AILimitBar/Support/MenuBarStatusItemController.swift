@@ -282,8 +282,8 @@ final class MenuBarStatusItemController: NSObject, ObservableObject, NSPopoverDe
         statusButton.target = self
         statusButton.action = #selector(togglePopover(_:))
         statusButton.sendAction(on: Self.actionEventMask)
-        statusButton.setAccessibilityLabel("AI Limitbar")
-        statusButton.toolTip = "AI Limitbar"
+        statusButton.setAccessibilityLabel("Bairometer")
+        statusButton.toolTip = "Bairometer"
     }
 
     private func configurePopover() {

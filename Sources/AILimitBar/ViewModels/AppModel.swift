@@ -84,7 +84,7 @@ final class AppModel: ObservableObject {
             database = try AppDatabase(directory: directory)
         } catch {
             database = nil
-            initialStorageWarning = "AI Limitbar storage is unavailable. Changes cannot be saved."
+            initialStorageWarning = "Bairometer storage is unavailable. Changes cannot be saved."
         }
         let snapshotStore = DatabaseSnapshotStore(database: database)
         self.snapshotStore = snapshotStore
@@ -253,7 +253,7 @@ final class AppModel: ObservableObject {
             AppStrings.Storage.legacyMigration.localized(locale: locale)
         case "Application Support is unavailable. Temporary storage is active.":
             AppStrings.Storage.temporaryStorage.localized(locale: locale)
-        case "AI Limitbar storage is unavailable. Changes cannot be saved.":
+        case "Bairometer storage is unavailable. Changes cannot be saved.":
             AppStrings.Storage.storageUnavailable.localized(locale: locale)
         case "OpenRouter credential metadata could not be loaded.":
             AppStrings.Storage.openRouterCredentials.localized(locale: locale)
@@ -302,7 +302,7 @@ final class AppModel: ObservableObject {
             message = messages.first ?? "The last refresh failed."
         } else if account.sourceMode == .ollamaWebPage && account.webDataStoreID == nil {
             availability = .needsConnection
-            message = "Connect this account through AI Limitbar before refreshing."
+            message = "Connect this account through Bairometer before refreshing."
             messages = [message]
         } else if snapshot == nil || snapshot?.status == .unavailable {
             availability = .noData

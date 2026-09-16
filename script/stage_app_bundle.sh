@@ -155,8 +155,12 @@ for resource_bundle in "$BUILD_DIRECTORY"/*.bundle; do
       continue
       ;;
     "$APP_RESOURCE_BUNDLE")
+      resource_directory="$resource_bundle"
+      if [[ -d "$resource_bundle/Contents/Resources" ]]; then
+        resource_directory="$resource_bundle/Contents/Resources"
+      fi
       for localization in en ru; do
-        localized_resources="$resource_bundle/$localization.lproj"
+        localized_resources="$resource_directory/$localization.lproj"
         [[ -d "$localized_resources" ]] || {
           echo "error: missing $localization localization resources in $resource_name" >&2
           exit 1
@@ -199,6 +203,8 @@ cat >"$INFO_PLIST" <<PLIST
   <string>$BUNDLE_ID</string>
   <key>CFBundleName</key>
   <string>$APP_NAME</string>
+  <key>CFBundleDisplayName</key>
+  <string>Bairometer</string>
   <key>CFBundleDevelopmentRegion</key>
   <string>en</string>
   <key>CFBundleLocalizations</key>
@@ -235,7 +241,11 @@ rm -f "$ASSET_INFO_PLIST"
 }
 
 for localization in en ru; do
-  built_strings="$BUILD_DIRECTORY/$APP_RESOURCE_BUNDLE/$localization.lproj/Localizable.strings"
+  resource_directory="$BUILD_DIRECTORY/$APP_RESOURCE_BUNDLE"
+  if [[ -d "$resource_directory/Contents/Resources" ]]; then
+    resource_directory="$resource_directory/Contents/Resources"
+  fi
+  built_strings="$resource_directory/$localization.lproj/Localizable.strings"
   staged_strings="$APP_RESOURCES/$localization.lproj/Localizable.strings"
   /usr/bin/plutil -lint "$staged_strings" >/dev/null
   cmp -s "$built_strings" "$staged_strings" || {

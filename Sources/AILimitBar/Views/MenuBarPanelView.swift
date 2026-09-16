@@ -64,7 +64,7 @@ struct MenuBarPanelView: View {
 
     private var header: some View {
         HStack(alignment: .firstTextBaseline) {
-            Text(">_ AI Limitbar")
+            Text(">_ Bairometer")
                 .font(TerminalTheme.titleFont)
                 .foregroundStyle(TerminalTheme.primary)
 

@@ -18,7 +18,7 @@ struct AboutView: View {
                 .accessibilityHidden(true)
 
             VStack(spacing: 5) {
-                Text("AI Limitbar")
+                Text("Bairometer")
                     .font(.system(size: 18, weight: .bold, design: .monospaced))
                     .foregroundStyle(TerminalTheme.primary)
 
