@@ -322,6 +322,41 @@ private final class OllamaWebPageSession: NSObject, WKNavigationDelegate {
         return null;
       };
 
+      const monthlyUsage = (() => {
+        const amountPattern = /^\$([\d,]+(?:\.\d+)?)\s+of\s+\$([\d,]+(?:\.\d+)?)\s+used$/;
+        const amountLeaf = Array.from(document.querySelectorAll("body *"))
+          .find((element) => element.children.length === 0 && amountPattern.test((element.textContent || "").trim()));
+        if (!amountLeaf) return null;
+
+        const amountText = (amountLeaf.textContent || "").trim();
+        const amountMatch = amountText.match(amountPattern);
+        const usedLabel = "$" + amountMatch[1];
+        const limitLabel = "$" + amountMatch[2];
+        const used = Number(amountMatch[1].replace(/,/g, ""));
+        const limit = Number(amountMatch[2].replace(/,/g, ""));
+
+        let block = amountLeaf.parentElement;
+        while (block && block !== document.body && !/(?:reset|resets)/i.test(block.innerText || "")) {
+          block = block.parentElement;
+        }
+        if (!block || block === document.body) block = amountLeaf.parentElement;
+
+        let resetAt = null;
+        const timeElement = block.querySelector("[data-time], time[datetime]");
+        const timeValue = timeElement?.getAttribute("data-time") ?? timeElement?.getAttribute("datetime");
+        if (timeValue && !Number.isNaN(Date.parse(timeValue))) {
+          resetAt = new Date(timeValue).toISOString();
+        }
+        if (!resetAt) resetAt = parseResetAt(block.innerText || "");
+
+        return {
+          usedPercent: limit > 0 ? Math.round((used / limit) * 10000) / 100 : null,
+          usedLabel,
+          limitLabel,
+          resetAt
+        };
+      })();
+
       const sectionFor = (label) => {
         const anchor = Array.from(document.querySelectorAll("body *"))
           .find((element) => element.children.length === 0 && element.textContent?.trim() === label);
@@ -400,10 +435,11 @@ private final class OllamaWebPageSession: NSObject, WKNavigationDelegate {
         if (delivered) return true;
         const session = sectionFor("Session usage");
         const weekly = sectionFor("Weekly usage");
-        if (!session && !weekly) return false;
+        const monthly = monthlyUsage;
+        if (!session && !weekly && !monthly) return false;
 
         delivered = true;
-        window.webkit.messageHandlers.\#(OllamaWebPageUsageExtractionPolicy.messageHandlerName).postMessage(JSON.stringify({ session, weekly }));
+        window.webkit.messageHandlers.\#(OllamaWebPageUsageExtractionPolicy.messageHandlerName).postMessage(JSON.stringify({ session, weekly, monthly }));
         return true;
       };
 

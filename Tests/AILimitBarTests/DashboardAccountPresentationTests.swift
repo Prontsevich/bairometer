@@ -3,7 +3,7 @@ import XCTest
 @testable import AILimitBar
 
 final class DashboardAccountPresentationTests: XCTestCase {
-    func testUsageWindowFormatsPercentAndRelativeResetWithoutRemainingDuplicate() {
+    func testUsageWindowFormatsPercentResetAndSupportingText() {
         let now = Date(timeIntervalSince1970: 1_000_000)
         let snapshot = makeSnapshot(
             limitWindows: [
@@ -27,7 +27,8 @@ final class DashboardAccountPresentationTests: XCTestCase {
         XCTAssertEqual(presentation.windows.count, 1)
         XCTAssertEqual(presentation.windows[0].displayText, "41.6% used")
         XCTAssertEqual(presentation.windows[0].resetText, "resets in 2 hours")
-        XCTAssertEqual(presentation.windows[0].accessibilityValue, "41.6% used")
+        XCTAssertEqual(presentation.windows[0].supportingText, "Approx. 58% remaining")
+        XCTAssertEqual(presentation.windows[0].accessibilityValue, "41.6% used, Approx. 58% remaining")
         XCTAssertNil(presentation.bodyMessage)
     }
 

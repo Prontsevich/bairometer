@@ -11,10 +11,21 @@ account receives its own persistent WebKit data store identified by an opaque
 UUID; AI Limitbar never reads, imports, exports, logs, or stores cookies,
 passwords, tokens, browser profile data, raw HTML, or raw bridge payloads.
 
-The source loads `https://ollama.com/settings` and extracts only the semantic
-`Session usage` and `Weekly usage` sections, resolving each value from its own
-usage card even when Ollama wraps both cards in a shared section. The source
-also reports the reset time for each window when Ollama exposes it. During
+The source loads `https://ollama.com/settings` and extracts only semantic usage
+sections. It supports both page variants Ollama currently serves:
+
+- The legacy variant renders `Session usage` and `Weekly usage` percentage cards,
+  resolving each value from its own usage card even when Ollama wraps both cards
+  in a shared section.
+- The monthly variant renders an `Included usage` block with a spend meter for
+  the plan month: an amount line such as `$4.91 of $60 used`, a reset element
+  carrying the reset timestamp (`data-time` or `<time datetime>`), and
+  per-model request segments. The extracted window is normalized as a
+  `Monthly` limit window with a used percentage computed from the amounts, the
+  `$X of $Y` amount as its remaining label, and the reset time when exposed.
+
+Either variant may appear; whichever sections are present are extracted, and
+both can appear together. During
 interactive sign-in, WebKit may follow Ollama's documented authentication
 redirect through `api.workos.com`, `signin.ollama.com`, Google, or GitHub;
 regional Google Account endpoints such as `accounts.google.by` are allowed for
@@ -28,8 +39,9 @@ render. After login, extraction remains restricted to the settings page.
 
 The values are labeled `Ollama settings web page (Experimental)` with `live`
 confidence. The page structure is undocumented and may change, but a successful
-read is presented as `OK`; model request counts, extra-usage balance, and
-billing values are intentionally excluded.
+read is presented as `OK`; model request counts, per-model meter segments,
+extra-usage balance, and billing values are intentionally excluded from the
+normalized payload beyond the monthly spend amounts shown on the usage window.
 
 ## Appearance
 

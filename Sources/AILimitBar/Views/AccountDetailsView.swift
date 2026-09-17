@@ -148,6 +148,15 @@ struct AccountDetailsView: View {
                     usageDisplayControl(for: window)
                 }
 
+                if let remainingLabel = window.remainingLabel, !remainingLabel.isEmpty {
+                    TerminalRule()
+                    TerminalInspectorRow(
+                        label: AppStrings.AccountDetails.usage.localized(locale: locale),
+                        value: remainingLabel,
+                        valueColor: TerminalTheme.primary
+                    )
+                }
+
                 if let resetAt = window.resetAt {
                     TerminalRule()
                     TerminalInspectorRow(

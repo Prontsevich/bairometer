@@ -17,13 +17,17 @@ struct DashboardLimitWindowPresentation: Identifiable, Equatable {
     let displayName: String
     let displayPercent: Double
     let displayText: String
+    let supportingText: String?
     let accessibilityLabel: String
     let toggleHelp: String
     let toggleAccessibilityHint: String
     let resetText: String?
 
     var accessibilityValue: String {
-        displayText
+        [displayText, supportingText]
+            .compactMap { $0 }
+            .filter { !$0.isEmpty }
+            .joined(separator: ", ")
     }
 
     init?(window: UsageLimitWindow, mode: UsageDisplayMode, now: Date, locale: Locale) {
@@ -34,6 +38,7 @@ struct DashboardLimitWindowPresentation: Identifiable, Equatable {
         let clampedUsedPercent = min(max(usedPercent, 0), 100)
         displayPercent = mode == .used ? clampedUsedPercent : 100 - clampedUsedPercent
         displayText = Self.displayText(for: displayPercent, mode: mode, locale: locale)
+        supportingText = window.remainingLabel
         accessibilityLabel = AppStrings.Dashboard.windowUsage.formatted(locale: locale, displayName)
         let nextMode: UsageDisplayMode = mode == .used ? .left : .used
         let nextText = Self.displayText(
@@ -56,6 +61,7 @@ struct DashboardLimitWindowPresentation: Identifiable, Equatable {
         displayName: String,
         displayPercent: Double,
         displayText: String,
+        supportingText: String? = nil,
         accessibilityLabel: String,
         toggleHelp: String,
         toggleAccessibilityHint: String,
@@ -65,6 +71,7 @@ struct DashboardLimitWindowPresentation: Identifiable, Equatable {
         self.displayName = displayName
         self.displayPercent = displayPercent
         self.displayText = displayText
+        self.supportingText = supportingText
         self.accessibilityLabel = accessibilityLabel
         self.toggleHelp = toggleHelp
         self.toggleAccessibilityHint = toggleAccessibilityHint

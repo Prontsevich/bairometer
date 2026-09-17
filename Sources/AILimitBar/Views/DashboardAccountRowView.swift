@@ -174,6 +174,7 @@ struct DashboardAccountRowView: View {
                     LimitWindowProgressRow(
                         window: window,
                         tint: progressTint,
+                        supportingText: window.supportingText,
                         onToggle: {
                             appModel.toggleUsageDisplayMode(for: row.account, windowID: window.id)
                         },

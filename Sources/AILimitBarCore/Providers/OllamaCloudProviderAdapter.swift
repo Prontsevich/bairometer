@@ -26,16 +26,38 @@ public struct OllamaUsagePageWindowPayload: Codable, Equatable, Sendable {
     }
 }
 
+public struct OllamaUsagePageMonthlyWindowPayload: Codable, Equatable, Sendable {
+    public let usedPercent: Double?
+    public let usedLabel: String?
+    public let limitLabel: String?
+    public let resetAt: Date?
+
+    public init(
+        usedPercent: Double?,
+        usedLabel: String? = nil,
+        limitLabel: String? = nil,
+        resetAt: Date? = nil
+    ) {
+        self.usedPercent = usedPercent
+        self.usedLabel = usedLabel
+        self.limitLabel = limitLabel
+        self.resetAt = resetAt
+    }
+}
+
 public struct OllamaUsagePagePayload: Codable, Equatable, Sendable {
     public let session: OllamaUsagePageWindowPayload?
     public let weekly: OllamaUsagePageWindowPayload?
+    public let monthly: OllamaUsagePageMonthlyWindowPayload?
 
     public init(
         session: OllamaUsagePageWindowPayload?,
-        weekly: OllamaUsagePageWindowPayload?
+        weekly: OllamaUsagePageWindowPayload?,
+        monthly: OllamaUsagePageMonthlyWindowPayload? = nil
     ) {
         self.session = session
         self.weekly = weekly
+        self.monthly = monthly
     }
 }
 
@@ -63,31 +85,42 @@ public enum OllamaUsagePageParser {
         from payload: OllamaUsagePagePayload,
         now: Date = Date()
     ) throws -> [UsageLimitWindow] {
-        [
-            try makeWindow(
-                id: "session",
-                displayName: "Session",
-                payload: payload.session,
-                now: now
-            ),
-            try makeWindow(
-                id: "weekly",
-                displayName: "Weekly",
-                payload: payload.weekly,
-                now: now
-            )
-        ]
+        let legacyWindows: [UsageLimitWindow] = try [
+            payload.session.map {
+                try makeLegacyWindow(
+                    id: "session",
+                    displayName: "Session",
+                    payload: $0,
+                    now: now
+                )
+            },
+            payload.weekly.map {
+                try makeLegacyWindow(
+                    id: "weekly",
+                    displayName: "Weekly",
+                    payload: $0,
+                    now: now
+                )
+            }
+        ].compactMap { $0 }
+
+        let monthlyWindow = try payload.monthly.map {
+            try makeMonthlyWindow(payload: $0, now: now)
+        }
+
+        let windows = legacyWindows + [monthlyWindow].compactMap { $0 }
+        guard !windows.isEmpty else {
+            throw OllamaUsagePageParseError.missingWindow("usage")
+        }
+        return windows
     }
 
-    private static func makeWindow(
+    private static func makeLegacyWindow(
         id: String,
         displayName: String,
-        payload: OllamaUsagePageWindowPayload?,
+        payload: OllamaUsagePageWindowPayload,
         now: Date
     ) throws -> UsageLimitWindow {
-        guard let payload else {
-            throw OllamaUsagePageParseError.missingWindow(displayName)
-        }
         guard let usedPercent = payload.usedPercent else {
             throw OllamaUsagePageParseError.missingPercentage(displayName)
         }
@@ -104,6 +137,40 @@ public enum OllamaUsagePageParser {
             usedPercent: usedPercent,
             resetAt: payload.resetAt
         )
+    }
+
+    private static func makeMonthlyWindow(
+        payload: OllamaUsagePageMonthlyWindowPayload,
+        now: Date
+    ) throws -> UsageLimitWindow {
+        let displayName = "Monthly"
+        guard let usedPercent = payload.usedPercent else {
+            throw OllamaUsagePageParseError.missingPercentage(displayName)
+        }
+        guard (0...100).contains(usedPercent) else {
+            throw OllamaUsagePageParseError.invalidPercentage(displayName)
+        }
+        if let resetAt = payload.resetAt, resetAt <= now {
+            throw OllamaUsagePageParseError.invalidReset(displayName)
+        }
+
+        return UsageLimitWindow(
+            id: "monthly",
+            displayName: displayName,
+            usedPercent: usedPercent,
+            remainingLabel: Self.monthlyAmountLabel(from: payload),
+            resetAt: payload.resetAt
+        )
+    }
+
+    private static func monthlyAmountLabel(
+        from payload: OllamaUsagePageMonthlyWindowPayload
+    ) -> String? {
+        guard let usedLabel = payload.usedLabel, !usedLabel.isEmpty,
+              let limitLabel = payload.limitLabel, !limitLabel.isEmpty else {
+            return nil
+        }
+        return "\(usedLabel) of \(limitLabel)"
     }
 }
 

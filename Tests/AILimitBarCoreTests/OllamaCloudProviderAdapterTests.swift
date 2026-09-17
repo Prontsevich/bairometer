@@ -25,14 +25,65 @@ final class OllamaCloudProviderAdapterTests: XCTestCase {
         XCTAssertEqual(windows[1].resetAt, now.addingTimeInterval(86_400))
     }
 
-    func testParserRejectsMissingWindow() {
+    func testParserBuildsMonthlyWindowFromNewPageVariant() throws {
         let payload = OllamaUsagePagePayload(
             session: nil,
-            weekly: OllamaUsagePageWindowPayload(usedPercent: 50)
+            weekly: nil,
+            monthly: OllamaUsagePageMonthlyWindowPayload(
+                usedPercent: 5.87,
+                usedLabel: "$3.52",
+                limitLabel: "$60",
+                resetAt: now.addingTimeInterval(14 * 86_400)
+            )
+        )
+
+        let windows = try OllamaUsagePageParser.limitWindows(from: payload, now: now)
+
+        XCTAssertEqual(windows.map(\.id), ["monthly"])
+        XCTAssertEqual(windows.map(\.displayName), ["Monthly"])
+        XCTAssertEqual(windows.map(\.usedPercent), [5.87])
+        XCTAssertEqual(windows[0].remainingLabel, "$3.52 of $60")
+        XCTAssertEqual(windows[0].resetAt, now.addingTimeInterval(14 * 86_400))
+    }
+
+    func testParserCombinesLegacyAndMonthlyWindows() throws {
+        let payload = OllamaUsagePagePayload(
+            session: OllamaUsagePageWindowPayload(usedPercent: 42),
+            weekly: OllamaUsagePageWindowPayload(usedPercent: 71),
+            monthly: OllamaUsagePageMonthlyWindowPayload(
+                usedPercent: 10,
+                usedLabel: "$6",
+                limitLabel: "$60"
+            )
+        )
+
+        let windows = try OllamaUsagePageParser.limitWindows(from: payload, now: now)
+
+        XCTAssertEqual(windows.map(\.id), ["session", "weekly", "monthly"])
+        XCTAssertEqual(windows[2].remainingLabel, "$6 of $60")
+    }
+
+    func testParserRejectsMonthlyPercentageOutOfRange() {
+        let payload = OllamaUsagePagePayload(
+            session: nil,
+            weekly: nil,
+            monthly: OllamaUsagePageMonthlyWindowPayload(usedPercent: 101)
         )
 
         XCTAssertThrowsError(try OllamaUsagePageParser.limitWindows(from: payload, now: now)) { error in
-            XCTAssertEqual(error as? OllamaUsagePageParseError, .missingWindow("Session"))
+            XCTAssertEqual(error as? OllamaUsagePageParseError, .invalidPercentage("Monthly"))
+        }
+    }
+
+    func testParserRejectsPayloadWithoutAnyWindow() {
+        let payload = OllamaUsagePagePayload(
+            session: nil,
+            weekly: nil,
+            monthly: nil
+        )
+
+        XCTAssertThrowsError(try OllamaUsagePageParser.limitWindows(from: payload, now: now)) { error in
+            XCTAssertEqual(error as? OllamaUsagePageParseError, .missingWindow("usage"))
         }
     }
 

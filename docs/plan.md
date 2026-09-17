@@ -394,15 +394,19 @@ Ollama Cloud supports cloud model access and an authenticated account usage
 page. Its documented API does not currently expose account usage or
 remaining-limit endpoints.
 
-Research result: the authenticated `https://ollama.com/settings` page currently
-server-renders session and weekly usage percentages with reset information. No
-separate usage JSON response was observed during the page-load check.
+Research result: the authenticated `https://ollama.com/settings` page has
+server-rendered usage in two variants. The legacy variant renders session and
+weekly usage percentages with reset information. The current variant renders an
+`Included usage` block with a monthly spend meter (`$X of $Y used`), a reset
+timestamp, and per-model request segments. No separate usage JSON response was
+observed during the page-load checks. Research re-verified on 2026-09-11
+against the live monthly variant.
 
 Current implementation status: manual-confidence placeholder remains the default,
 and Milestone 14 adds an explicit opt-in `ollama-web-page` source mode. This does
 not turn the undocumented page into a supported Ollama API.
 
-Research dates: 2026-07-07 and 2026-07-13.
+Research dates: 2026-07-07, 2026-07-13, and 2026-09-11.
 
 Official sources checked:
 
@@ -420,7 +424,7 @@ Supported source strategy:
 | Local Ollama API at `http://localhost:11434/api` | Per-request response metrics such as `total_duration`, `load_duration`, `prompt_eval_count`, `eval_count`, and related timing fields. Streaming responses include usage fields in the final chunk. | Useful for request-level local model accounting only when AI Limitbar observes or proxies requests. It does not provide account-level Ollama Cloud usage or remaining quota. |
 | Ollama Cloud API at `https://ollama.com/api` | Same Ollama model interaction API for cloud models, authenticated with an API key. Documented endpoints include model generation/chat, embeddings, tags, running models, model details, and model management. | Supports cloud model calls, but the checked docs do not list a billing, account usage, quota, or remaining-limit endpoint. |
 | Ollama API keys/settings | API keys for programmatic access to `ollama.com`; keys can be revoked and currently do not expire. | Required for future cloud model API calls. Not enough to expose usage limits. |
-| Ollama account settings page | The authenticated `https://ollama.com/settings` page currently server-renders `Session usage` and `Weekly usage` percentages with reset information. | Current manual fallback. Planned experimental source only through an AI Limitbar-owned WebKit connection and semantic DOM parsing. Its `Experimental` source label is informational when a read succeeds. It must not reuse another browser's session or store raw page/session data. |
+| Ollama account settings page | The authenticated `https://ollama.com/settings` page server-renders usage in two variants: legacy `Session usage` / `Weekly usage` percentage cards with reset information, and a current monthly `Included usage` block with a spend meter (`$X of $Y used`), a reset timestamp, and per-model request segments. | Current manual fallback. Planned experimental source only through an AI Limitbar-owned WebKit connection and semantic DOM parsing. Its `Experimental` source label is informational when a read succeeds. It must not reuse another browser's session or store raw page/session data. |
 
 Current confidence level: `manual`.
 
@@ -441,14 +445,19 @@ session data. The user completes sign-in in that view, and the app never reuses
 or extracts a session from Codex, Safari, Chrome, or another browser.
 
 The WebKit user script is guarded to `https://ollama.com/settings` and extracts
-only semantic `Session usage` and `Weekly usage` values from their individual
-usage cards, even when Ollama wraps both cards in a shared section. Interactive
+only semantic usage values: legacy `Session usage` and `Weekly usage` values
+from their individual usage cards, even when Ollama wraps both cards in a shared
+section, and the monthly `Included usage` block with its `$X of $Y used` amounts
+and reset timestamp when Ollama serves the monthly spend-meter variant. Either
+variant may appear; both can appear together. Interactive
 login may follow the expected Ollama WorkOS/Google/GitHub authentication
 redirects; reset times are carried through when exposed by the page.
 Scheduled refresh never follows auth redirects. Interactive login remains open
 until it completes or the user cancels the connection sheet, while scheduled
 refresh keeps a 20-second load timeout. Swift validates the
-typed bridge payload before mapping it to two `UsageLimitWindow` entries,
+typed bridge payload before mapping every present window to `UsageLimitWindow`
+entries (legacy `Session`/`Weekly`, monthly `Monthly` with the spend amounts as
+its remaining label),
 discards the in-memory payload after validation, and leaves the last valid
 snapshot in place after a missing session, parser drift, incomplete data,
 timeout, or load failure. Scheduled refresh never foregrounds the login UI or
