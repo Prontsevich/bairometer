@@ -2,11 +2,12 @@
 
 ## Work Tracking
 
-Active work, status, and priority are tracked in the private Linear project
-named `AI Limitbar`. This document preserves milestone goals, scope,
-acceptance criteria, and completed-history evidence; it is not a second live
-task tracker. Closed checkboxes are historical. Remaining plain bullets
-describe scope whose live state belongs to the corresponding Linear issue.
+Active work, status, priority, dependencies, and acceptance are tracked in
+private Linear under Team `Development` for the `Bairometer` product. This
+document preserves milestone goals, scope, acceptance criteria, and
+completed-history evidence; it is not a second live task tracker. Closed
+checkboxes are historical. Remaining plain bullets describe scope whose live
+state belongs to the corresponding Linear Issue.
 
 The public GitHub issue links below are legacy references for completed manual
 QA. New private implementation work belongs in Linear. Do not copy private

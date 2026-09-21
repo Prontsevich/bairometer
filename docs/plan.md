@@ -66,11 +66,14 @@ start a provider CLI in Documents, Downloads, Music, or another user workspace.
 
 ## Work Tracking
 
-The private Linear workspace is the source of truth for active strategy,
-priorities, project documents, status, and execution context. Each active item
-is a Linear issue. Its implementation pull request is attached from the private
-issue side after the PR exists, without copying private planning context or
-issue identifiers into public GitHub issues, branches, commits, or pull
+Private Linear is the source of truth for active strategy, priorities, project
+documents, status, execution context, dependencies, and acceptance. This
+product is organized under Team `Development` and the `Bairometer` product
+Initiative. Each active item is a Linear Issue: new intake starts in `Triage`,
+finite multi-Issue outcomes use a Project, and ordinary standalone work uses
+`Improvements & Fixes`. Its implementation pull request is attached from the
+private Issue side after the PR exists, without copying private planning context
+or Issue identifiers into public GitHub issues, branches, commits, or pull
 requests.
 
 The roadmap in `docs/tasks.md` preserves product scope, acceptance criteria, and
@@ -78,6 +81,10 @@ completed-history evidence rather than duplicating active task state. GitHub
 Releases are the public changelog. Their notes are derived from completed work,
 merged pull requests, and commits after private planning context is removed;
 Linear project updates are for current status, not published release history.
+
+If Linear is temporarily unavailable, `docs/backlog.md` records raw intake and
+necessary pending synchronization only. Reconcile and retire those temporary
+entries after access returns; it must not become a parallel live tracker.
 
 ## Non-Goals For MVP
 

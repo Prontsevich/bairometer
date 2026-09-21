@@ -117,7 +117,10 @@ layer responsibilities, key patterns, and working agreements.
 ## Documentation
 
 - [`docs/plan.md`](docs/plan.md) — Product plan, provider research, architecture decisions
-- [`docs/tasks.md`](docs/tasks.md) — Milestone tracker and completion state
+- [`docs/tasks.md`](docs/tasks.md) — Completed milestone scope, acceptance, and
+  verification history; active work lives in Linear
+- [`docs/backlog.md`](docs/backlog.md) — Fallback intake and pending
+  synchronization only when Linear is unavailable
 - [`docs/dashboard-design.md`](docs/dashboard-design.md) — Terminal-fieldset dashboard design contract
 - [`docs/settings-design.md`](docs/settings-design.md) — Settings window lifecycle and visual contract
 - [`docs/design-qa.md`](docs/design-qa.md) — Dashboard visual QA findings and fixes

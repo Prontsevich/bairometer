@@ -90,25 +90,36 @@ AILimitBarClaudeStatusLine (helper)
 
 ## Working Agreement
 
-- Treat the live code and `Package.swift` as the source of truth for the current
+- Treat live code and `Package.swift` as the source of truth for current
   implementation, `docs/plan.md` for current architecture and settled public
-  contracts, the private Linear workspace for active strategy, priorities,
-  project documents, and issues, and `docs/tasks.md` for completed-history
-  evidence.
-- When Linear is connected, read the team document `AI Limitbar — Working Guide`
-  before selecting, creating, or starting work. Then read the relevant Project
-  document, issue, and any linked design or provider document.
-- Use the Linear lifecycle consistently: new ideas start in `Triage`, confirmed
-  unscheduled work moves to `Backlog`, only the next 3–5 ready issues belong in
-  `Todo`, active implementation moves through `In Progress` and `In Review`,
-  and `Done` requires completed verification rather than implementation alone.
-- An issue labeled `Requires Apple Developer Program` must remain unassigned in
-  `Backlog`, without an estimate or target date, until the team-level Apple
-  Developer Program membership gate is `Done`. A Project existing in Linear is
-  not permission to start gated work.
-- Update the linked Linear issue and documentation alongside implementation
-  when behavior, architecture, or milestone status changes. Do not defer either
-  to a later cleanup pass.
+  contracts, and `docs/tasks.md` for completed-history evidence. Active work,
+  priorities, dependencies, acceptance, and lifecycle belong in private Linear.
+- When Linear is connected and available, use Team `Development` and the
+  `Bairometer` product Initiative. Read `Development — Working Guide`, then the
+  selected Issue, its relevant finite Project document, and only the linked
+  design or provider documents needed for its acceptance. Views are navigation
+  aids, not another planning hierarchy.
+- New ideas, reports, observations, and agent-discovered concerns enter
+  `Triage` cheaply. Search before creating or shaping work. Each shaped Issue
+  has exactly one Type: `Bug`, `Gap`, `Feature`, `Improvement`, `Refactor`,
+  `Research`, or `Chore`. Use a finite Project for a coherent multi-Issue
+  outcome; use `Improvements & Fixes` for ordinary standalone work.
+- Follow `Triage` → `Backlog` → `Todo` → `In Progress` → `In Review` → `Done`.
+  A status, Project, or plan does not grant execution authority. `Done` requires
+  the Issue's observable acceptance and required verification, rather than
+  technical implementation or a checklist alone.
+- Read the actual evidence and dependencies for any gate before starting its
+  blocked scope. Historical Apple Developer Program membership evidence does not
+  itself satisfy downstream signing, notarization, protected-CI, clean-Mac, or
+  release acceptance requirements.
+- Use `change` and `execute-tasks` handoffs proportionally: a small change may
+  use an inline approach, while consequential design needs a dated spec and
+  resumable ordered work needs a dated plan. Reconcile affected living docs
+  with verified implementation; keep tracker acceptance canonical in Linear.
+- When Linear is unavailable, use `docs/backlog.md` for intake and necessary
+  pending synchronization, explicitly marked pending. Reconcile it with Linear
+  after access returns and retire temporary entries; do not run parallel live
+  trackers while Linear is available.
 - Treat multiple independently authenticated accounts as a first-class
   power-user scenario in provider research and implementation. A source tied to
   one local CLI identity must state that limit, must not be presented as several
@@ -170,6 +181,8 @@ Common scopes: `storage`, `codex`, `dashboard`, `ollama`, `claude`, `settings`,
   contracts
 - `docs/tasks.md` — Completed milestone scope, acceptance criteria, and
   verification history; active and future scope is tracked privately in Linear
+- `docs/backlog.md` — Fallback intake and pending synchronization only when
+  Linear is unavailable
 - `docs/dashboard-design.md` — Terminal-fieldset dashboard design contract
 - `docs/settings-design.md` — Settings window lifecycle and visual contract
 - `docs/design-qa.md` — Dashboard visual QA findings and fixes

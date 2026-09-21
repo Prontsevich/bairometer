@@ -7,17 +7,32 @@ verification, and commit policy.
 
 ## Task sources
 
-Active strategy, priority, project documents, and issues live in the private
-Linear workspace. `docs/tasks.md` is completed-history evidence, not a live
-tracker.
+Active strategy, priority, project documents, Issue acceptance, and lifecycle
+live in private Linear. `docs/tasks.md` is completed-history evidence, not a
+live tracker.
 
 When Linear is connected:
 
-1. Read the team document `AI Limitbar — Working Guide`.
-2. Read the relevant Linear Project document.
-3. Read the selected issue and only the linked design or provider documents
+1. Use Team `Development` and the `Bairometer` product Initiative, then read
+   `Development — Working Guide`.
+2. Read the relevant finite Project document, or confirm that standalone work
+   belongs in `Improvements & Fixes`.
+3. Read the selected Issue and only the linked design or provider documents
    needed for its acceptance criteria.
-4. Do not select gated work merely because its Project exists.
+4. Do not select work directly from `Triage`, and do not select gated work
+   merely because its Project exists.
+
+New ideas, reports, observations, and agent-discovered concerns enter `Triage`
+cheaply. Search before creating or shaping work. Each shaped Issue has exactly
+one Type: `Bug`, `Gap`, `Feature`, `Improvement`, `Refactor`, `Research`, or
+`Chore`. Views are navigation aids, not another planning hierarchy. A finite
+Project groups a coherent multi-Issue outcome; `Improvements & Fixes` holds
+ordinary standalone work.
+
+When Linear is unavailable, use `docs/backlog.md` for intake and necessary
+pending synchronization, explicitly marked pending. Reconcile and retire
+temporary entries after access returns; do not maintain a parallel live tracker
+while Linear is available.
 
 Accept a Linear issue, an approved repository plan, or an explicit user task
 list. Never copy private Linear identifiers or URLs into branches, commits,
@@ -74,11 +89,14 @@ The parent orchestrator owns all status transitions:
 | Every acceptance criterion, including required manual verification, is complete | `Done` only when appropriate for the issue workflow |
 
 A durable review artifact is a task commit or an explicitly user-requested
-working-tree review. Never mark an issue `Done` merely because code was written.
+working-tree review. Never mark an Issue `Done` merely because code was written
+or a technical checklist was completed. Confirm its observable acceptance and
+required verification.
 
-Issues labeled `Requires Apple Developer Program` must remain unassigned in
-`Backlog`, without an estimate or target date, until the team-level membership
-gate is `Done`.
+Read the actual evidence and dependencies for a gate before starting its
+blocked scope. Historical Apple Developer Program membership evidence does not
+itself satisfy downstream signing, notarization, protected-CI, clean-Mac, or
+release acceptance requirements.
 
 ## Worker and review visibility
 
