@@ -1,14 +1,14 @@
 # Ollama Cloud Experimental Web Page Source
 
-Ollama Cloud does not currently document an account-usage API. AI Limitbar uses
+Ollama Cloud does not currently document an account-usage API. Bairometer uses
 the `Experimental web page` source for each Ollama account.
 
 In Settings or the dashboard account details, save the account, then choose
-`Connect Ollama…` or `Reconnect`. AI Limitbar opens a dedicated connection
+`Connect Ollama…` or `Reconnect`. Bairometer opens a dedicated connection
 window so the transient menu-bar panel cannot dismiss the sign-in flow. Sign in
-only in the AI Limitbar-owned WebKit view. Each
+only in the Bairometer-owned WebKit view. Each
 account receives its own persistent WebKit data store identified by an opaque
-UUID; AI Limitbar never reads, imports, exports, logs, or stores cookies,
+UUID; Bairometer never reads, imports, exports, logs, or stores cookies,
 passwords, tokens, browser profile data, raw HTML, or raw bridge payloads.
 
 The source loads `https://ollama.com/settings` and extracts only semantic usage

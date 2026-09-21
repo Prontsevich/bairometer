@@ -3,7 +3,7 @@
 ## Status and decision
 
 OpenRouter has a supported `documented-interface` result for the first MVP. One
-saved AI Limitbar account represents one user-declared OpenRouter billing
+saved Bairometer account represents one user-declared OpenRouter billing
 account. It contains one or more ordinary API-key credential contexts, each
 using `GET /api/v1/key` for its own limits and usage. An optional management key
 adds the single account-wide credits metric through `GET /api/v1/credits`.
@@ -249,7 +249,7 @@ An ordinary key is the narrowest reliable credential boundary:
   return a workspace identifier;
 - organization keys draw from the organization's shared credit pool, but the
   current-key response does not identify the organization;
-- therefore AI Limitbar can truthfully label the source as one configured API
+- therefore Bairometer can truthfully label the source as one configured API
   key, but cannot infer an upstream personal account, organization or workspace
   from it;
 - keys grouped by the user under one billing account retain separate local
@@ -291,7 +291,7 @@ Observed results:
   ordinary-key fallback.
 - The same ordinary key unexpectedly returned HTTP 200 and the documented
   numeric schema from `/credits`, despite the current API reference requiring a
-  management key. This is an undocumented authorization mismatch. AI Limitbar
+  management key. This is an undocumented authorization mismatch. Bairometer
   must not rely on it; `/credits` remains management-only in the source
   contract until OpenRouter changes its documentation.
 - The management credential identified itself as both management and

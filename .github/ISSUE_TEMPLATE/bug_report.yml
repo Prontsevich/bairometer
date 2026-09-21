@@ -1,11 +1,11 @@
 name: Bug report
-description: Report a reproducible problem in AI Limitbar
+description: Report a reproducible problem in Bairometer
 title: "[Bug]: "
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for helping improve AI Limitbar.
+        Thanks for helping improve Bairometer.
 
         This issue is public. Do not include API keys, tokens, cookies, raw provider responses, private account identifiers, sensitive URLs, personal data, or unredacted screenshots and logs.
   - type: textarea
@@ -13,7 +13,7 @@ body:
     attributes:
       label: What happened?
       description: Describe the observed behavior and what you expected instead.
-      placeholder: AI Limitbar showed… I expected…
+      placeholder: Bairometer showed… I expected…
     validations:
       required: true
   - type: textarea
@@ -30,7 +30,7 @@ body:
   - type: input
     id: version
     attributes:
-      label: AI Limitbar version
+      label: Bairometer version
       placeholder: 0.2.0 or Development build
     validations:
       required: true

@@ -2,8 +2,8 @@
 
 ## Status and boundary
 
-This document defines the implementation-level version 1 direction for AI
-Limitbar's internal Provider Integration Contract. It is a design contract for
+This document defines the implementation-level version 1 direction for
+Bairometer's internal Provider Integration Contract. It is a design contract for
 the application and future portable Core; it is not a public standard, JSON
 Schema, SDK, compatibility promise, plugin runtime, or provider registry.
 
@@ -187,7 +187,7 @@ CapacitySnapshot
   metrics: [CapacityMetric]
 ```
 
-`savedAccountID` is generated and owned by AI Limitbar. It is not an upstream
+`savedAccountID` is generated and owned by Bairometer. It is not an upstream
 account, user, workspace, key, or tenant identifier.
 
 ### `AccountContext`

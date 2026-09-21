@@ -66,7 +66,7 @@ pressed behavior for all interactive elements.
 
 ### Header
 
-- The panel title is `AI Limitbar`.
+- The panel title is `Bairometer`.
 - A glyph-only Refresh All control sits in the upper-right corner and invokes
   the existing global refresh path.
 - While the global refresh runs, that control presents progress and cannot be

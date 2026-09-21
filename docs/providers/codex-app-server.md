@@ -2,7 +2,7 @@
 
 OpenAI Codex accounts use the `Experimental app-server` source. Only one
 account can be configured because it reflects the current local Codex CLI
-identity. On refresh, AI Limitbar starts a short-lived local process:
+identity. On refresh, Bairometer starts a short-lived local process:
 
 ```text
 codex app-server --listen stdio://
@@ -15,14 +15,14 @@ identified `codex` rate-limit bucket, its `primary` window, and its optional
 as experimental because the local CLI protocol may change; a successful read is
 still presented as `OK`.
 
-The child runs from AI Limitbar's dedicated private temporary directory rather
+The child runs from Bairometer's dedicated private temporary directory rather
 than inheriting the app launch directory. `PWD` points to that directory, while
 inherited `OLDPWD` and `INIT_CWD` values are removed to avoid incidental access
 to protected user folders during scheduled refresh.
 
 Leave `Codex executable` blank to use automatic discovery from the shell PATH
 and standard local install locations, or select a specific executable for that
-account. AI Limitbar does not open a terminal, drive `/status` through a PTY,
+account. Bairometer does not open a terminal, drive `/status` through a PTY,
 read browser content, session files, cookies, tokens, or credentials. It
 discards raw JSON-RPC messages and deliberately excludes credits, opaque reset
 identifiers, and other unneeded account fields before a snapshot is created.
@@ -34,7 +34,7 @@ recoverable diagnostic with steps to update or authenticate Codex CLI and retry.
 
 ## Authenticated web boundary
 
-AI Limitbar does not currently provide an authenticated Codex web source. The
+Bairometer does not currently provide an authenticated Codex web source. The
 documented app-server account API is preferred for the one active local Codex
 CLI identity because it already exposes the relevant account-wide quota, reset,
 plan, credit, and token-activity capabilities when they are available. A future

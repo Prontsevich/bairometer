@@ -4,8 +4,10 @@ Guidance for AI coding agents working in this repository.
 
 ## Project Overview
 
-AI Limitbar is a macOS menu-bar-only app (`LSUIElement`) for viewing normalized
-AI provider usage snapshots. Built with SwiftUI on Swift 6.2 / macOS 15+.
+Bairometer is a macOS menu-bar-only app (`LSUIElement`) for viewing normalized
+AI provider usage snapshots. `AILimitBar` remains its technical identity for
+packages, targets, executables, storage, signing, and bundle identifiers. Built
+with SwiftUI on Swift 6.2 / macOS 15+.
 
 ## Build & Test
 

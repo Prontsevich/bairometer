@@ -47,7 +47,7 @@ to `dist/AILimitBarUITestHost.app`, changes only the copied bundle metadata, and
 ad-hoc signs and validates the result. The host identity is:
 
 - bundle ID: `io.github.Prontsevich.AILimitBar.UITestHost`;
-- display name: `AI Limitbar UI Test Host`;
+- display name: `Bairometer UI Test Host`;
 - executable and process: `AILimitBarTest`;
 - `LSUIElement=false`.
 

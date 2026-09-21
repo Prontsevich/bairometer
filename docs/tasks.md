@@ -1,4 +1,4 @@
-# AI Limitbar Roadmap
+# Bairometer Roadmap
 
 ## Work Tracking
 
@@ -12,6 +12,10 @@ state belongs to the corresponding Linear Issue.
 The public GitHub issue links below are legacy references for completed manual
 QA. New private implementation work belongs in Linear. Do not copy private
 Linear issue descriptions or identifiers into public GitHub content.
+
+Bairometer is the public product identity. Historical entries retain
+`AILimitBar` only for technical compatibility artifacts such as executables,
+bundle paths, storage, and identifiers.
 
 | Roadmap scope | GitHub issue |
 | --- | --- |
@@ -128,7 +132,7 @@ Acceptance:
 Decision:
 
 - Claude Code is the first real provider target.
-- Initial mode is opt-in `local-estimate` from an AI Limitbar-owned JSON
+- Initial mode is opt-in `local-estimate` from a Bairometer-owned JSON
   snapshot file.
 - The provider must not parse Claude's interactive `/usage` screen,
   undocumented local session files, browser pages, or private provider state.
@@ -317,7 +321,7 @@ Its deployment and visual baseline were later superseded; the current decision
 is macOS 15+ with the terminal-fieldset visual system documented in
 `docs/plan.md`.
 
-Goal: move AI Limitbar to a modern-only macOS baseline and redesign the visible
+Goal: move Bairometer to a modern-only macOS baseline and redesign the visible
 app surfaces around the current system design language instead of legacy
 compatibility patterns.
 
@@ -365,7 +369,7 @@ Acceptance:
 
 Decision:
 
-- AI Limitbar is a modern-only macOS app. Do not optimize UI architecture for
+- Bairometer is a modern-only macOS app. Do not optimize UI architecture for
   macOS 14-era compatibility unless that decision is explicitly reopened.
 - Liquid Glass and current SwiftUI macOS patterns are the default design
   baseline.
@@ -492,7 +496,7 @@ Acceptance:
 Goal: make Claude Code useful without relying on hand-edited JSON files.
 
 - [x] Define the first supported Claude Code local data source contract.
-- [x] Add a helper/import path that writes AI Limitbar local snapshot JSON.
+- [x] Add a helper/import path that writes Bairometer local snapshot JSON.
 - [x] Validate helper output before storing snapshots.
 - [x] Add source diagnostics for missing file, invalid schema, stale helper
   output, and invalid percentage values.
@@ -517,7 +521,7 @@ credentials.
 - [x] Add an `ollama-web-page` source mode; keep `manual` as the default and
   fallback mode for Ollama Cloud accounts.
 - [x] Add a compact `Connect Ollama…` / `Reconnect` flow backed by an
-  AI Limitbar-owned `WKWebView`; the user completes sign-in directly with
+  Bairometer-owned `WKWebView`; the user completes sign-in directly with
   Ollama in that view.
 - [x] Keep the WebKit session isolated from other browsers and apps. Do not
   read, export, import, log, or write cookies, tokens, passwords, profile data,
@@ -555,7 +559,7 @@ credentials.
 Acceptance:
 
 - [x] An explicitly connected Ollama account supplies current session and weekly
-  limit windows from its settings page without any AI Limitbar-managed
+  limit windows from its settings page without any Bairometer-managed
   credential storage.
 - [x] The settings and dashboard clearly distinguish this source from an official
   machine-readable usage API and make reconnection actionable.
@@ -571,7 +575,7 @@ Decision:
   no separate usage JSON response was observed during the research check.
 - This source is intentionally an experimental DOM integration. Re-evaluate it
   if Ollama publishes a supported account-usage API.
-- The user must sign in again through AI Limitbar's own WebKit view. The app
+- The user must sign in again through Bairometer's own WebKit view. The app
   must never reuse or extract a session from Codex, Safari, Chrome, or another
   browser.
 
@@ -616,7 +620,7 @@ Acceptance:
 - The app never drives `/status` through a PTY and never reads browser content,
   raw Codex session files, or Codex authentication state.
 - No credentials, raw app-server payloads, or opaque account identifiers are
-  written to AI Limitbar storage or diagnostics.
+  written to Bairometer storage or diagnostics.
 - A Codex CLI update or unavailable experimental interface leaves the account
   in a clear recoverable state and preserves the manual usage-page workflow.
 
@@ -629,7 +633,8 @@ state or weakening the current privacy boundary.
 - [x] Add GRDB through Swift Package Manager and make it available to both
   `AILimitBar` and `AILimitBarClaudeStatusLine` through `AILimitBarCore`.
 - [x] Create one non-user-configurable database at
-  `~/Library/Application Support/AI Limitbar/AI Limitbar.sqlite` and enable
+  `~/Library/Application Support/AI Limitbar/AI Limitbar.sqlite` (a retained
+  technical path) and enable
   WAL mode, foreign-key enforcement, and a bounded busy timeout.
 - [x] Define versioned GRDB migrations for provider accounts, current
   normalized snapshots, refresh settings, and persisted source diagnostics.
@@ -643,7 +648,7 @@ state or weakening the current privacy boundary.
   `RefreshSettingsStore` behind focused store protocols so `AppModel` keeps its
   existing account and refresh behavior.
 - [x] Replace Claude Code's generic `local-snapshot` path with an
-  AI Limitbar-managed `statusLine` database source. The helper must validate
+  Bairometer-managed `statusLine` database source. The helper must validate
   and write only the normalized snapshot in a short transaction, even when the
   app is not running.
 - [x] Remove the user-editable local snapshot path from Settings after the
@@ -672,7 +677,7 @@ Acceptance:
 - A fresh install runs entirely from the GRDB-managed SQLite database and
   requires no user-provided snapshot path.
 - Updating Claude Code through the bundled `statusLine` helper remains safe
-  while AI Limitbar is closed or reading the same database.
+  while Bairometer is closed or reading the same database.
 - Existing supported JSON-based installations retain their accounts, refresh
   settings, and latest valid snapshots after one restart; their legacy files
   remain available as backups.
@@ -746,7 +751,7 @@ terminal-fieldset product language and one consistent interactive control layer.
 Design contract: [`docs/settings-design.md`](settings-design.md).
 
 - [x] Replace the SwiftUI `Settings` scene and `SettingsLink` entry point with a
-  singleton `Window("AI Limitbar Settings", id: "settings")` scene opened through
+  singleton `Window("Bairometer Settings", id: "settings")` scene opened through
   `openWindow(id:)`.
 - [x] Add one narrow application-activation boundary that calls the current
   `NSApplication.activate()` API in direct response to the Settings action before
@@ -908,7 +913,7 @@ Acceptance:
   authenticated local CLI without opening an interactive terminal.
 - A successful refresh performs no model turn, exposes no tools, creates no
   persisted Claude session, and stores only the normalized `UsageSnapshot` in
-  AI Limitbar's database.
+  Bairometer's database.
 - Machine-local activity attribution from `/usage` is never presented as an
   account-wide quota value or retained in storage or diagnostics.
 - A Claude CLI or text-format change fails closed, preserves the last valid
@@ -921,7 +926,7 @@ Acceptance:
 
 ## Milestone 20: GitHub Release Distribution
 
-Goal: let people download and run a tested AI Limitbar `.app` from GitHub
+Goal: let people download and run a tested Bairometer `.app` from GitHub
 Releases without building from source, while keeping the initial ad-hoc-signed,
 non-notarized distribution path honest about macOS Gatekeeper warnings.
 
@@ -1112,15 +1117,15 @@ Acceptance:
 - Sign-in, navigation, keyboard focus, form submission, and normalized usage
   parsing behave exactly as before the visual adaptation.
 
-## Milestone 22.4: About AI Limitbar
+## Milestone 22.4: About Bairometer
 
 Goal: provide a compact, discoverable source of app identity, build metadata,
 and project-support links without expanding Settings or touching provider data.
 
 - [x] Add an `About` text action beside `Settings` in the menu-bar panel footer.
   Keep the existing compact terminal text-action style, `Quit` alignment, and an
-  explicit `About AI Limitbar` help/accessibility label.
-- [x] Present one fixed-size, non-restoring `About AI Limitbar` utility window.
+  explicit `About Bairometer` help/accessibility label.
+- [x] Present one fixed-size, non-restoring `About Bairometer` utility window.
   It activates the `LSUIElement` app, reuses and foregrounds an open window,
   centers a newly reopened window on the display that received the menu-bar
   action, and leaves only the native Close control available.

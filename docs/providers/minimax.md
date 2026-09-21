@@ -2,7 +2,7 @@
 
 ## Supported boundary
 
-AI Limitbar implements the experimental MiniMax Global Token Plan source with
+Bairometer implements the experimental MiniMax Global Token Plan source with
 the documented `GET /v1/token_plan/remains` endpoint. A saved MiniMax account
 is a local context for one Global personal Default Team and exactly one
 Subscription Key. It is not a MiniMax profile and must not merge Teams, regions,
@@ -53,7 +53,7 @@ Although the array is named `model_remains`, the reviewed identifiers observed
 there are quota-category identifiers, not callable MiniMax model names. The
 official [Token Plan overview](https://platform.minimax.io/docs/token-plan/intro)
 describes a shared text, image, speech, and music quota alongside a distinct
-video-generation quota. AI Limitbar therefore applies this closed,
+video-generation quota. Bairometer therefore applies this closed,
 code-reviewed mapping:
 
 - Wire identifier `general` → stable ID `quota-category-a` → local label

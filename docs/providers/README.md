@@ -1,6 +1,6 @@
 # Provider Documentation
 
-Detailed implementation notes for each AI Limitbar data source.
+Detailed implementation notes for each Bairometer data source.
 
 | Provider | Document | Default | Experimental |
 | --- | --- | --- | --- |

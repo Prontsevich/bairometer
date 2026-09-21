@@ -1,4 +1,4 @@
-# AI Limitbar App Icon Candidates
+# Bairometer App Icon Candidates
 
 This tracked archive preserves the six original directions and the final
 selected hybrid from the 2026-07 icon exploration. It is a design reference

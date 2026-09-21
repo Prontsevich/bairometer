@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to AI Limitbar are documented in this file.
+All notable changes to Bairometer are documented in this file.
 
 ## v0.5.0 - 2026-08-28
 

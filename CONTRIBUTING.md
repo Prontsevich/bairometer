@@ -1,4 +1,8 @@
-# Contributing to AI Limitbar
+# Contributing to Bairometer
+
+Bairometer is the public product name. The existing `AILimitBar` package,
+executables, app bundle, archive names, storage, signing, and repository
+identity are retained technical identifiers; do not rename them incidentally.
 
 ## Build & Test
 

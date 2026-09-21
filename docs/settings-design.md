@@ -40,7 +40,7 @@ selection, accessibility, and Light/Dark behavior.
 ## Window Architecture
 
 - Declare Settings as a singleton SwiftUI
-  `Window("AI Limitbar Settings", id: "settings")` scene.
+  `Window("Bairometer Settings", id: "settings")` scene.
 - Open it with `openWindow(id: "settings")`. Calling the action while the window
   is already open brings that window forward instead of creating another one.
 - Immediately before opening, call the current `NSApplication.activate()` API
@@ -107,7 +107,7 @@ Setup. Accounts continues to use a local master-detail workspace and remains
 the selected section when Settings opens or reopens.
 
 ```text
-┌─ AI Limitbar Settings ─────────────────────────────────────┐
+┌─ Bairometer Settings ──────────────────────────────────────┐
 │        [ General ]  [ Accounts ]  [ Providers ]            │
 ├──────────────────┬─────────────────────────────────────────┤
 │ ACCOUNTS         │ claude-main                    [Enabled]│
@@ -192,7 +192,7 @@ these actions remove local configuration rather than remote OpenRouter objects.
 
 ## Interaction And Accessibility
 
-- Opening Settings from behind another application activates AI Limitbar and
+- Opening Settings from behind another application activates Bairometer and
   makes the Settings window key.
 - Terminal selection and segmented controls use the same active/inactive palette
   as the dashboard fieldsets, with visible hover and pressed feedback. Each
@@ -214,7 +214,7 @@ these actions remove local configuration rather than remote OpenRouter objects.
 ## Non-Goals
 
 - Changing provider, refresh, snapshot, or persistence contracts.
-- Adding a Dock icon or converting AI Limitbar into a conventional main-window
+- Adding a Dock icon or converting Bairometer into a conventional main-window
   app.
 - Using an always-on-top Settings panel.
 - Recreating general text-editing controls, file panels, or dialogs. Terminal

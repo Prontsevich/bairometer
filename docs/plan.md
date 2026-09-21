@@ -1,10 +1,14 @@
-# AI Limitbar Plan
+# Bairometer Plan
 
 ## Purpose
 
-AI Limitbar is a macOS menu bar app for monitoring AI provider usage limits in
+Bairometer is a macOS menu bar app for monitoring AI provider usage limits in
 one place. The app should make it clear which limits are known precisely, which
 are estimates, and which require opening the provider's own usage page.
+
+Bairometer is the public product identity. The existing `AILimitBar` package,
+executables, bundle identifier, storage paths, signing identity, archive names,
+and repository remain technical compatibility identifiers.
 
 The first version focuses on visibility and reliability, not on perfect
 coverage. A provider integration is acceptable only if the app can explain where
@@ -55,12 +59,12 @@ The MVP fetches live data only through explicitly opted-in experimental source
 paths. The Codex app-server source uses the documented local app-server protocol
 but remains experimental because CLI compatibility can change. Ollama's
 experimental page source is live but undocumented and is not treated as
-authoritative. Claude Code can write an AI Limitbar-owned managed database
+authoritative. Claude Code can write a Bairometer-owned managed database
 snapshot as an explicit local estimate; the remaining provider paths are manual-confidence
 fallbacks.
 
 Short-lived Codex and Claude CLI processes run from a dedicated private
-temporary directory. AI Limitbar normalizes `PWD` to that directory and removes
+temporary directory. Bairometer normalizes `PWD` to that directory and removes
 inherited `OLDPWD` and `INIT_CWD` hints so scheduled refresh cannot accidentally
 start a provider CLI in Documents, Downloads, Music, or another user workspace.
 
@@ -112,7 +116,7 @@ entries after access returns; it must not become a parallel live tracker.
 
 ## Platform Baseline
 
-AI Limitbar is a modern-only macOS app. The project targets macOS 15 Sequoia as
+Bairometer is a modern-only macOS app. The project targets macOS 15 Sequoia as
 the minimum supported baseline. This preserves the current SwiftUI window
 behavior without compatibility branches for older releases. The app does not
 depend on Liquid Glass; the product-specific terminal-fieldset visual system
@@ -197,7 +201,7 @@ Adapters should not write UI state directly. They should return normalized
 snapshots to an app-level store.
 
 Experimental web-page sources must keep their authentication boundary inside an
-AI Limitbar-owned WebKit view. They may receive a minimal, validated bridge
+Bairometer-owned WebKit view. They may receive a minimal, validated bridge
 payload from that view, but must not read, import, export, or persist cookies,
 tokens, raw HTML, browser storage, or raw bridge payloads. A parsing or session
 failure must preserve the last valid normalized snapshot.
@@ -206,18 +210,18 @@ failure must preserve the last valid normalized snapshot.
 
 ### OpenAI Codex
 
-AI Limitbar keeps `manual` as the default and fallback OpenAI Codex source. One
+Bairometer keeps `manual` as the default and fallback OpenAI Codex source. One
 explicitly selected account may use `app-server`, which starts a short-lived
 local `codex app-server --listen stdio://` process for a refresh. It performs
 the documented JSONL initialization handshake, requests
 `account/rateLimits/read`, then terminates the process. This is not terminal
-automation: AI Limitbar never starts an interactive CLI, drives `/status`
+automation: Bairometer never starts an interactive CLI, drives `/status`
 through a PTY, reads browser content, or reads local Codex authentication or
 session files.
 
 The app resolves `codex` from an optional per-account executable override, then
 from the shell PATH and standard local install locations. The override is a
-local executable path only; AI Limitbar does not persist credentials, cookies,
+local executable path only; Bairometer does not persist credentials, cookies,
 tokens, or account files. Automatic discovery never stores its result.
 
 The source selects a limit bucket only when it is explicitly identified as
@@ -250,7 +254,7 @@ other Claude surfaces.
 Initial integration should separate local estimates from official account-level
 usage if both become available.
 
-MVP status: opt-in `local-estimate` source backed by an AI Limitbar-owned
+MVP status: opt-in `local-estimate` source backed by a Bairometer-owned
 snapshot written by the Claude Code `statusLine` helper. The implemented source
 does not parse Claude interactive screens, private local files, or browser
 pages. Milestone 19 adds a separate opt-in experimental source that invokes
@@ -272,10 +276,10 @@ Official sources checked:
 
 Supported source strategy:
 
-| Source | Output shape | Fit for AI Limitbar |
+| Source | Output shape | Fit for Bairometer |
 | --- | --- | --- |
 | Claude Code `/usage`, `/cost`, and `/stats` commands | `/usage` is a built-in slash command that can be dispatched in non-interactive mode on supported CLI versions. `--output-format json` returns a result envelope, while the plan limits inside `result` remain human-readable text. On Claude Code `2.1.207`, the verified text included current session, all-model weekly, and Fable weekly percentages; weekly values included UTC reset times while the session value did not. The envelope reported zero model turns, cost, and token usage. The same screen also includes approximate machine-local activity attribution. | Implemented as the opt-in `claude-usage-cli` experimental source in Milestone 19. It parses only recognized plan-limit lines in memory and ignores the local activity breakdown. The JSON envelope and non-interactive dispatch make this safer than PTY scraping, but the inner text is not a stable machine-readable quota schema and fails closed on drift. |
-| Claude Code status line | User-configured command receives JSON session data on stdin, including `rate_limits.five_hour` and `rate_limits.seven_day` with consumed percentages and reset timestamps when available. | Selected opt-in source. AI Limitbar's helper validates the input and writes a normalized `local-estimate` snapshot to the app-owned database. It remains machine/session-local, not authoritative account-wide usage. |
+| Claude Code status line | User-configured command receives JSON session data on stdin, including `rate_limits.five_hour` and `rate_limits.seven_day` with consumed percentages and reset timestamps when available. | Selected opt-in source. Bairometer's helper validates the input and writes a normalized `local-estimate` snapshot to the app-owned database. It remains machine/session-local, not authoritative account-wide usage. |
 | OpenTelemetry export | Metrics and logs/events for organization usage, cost, token counters, active time, tool activity, and API request events when telemetry is enabled. | Future team/admin mode can ingest telemetry with `local-estimate` or organization-reporting confidence. It requires explicit telemetry configuration and is not a default personal account source. |
 | Claude Code analytics dashboard | Team/Enterprise usage and contribution dashboards, with CSV export; API customers have Console team insights. | Future admin/reporting mode only. Not a live personal remaining-limit source. |
 | Claude Console Usage page | Authoritative billing for API users. | Manual source for API billing. It should not be shown as Claude subscription plan remaining quota. |
@@ -283,14 +287,15 @@ Supported source strategy:
 Selected initial confidence level: `local-estimate` for statusLine snapshots and
 `manual` when the helper is not configured.
 
-Selected MVP source mode: configure an AI Limitbar-owned statusLine helper. The
+Selected MVP source mode: configure a Bairometer-owned statusLine helper. The
 helper consumes only documented statusLine JSON and writes the normalized
-snapshot to `~/Library/Application Support/AI Limitbar/AI Limitbar.sqlite`. The
+snapshot to `~/Library/Application Support/AI Limitbar/AI Limitbar.sqlite`; this
+retained path is part of the technical compatibility contract. The
 user must explicitly add the generated `--account-id` command to
-`~/.claude/settings.json`; AI Limitbar does not edit Claude Code settings
+`~/.claude/settings.json`; Bairometer does not edit Claude Code settings
 automatically.
 
-Implemented post-MVP experimental source: AI Limitbar locates an explicitly selected
+Implemented post-MVP experimental source: Bairometer locates an explicitly selected
 local Claude executable and runs the equivalent of:
 
 ```zsh
@@ -426,12 +431,12 @@ Official sources checked:
 
 Supported source strategy:
 
-| Source | Output shape | Fit for AI Limitbar |
+| Source | Output shape | Fit for Bairometer |
 | --- | --- | --- |
-| Local Ollama API at `http://localhost:11434/api` | Per-request response metrics such as `total_duration`, `load_duration`, `prompt_eval_count`, `eval_count`, and related timing fields. Streaming responses include usage fields in the final chunk. | Useful for request-level local model accounting only when AI Limitbar observes or proxies requests. It does not provide account-level Ollama Cloud usage or remaining quota. |
+| Local Ollama API at `http://localhost:11434/api` | Per-request response metrics such as `total_duration`, `load_duration`, `prompt_eval_count`, `eval_count`, and related timing fields. Streaming responses include usage fields in the final chunk. | Useful for request-level local model accounting only when Bairometer observes or proxies requests. It does not provide account-level Ollama Cloud usage or remaining quota. |
 | Ollama Cloud API at `https://ollama.com/api` | Same Ollama model interaction API for cloud models, authenticated with an API key. Documented endpoints include model generation/chat, embeddings, tags, running models, model details, and model management. | Supports cloud model calls, but the checked docs do not list a billing, account usage, quota, or remaining-limit endpoint. |
 | Ollama API keys/settings | API keys for programmatic access to `ollama.com`; keys can be revoked and currently do not expire. | Required for future cloud model API calls. Not enough to expose usage limits. |
-| Ollama account settings page | The authenticated `https://ollama.com/settings` page server-renders usage in two variants: legacy `Session usage` / `Weekly usage` percentage cards with reset information, and a current monthly `Included usage` block with a spend meter (`$X of $Y used`), a reset timestamp, and per-model request segments. | Current manual fallback. Planned experimental source only through an AI Limitbar-owned WebKit connection and semantic DOM parsing. Its `Experimental` source label is informational when a read succeeds. It must not reuse another browser's session or store raw page/session data. |
+| Ollama account settings page | The authenticated `https://ollama.com/settings` page server-renders usage in two variants: legacy `Session usage` / `Weekly usage` percentage cards with reset information, and a current monthly `Included usage` block with a spend meter (`$X of $Y used`), a reset timestamp, and per-model request segments. | Current manual fallback. Planned experimental source only through a Bairometer-owned WebKit connection and semantic DOM parsing. Its `Experimental` source label is informational when a read succeeds. It must not reuse another browser's session or store raw page/session data. |
 
 Current confidence level: `manual`.
 
@@ -446,7 +451,7 @@ as manual. Do not call Ollama Cloud APIs for usage monitoring until a documented
 account usage endpoint exists.
 
 Implemented source mode: `ollama-web-page` is opt-in and starts with an
-AI Limitbar-owned `WKWebView` connection. Each account stores only an opaque
+Bairometer-owned `WKWebView` connection. Each account stores only an opaque
 WebKit data-store UUID in provider configuration; WebKit owns the persistent
 session data. The user completes sign-in in that view, and the app never reuses
 or extracts a session from Codex, Safari, Chrome, or another browser.
@@ -468,7 +473,7 @@ its remaining label),
 discards the in-memory payload after validation, and leaves the last valid
 snapshot in place after a missing session, parser drift, incomplete data,
 timeout, or load failure. Scheduled refresh never foregrounds the login UI or
-attempts unattended reauthentication. If AI Limitbar later becomes an Ollama
+attempts unattended reauthentication. If Bairometer later becomes an Ollama
 request proxy, it can expose its own `local-estimate` counters for observed
 requests, but those must remain labeled as partial and not account-wide.
 
@@ -554,13 +559,13 @@ expected assets with replacement. A published release or any mismatched tag or
 release remains a hard failure. A user publishes the draft after reviewing its
 notes, checksums, and assets.
 
-### About AI Limitbar
+### About Bairometer
 
 Milestone 22.4 adds a compact `About` action beside `Settings` in the menu-bar
-panel footer. It opens one fixed-size, non-restoring `About AI Limitbar` window
+panel footer. It opens one fixed-size, non-restoring `About Bairometer` window
 on the display that received the menu-bar action. The window is independent of
 account, provider, refresh, diagnostic, and persistence state; it shows the
-bundled app icon, `AI Limitbar`, release metadata, and project links only.
+bundled app icon, `Bairometer`, release metadata, and project links only.
 
 The release bundle supplies `CFBundleShortVersionString` and `CFBundleVersion`,
 which are displayed as `Version <version> (build <build>)`. Local staged builds
@@ -631,7 +636,7 @@ future opt-in web fallback may still be valuable for additional independently
 authenticated ChatGPT accounts. That question requires its own evidence-first
 research before a web source can be selected.
 
-AI Limitbar does not currently provide an authenticated Codex web source or
+Bairometer does not currently provide an authenticated Codex web source or
 semantic DOM parser. LMB-10 therefore did not initiate embedded sign-in,
 handle MFA or passkeys, retain a WebKit session, restore a web session after
 relaunch, or create per-account Codex `WKWebsiteDataStore` instances. It also
@@ -652,7 +657,7 @@ The documented `account/read` shapes include ChatGPT, API-key, and Amazon
 Bedrock identities; active auth-mode notifications also name externally
 supplied ChatGPT tokens, agent identity, and personal access tokens. Account
 token-activity data requires a Codex-service-backed identity; API-key-only and
-Bedrock authentication do not provide it. AI Limitbar must show
+Bedrock authentication do not provide it. Bairometer must show
 unavailable/manual state rather than fall back to a web session for an
 unsupported identity.
 
@@ -712,7 +717,7 @@ should show an unavailable/manual state instead of inventing progress bars.
 
 ## Provider Integration Contract Direction
 
-AI Limitbar uses a small, versioned internal Provider Integration Contract with
+Bairometer uses a small, versioned internal Provider Integration Contract with
 three primary models: `ProviderSurface`, `SourceDescriptor`, and
 `CapacityMetric`. It separates provider and product-surface identity, local
 account and tenant contexts, source and authentication metadata, and native-unit
@@ -819,19 +824,20 @@ compatibility promise exists.
 ### Legacy JSON import
 
 Earlier releases persisted provider accounts, refresh settings, normalized
-snapshots, and the AI Limitbar-managed Claude Code `statusLine` payload as
+snapshots, and the Bairometer-managed Claude Code `statusLine` payload as
 versioned JSON documents in Application Support. They are now legacy import
 sources, not active persistence.
 
 Raw legacy arrays and documents with another format version are not imported.
-AI Limitbar never deletes or rewrites the original files, so they remain
+Bairometer never deletes or rewrites the original files, so they remain
 available as local backups.
 
 ### Active local database
 
-AI Limitbar uses GRDB over SQLite as its single app-owned persistence
+Bairometer uses GRDB over SQLite as its single app-owned persistence
 engine. The database location is fixed at
-`~/Library/Application Support/AI Limitbar/AI Limitbar.sqlite`; users do not
+`~/Library/Application Support/AI Limitbar/AI Limitbar.sqlite`; the retained
+technical path is not a public-name migration. Users do not
 select database or snapshot paths.
 
 GRDB is shared through `AILimitBarCore` by the menu bar app and the bundled
@@ -967,16 +973,16 @@ registers the local Mac and refreshes the development profile when needed.
 
 Account display names are globally unique across all saved accounts, including
 disabled accounts, because the menu-bar dashboard uses the account name as its
-primary identifier. Before persistence, AI Limitbar trims leading/trailing
+primary identifier. Before persistence, Bairometer trims leading/trailing
 whitespace and compares names case-insensitively. The database stores a
 normalized display-name key under a unique constraint; Settings validates the
 same rule before attempting a write. A legacy import that finds a collision
 retains every account with deterministic ` (2)`, ` (3)`, and later suffixes and
 surfaces a migration warning rather than discarding or overwriting data.
 
-The Claude Code source is an AI Limitbar-managed database source. The
+The Claude Code source is a Bairometer-managed database source. The
 helper validates its documented `statusLine` input and writes the normalized
-local-estimate snapshot directly to the database, including when AI Limitbar is
+local-estimate snapshot directly to the database, including when Bairometer is
 not running. The Settings UI does not expose a generic local JSON path.
 
 On the first database launch, the app imports valid legacy `providers.json`,

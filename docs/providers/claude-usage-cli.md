@@ -1,6 +1,6 @@
 # Claude Code `/usage` CLI Source
 
-AI Limitbar can read Claude subscription plan limits from the locally
+Bairometer can read Claude subscription plan limits from the locally
 authenticated Claude Code CLI without opening an interactive terminal. This
 source is opt-in and Experimental because the outer CLI result is JSON but the
 plan-limit values inside `result` remain human-readable text.
@@ -8,7 +8,7 @@ plan-limit values inside `result` remain human-readable text.
 ## Setup
 
 1. Sign in with the local Claude Code CLI identity that should supply usage.
-2. Create or edit a Claude Code account in AI Limitbar Settings.
+2. Create or edit a Claude Code account in Bairometer Settings.
 3. Select `/usage CLI` under Source.
 4. Leave `Claude Path` blank for automatic discovery, or choose an executable.
 5. Save the account and use `Test Connection` or Refresh.
@@ -20,7 +20,7 @@ helper.
 
 ## Process Contract
 
-AI Limitbar locates `claude` from the saved override, `PATH`, and standard local
+Bairometer locates `claude` from the saved override, `PATH`, and standard local
 install locations, then runs:
 
 ```zsh
@@ -34,7 +34,7 @@ terminates the child. Stderr is discarded, and raw stdout is decoded in memory
 only. A response is accepted only when it is a successful result with zero
 turns, zero model tokens, and zero model cost.
 
-The child runs from AI Limitbar's dedicated private temporary directory rather
+The child runs from Bairometer's dedicated private temporary directory rather
 than inheriting the app launch directory. `PWD` points to that directory, while
 inherited `OLDPWD` and `INIT_CWD` values are removed to avoid incidental access
 to protected user folders during scheduled refresh.
@@ -63,7 +63,7 @@ app-generated compatibility text, and sanitized refresh diagnostics.
 
 A missing executable, unauthenticated CLI, unsupported envelope, inference
 activity, malformed or oversized output, changed plan text, invalid percentage
-or weekly reset, timeout, or cancellation fails closed. AI Limitbar preserves
+or weekly reset, timeout, or cancellation fails closed. Bairometer preserves
 the last valid snapshot and shows an actionable sanitized error. Switch the
 account to Manual or managed `statusLine` if CLI compatibility changes.
 

@@ -1,4 +1,4 @@
-# 🖥️ AI Limitbar
+# 🖥️ Bairometer — AI capacity monitor
 
 > macOS menu bar app for viewing normalized AI provider usage —
 > all your limits in one compact place.
@@ -10,12 +10,12 @@
 ## Why
 
 Checking AI provider usage limits usually means opening each provider's page
-separately. AI Limitbar brings them together in one menu bar dropdown — with
+separately. Bairometer brings them together in one menu bar dropdown — with
 honest labels for what's live, what's estimated, and what needs attention.
 
 No real provider credentials are required to start.
 
-![AI Limitbar dashboard in dark mode](docs/screenshots/dashboard-dark.png)
+![Bairometer dashboard in dark mode](docs/screenshots/dashboard-dark.png)
 
 ## Features
 
@@ -48,10 +48,15 @@ the `Experimental` label is informational, not a warning.
 Download the matching archive from the
 [latest GitHub Release](https://github.com/Prontsevich/ai-limitbar/releases/latest):
 
+The public product name is Bairometer. Release archives and the app bundle
+intentionally retain their existing `AILimitBar` technical names for
+compatibility:
+
 - `AILimitBar-<version>-arm64.zip` for Apple Silicon Macs
 - `AILimitBar-<version>-x86_64.zip` for Intel Macs
 
-Unpack the archive and move `AILimitBar.app` to Applications.
+Unpack the archive and move `AILimitBar.app` to Applications; its displayed
+name is Bairometer.
 
 New releases created through the verified draft flow will be signed with a
 Developer ID Application certificate and notarized by Apple. Historical
@@ -100,7 +105,7 @@ Report bugs and feature ideas through the public
 direct feedback to [prontsevich@gmail.com](mailto:prontsevich@gmail.com), or
 message [@s_prontsevich](https://t.me/s_prontsevich) on Telegram.
 
-If you find AI Limitbar useful, consider supporting its continued development.
+If you find Bairometer useful, consider supporting its continued development.
 
 [![Boosty](https://img.shields.io/badge/Boosty-Support-FF6B00?logo=boosty&logoColor=white)](https://boosty.to/sergey.pro)
 
