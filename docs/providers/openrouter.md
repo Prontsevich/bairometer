@@ -54,8 +54,8 @@ key, credits are fetched once per account. A failure in one credential context
 preserves the other keys and the last valid account metric, with separate
 refresh results and diagnostics.
 
-Keys from a genuinely different billing owner belong to another saved AI
-Limitbar account. Without management inventory evidence, grouping is an
+Keys from a genuinely different billing owner belong to another saved
+Bairometer account. Without management inventory evidence, grouping is an
 explicit user choice rather than a provider-verified ownership claim.
 
 ## Settings and presentation
