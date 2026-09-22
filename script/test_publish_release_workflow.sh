@@ -59,7 +59,7 @@ publish_run = steps.fetch(1).fetch("run")
   head_branch
   head_sha
   for\ architecture\ in\ arm64\ x86_64
-  artifact_name="AILimitBar-$RELEASE_VERSION-$architecture"
+  artifact_name="Bairometer-$RELEASE_VERSION-$architecture"
   unzip
   sha256sum
   matching-refs

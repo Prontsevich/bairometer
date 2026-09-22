@@ -7,14 +7,14 @@ if [[ "${1:-}" == "--ui-test-host" ]]; then
 fi
 
 MODE="${1:-run}"
-APP_NAME="AILimitBar"
+APP_NAME="Bairometer"
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 DIST_DIR="$ROOT_DIR/dist"
 APP_BUNDLE="$DIST_DIR/$APP_NAME.app"
 INFO_PLIST="$APP_BUNDLE/Contents/Info.plist"
-SMOKE_TEST_FILTER="AILimitBarTests.AppModelTests/testDailyUseSmokePersistsAccountSettingsAndSnapshot"
-SMOKE_STORAGE_ARGUMENT="--ai-limitbar-storage-directory"
+SMOKE_TEST_FILTER="BairometerTests.AppModelTests/testDailyUseSmokePersistsAccountSettingsAndSnapshot"
+SMOKE_STORAGE_ARGUMENT="--bairometer-storage-directory"
 SMOKE_STORAGE_DIRECTORY=""
 SMOKE_PID=""
 
@@ -144,7 +144,7 @@ case "$MODE" in
     /usr/bin/log stream --info --style compact --predicate "subsystem == \"$BUNDLE_ID\""
     ;;
   --verify|verify)
-    SMOKE_STORAGE_DIRECTORY="$(mktemp -d "${TMPDIR:-/tmp}/ai-limitbar-verify.XXXXXX")"
+    SMOKE_STORAGE_DIRECTORY="$(mktemp -d "${TMPDIR:-/tmp}/bairometer-verify.XXXXXX")"
     EXISTING_PIDS="$(pgrep -x "$APP_NAME" || true)"
     open_app_with_storage "$SMOKE_STORAGE_DIRECTORY"
     SMOKE_PID="$(wait_for_new_pid "$EXISTING_PIDS")"

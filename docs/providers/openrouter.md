@@ -13,7 +13,7 @@ selected as a fallback for an ordinary key. The implemented MVP does not call
 `GET /api/v1/keys`, auto-import keys, or persist provider labels, hashes, owner
 IDs, or workspace IDs.
 
-The strict production HTTP client is implemented in `AILimitBarCore`. Its two
+The strict production HTTP client is implemented in `BairometerCore`. Its two
 explicit capabilities cannot substitute for each other: an ordinary credential
 can request only `GET /api/v1/key`, while an elevated management credential can
 request only `GET /api/v1/credits`. Both use fixed trusted HTTPS URLs, a bounded
@@ -217,7 +217,7 @@ creation uses after-first-unlock, this-device-only accessibility. Access stays
 inside the app's provisioned default Keychain group, so local staged
 verification requires Apple Development signing and an embedded authorized
 profile. The local developer supplies its Team ID explicitly through
-`AILIMITBAR_DEVELOPMENT_TEAM`; the repository stores no team-specific value.
+`BAIROMETER_DEVELOPMENT_TEAM`; the repository stores no team-specific value.
 Release staging accepts the Developer ID identity and matching provisioning
 profile only through explicit caller-owned inputs, validates the exact default
 Keychain group, and signs with Hardened Runtime and a secure timestamp.
@@ -469,12 +469,12 @@ per-slot diagnostics, and native SQLite persistence without provider traffic
 or real credentials:
 
 ```zsh
-verification_dir="${TMPDIR%/}/ailimitbar-openrouter-verification-$(uuidgen | tr -d '-').disposable"
-AILIMITBAR_DEVELOPMENT_TEAM=YOUR_TEAM_ID \
+verification_dir="${TMPDIR%/}/bairometer-openrouter-verification-$(uuidgen | tr -d '-').disposable"
+BAIROMETER_DEVELOPMENT_TEAM=YOUR_TEAM_ID \
   ./script/stage_app_bundle.sh --configuration debug
-dist/AILimitBar.app/Contents/MacOS/AILimitBar \
-  --ai-limitbar-openrouter-verification \
-  --ai-limitbar-storage-directory "$verification_dir"
+dist/Bairometer.app/Contents/MacOS/Bairometer \
+  --bairometer-openrouter-verification \
+  --bairometer-storage-directory "$verification_dir"
 ```
 
 The command accepts only a non-existing direct child of the canonical system

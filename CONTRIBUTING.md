@@ -1,8 +1,8 @@
 # Contributing to Bairometer
 
-Bairometer is the public product name. The existing `AILimitBar` package,
-executables, app bundle, archive names, storage, signing, and repository
-identity are retained technical identifiers; do not rename them incidentally.
+Bairometer is both the public product name and the technical identity for the
+package, executables, app bundle, archive names, storage, signing, and
+repository. Keep those names aligned when changing a related contract.
 
 ## Build & Test
 
@@ -11,7 +11,7 @@ identity are retained technical identifiers; do not rename them incidentally.
 ```zsh
 swift build                                           # Build all targets
 swift test                                            # Run full test suite
-AILIMITBAR_DEVELOPMENT_TEAM=YOUR_TEAM_ID \
+BAIROMETER_DEVELOPMENT_TEAM=YOUR_TEAM_ID \
   ./script/build_and_run.sh                           # Stage DEBUG .app and launch
 ```
 
@@ -26,7 +26,7 @@ AILIMITBAR_DEVELOPMENT_TEAM=YOUR_TEAM_ID \
 
 The run script builds the SwiftPM product and stages the DEBUG `.app` bundle in
 `dist/`. DEBUG staging requires the caller's explicit
-`AILIMITBAR_DEVELOPMENT_TEAM`; Xcode automatic signing selects an installed
+`BAIROMETER_DEVELOPMENT_TEAM`; Xcode automatic signing selects an installed
 Apple Development identity and an Xcode-managed provisioning profile that
 authorizes the restricted application-identifier and default Keychain-group
 entitlements. `--verify` first runs the deterministic app-layer integration
@@ -41,9 +41,9 @@ check and must be performed manually.
 Create locally validated architecture-specific release archives:
 
 ```zsh
-export AILIMITBAR_DEVELOPMENT_TEAM=YOUR_TEAM_ID
-export AILIMITBAR_DEVELOPER_IDENTITY="Developer ID Application: YOUR_NAME (YOUR_TEAM_ID)"
-export AILIMITBAR_PROVISIONING_PROFILE=/private/path/AILimitBar.provisionprofile
+export BAIROMETER_DEVELOPMENT_TEAM=YOUR_TEAM_ID
+export BAIROMETER_DEVELOPER_IDENTITY="Developer ID Application: YOUR_NAME (YOUR_TEAM_ID)"
+export BAIROMETER_PROVISIONING_PROFILE=/private/path/Bairometer.provisionprofile
 ./script/package_release.sh 0.2.0 20260813.1 arm64
 ./script/package_release.sh 0.2.0 20260813.1 x86_64
 ```
@@ -63,17 +63,17 @@ profile lives in an isolated file-based Keychain, also provide that Keychain's
 path:
 
 ```zsh
-export AILIMITBAR_NOTARYTOOL_PROFILE=YOUR_NOTARYTOOL_PROFILE
+export BAIROMETER_NOTARYTOOL_PROFILE=YOUR_NOTARYTOOL_PROFILE
 # Optional for an isolated file-based Keychain:
-export AILIMITBAR_NOTARYTOOL_KEYCHAIN=/private/path/release.keychain-db
+export BAIROMETER_NOTARYTOOL_KEYCHAIN=/private/path/release.keychain-db
 ./script/notarize_release.sh 0.2.0 20260813.1 arm64
 ./script/notarize_release.sh 0.2.0 20260813.1 x86_64
 ```
 
-The wrapper creates `AILimitBar-<version>-<architecture>-signed.zip` for the
+The wrapper creates `Bairometer-<version>-<architecture>-signed.zip` for the
 Apple submission, waits for an `Accepted` result, staples the app extracted
 from that exact submitted ZIP, and only then creates the final
-`AILimitBar-<version>-<architecture>.zip`. Both the stapled app and a fresh
+`Bairometer-<version>-<architecture>.zip`. Both the stapled app and a fresh
 extraction of the final ZIP must pass exact bundle, architecture, entitlement,
 signature, stapler-ticket, and Gatekeeper validation. On failure, the command
 prints only the submission ID/status and a private temporary path plus a safe

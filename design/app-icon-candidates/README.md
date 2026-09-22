@@ -2,7 +2,7 @@
 
 This tracked archive preserves the six original directions and the final
 selected hybrid from the 2026-07 icon exploration. It is a design reference
-only and is not packaged into `AILimitBar.app`.
+only and is not packaged into `Bairometer.app`.
 
 ## Original Directions
 

@@ -38,7 +38,7 @@ case "$ARCHITECTURE" in
 esac
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-APP_NAME="AILimitBar"
+APP_NAME="Bairometer"
 APP_BUNDLE="$ROOT_DIR/dist/$APP_NAME.app"
 OUTPUT_DIRECTORY="$ROOT_DIR/dist"
 ARCHIVE="$OUTPUT_DIRECTORY/$APP_NAME-$VERSION-$ARCHITECTURE$ARCHIVE_SUFFIX.zip"
@@ -55,7 +55,7 @@ trap cleanup EXIT
   --build-number "$BUILD_NUMBER" \
   --arch "$ARCHITECTURE"
 
-TEMP_DIRECTORY="$(mktemp -d "${TMPDIR:-/tmp}/AILimitBar-release.XXXXXX")"
+TEMP_DIRECTORY="$(mktemp -d "${TMPDIR:-/tmp}/Bairometer-release.XXXXXX")"
 [[ -d "$OUTPUT_DIRECTORY" ]] || {
   echo "error: release output directory is missing at $OUTPUT_DIRECTORY" >&2
   exit 1

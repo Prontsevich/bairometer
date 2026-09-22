@@ -40,20 +40,20 @@ case "$ARCHITECTURE" in
 esac
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-APP_NAME="AILimitBar"
-HELPER_NAME="AILimitBarClaudeStatusLine"
-EXPECTED_BUNDLE_ID="io.github.Prontsevich.AILimitBar"
-EXPECTED_TEAM="${AILIMITBAR_DEVELOPMENT_TEAM:-}"
-EXPECTED_IDENTITY="${AILIMITBAR_DEVELOPER_IDENTITY:-}"
+APP_NAME="Bairometer"
+HELPER_NAME="BairometerClaudeStatusLine"
+EXPECTED_BUNDLE_ID="io.github.Prontsevich.Bairometer"
+EXPECTED_TEAM="${BAIROMETER_DEVELOPMENT_TEAM:-}"
+EXPECTED_IDENTITY="${BAIROMETER_DEVELOPER_IDENTITY:-}"
 CODESIGN_COMMAND="/usr/bin/codesign"
 LIPO_COMMAND="/usr/bin/lipo"
 XCRUN_COMMAND="/usr/bin/xcrun"
 SPCTL_COMMAND="/usr/sbin/spctl"
-if [[ "${AILIMITBAR_NOTARIZATION_TEST_MODE:-0}" == "1" ]]; then
-  CODESIGN_COMMAND="${AILIMITBAR_TEST_CODESIGN_COMMAND:?}"
-  LIPO_COMMAND="${AILIMITBAR_TEST_LIPO_COMMAND:?}"
-  XCRUN_COMMAND="${AILIMITBAR_TEST_XCRUN_COMMAND:?}"
-  SPCTL_COMMAND="${AILIMITBAR_TEST_SPCTL_COMMAND:?}"
+if [[ "${BAIROMETER_NOTARIZATION_TEST_MODE:-0}" == "1" ]]; then
+  CODESIGN_COMMAND="${BAIROMETER_TEST_CODESIGN_COMMAND:?}"
+  LIPO_COMMAND="${BAIROMETER_TEST_LIPO_COMMAND:?}"
+  XCRUN_COMMAND="${BAIROMETER_TEST_XCRUN_COMMAND:?}"
+  SPCTL_COMMAND="${BAIROMETER_TEST_SPCTL_COMMAND:?}"
 fi
 TEMP_DIRECTORY=""
 
@@ -63,11 +63,11 @@ cleanup() {
 trap cleanup EXIT
 
 [[ -n "$EXPECTED_TEAM" ]] || {
-  echo "error: release validation requires AILIMITBAR_DEVELOPMENT_TEAM." >&2
+  echo "error: release validation requires BAIROMETER_DEVELOPMENT_TEAM." >&2
   exit 1
 }
 [[ -n "$EXPECTED_IDENTITY" ]] || {
-  echo "error: release validation requires AILIMITBAR_DEVELOPER_IDENTITY." >&2
+  echo "error: release validation requires BAIROMETER_DEVELOPER_IDENTITY." >&2
   exit 1
 }
 [[ -d "$APP_BUNDLE" ]] || {
@@ -119,7 +119,7 @@ assert_equal "AppIcon" "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIconName' "
 assert_equal "$ARCHITECTURE" "$("$LIPO_COMMAND" -archs "$bundle_binary")" "app architecture"
 assert_equal "$ARCHITECTURE" "$("$LIPO_COMMAND" -archs "$bundle_helper")" "helper architecture"
 
-TEMP_DIRECTORY="$(mktemp -d "${TMPDIR:-/tmp}/AILimitBar-release-validation.XXXXXX")"
+TEMP_DIRECTORY="$(mktemp -d "${TMPDIR:-/tmp}/Bairometer-release-validation.XXXXXX")"
 app_entitlements="$TEMP_DIRECTORY/app-entitlements.plist"
 codesign_verification_log="$TEMP_DIRECTORY/codesign-verification.log"
 stapler_validation_log="$TEMP_DIRECTORY/stapler-validation.log"

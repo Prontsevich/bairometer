@@ -13,16 +13,15 @@ The public GitHub issue links below are legacy references for completed manual
 QA. New private implementation work belongs in Linear. Do not copy private
 Linear issue descriptions or identifiers into public GitHub content.
 
-Bairometer is the public product identity. Historical entries retain
-`AILimitBar` only for technical compatibility artifacts such as executables,
-bundle paths, storage, and identifiers.
+Bairometer is both the public product and technical identity. Historical
+entries retain the names that were current when their evidence was recorded.
 
 | Roadmap scope | GitHub issue |
 | --- | --- |
-| Milestone 12 manual Settings QA | [#1](https://github.com/Prontsevich/ai-limitbar/issues/1) |
-| Milestone 17 manual dashboard QA | [#2](https://github.com/Prontsevich/ai-limitbar/issues/2) |
-| Milestone 22.1 manual status-indicator QA | [#4](https://github.com/Prontsevich/ai-limitbar/issues/4) |
-| Milestone 22.3 manual Ollama WebKit QA | [#5](https://github.com/Prontsevich/ai-limitbar/issues/5) |
+| Milestone 12 manual Settings QA | [#1](https://github.com/Prontsevich/bairometer/issues/1) |
+| Milestone 17 manual dashboard QA | [#2](https://github.com/Prontsevich/bairometer/issues/2) |
+| Milestone 22.1 manual status-indicator QA | [#4](https://github.com/Prontsevich/bairometer/issues/4) |
+| Milestone 22.3 manual Ollama WebKit QA | [#5](https://github.com/Prontsevich/bairometer/issues/5) |
 
 ## Milestone 0: Project Foundation
 
@@ -178,7 +177,7 @@ Acceptance:
 
 Decision:
 
-- Provisional App Group identifier: `group.com.lestroy.ai-limitbar`.
+- Provisional App Group identifier: `group.com.lestroy.bairometer`.
 - The identifier must be verified against the final Apple Developer Team and
   bundle identifiers before signing a WidgetKit build.
 
@@ -431,7 +430,7 @@ Acceptance:
   refresh status, or persistence residue after the task completes.
 - Malformed or newer snapshot formats are preserved before replacement.
 - App-facing orchestration has deterministic automated coverage instead of
-  relying only on `AILimitBarCore` tests.
+  relying only on `BairometerCore` tests.
 - Every development mode exercises the same menu-bar-only `.app` bundle shape.
 - The working tree contains no obsolete dashboard predecessor code.
 - Documentation describes the live implementation and current quality gate.
@@ -631,10 +630,9 @@ app-owned SQLite database accessed through GRDB, without losing existing local
 state or weakening the current privacy boundary.
 
 - [x] Add GRDB through Swift Package Manager and make it available to both
-  `AILimitBar` and `AILimitBarClaudeStatusLine` through `AILimitBarCore`.
+  `Bairometer` and `BairometerClaudeStatusLine` through `BairometerCore`.
 - [x] Create one non-user-configurable database at
-  `~/Library/Application Support/AI Limitbar/AI Limitbar.sqlite` (a retained
-  technical path) and enable
+  `~/Library/Application Support/Bairometer/Bairometer.sqlite` and enable
   WAL mode, foreign-key enforcement, and a bounded busy timeout.
 - [x] Define versioned GRDB migrations for provider accounts, current
   normalized snapshots, refresh settings, and persisted source diagnostics.
@@ -938,10 +936,10 @@ to macOS 15 and extends release packaging with separate Apple Silicon and Intel
 archives.
 
 - [x] Add one reproducible release-packaging script that builds the SwiftPM
-  products, stages the complete `AILimitBar.app` bundle (including the bundled
+  products, stages the complete `Bairometer.app` bundle (including the bundled
   Claude Code helper, selected AppIcon asset, and localized resources), signs
   the bundle ad-hoc, and creates an architecture-specific
-  `AILimitBar-<version>-<arch>.zip` with `ditto --keepParent`.
+  `Bairometer-<version>-<arch>.zip` with `ditto --keepParent`.
 - [x] Give the staged bundle explicit `CFBundleShortVersionString` and
   `CFBundleVersion` values without changing the existing local build-and-run
   workflow. The former is the release's `MAJOR.MINOR.PATCH` version; the latter
@@ -955,12 +953,12 @@ archives.
   permission to create a GitHub Release and upload both ZIPs. Keep the workflow
   free of Apple-signing credentials, tokens, and other secrets in this first
   distribution milestone.
-- [x] Publish both archives as `AILimitBar-<version>-arm64.zip` and
-  `AILimitBar-<version>-x86_64.zip` on the matching GitHub Release, with
+- [x] Publish both archives as `Bairometer-<version>-arm64.zip` and
+  `Bairometer-<version>-x86_64.zip` on the matching GitHub Release, with
   generated or maintained release notes that state the version and macOS 15+
   requirement plus the architecture mapping.
 - [x] Document the tag-to-release procedure and installation path: download the
-  ZIP, unpack it, move `AILimitBar.app` to Applications, and use the standard
+  ZIP, unpack it, move `Bairometer.app` to Applications, and use the standard
   macOS Gatekeeper recovery action on first launch when required.
 - [x] State plainly in release documentation that ad-hoc signing is not
   Developer ID signing or Apple notarization; do not describe this first path
@@ -973,9 +971,9 @@ archives.
 Acceptance:
 
 - Pushing one version tag creates a GitHub Release with exactly two custom
-  application archives, `AILimitBar-<version>-arm64.zip` and
-  `AILimitBar-<version>-x86_64.zip`; no source build is needed by the downloader.
-- The archive expands directly to `AILimitBar.app`, whose main executable,
+  application archives, `Bairometer-<version>-arm64.zip` and
+  `Bairometer-<version>-x86_64.zip`; no source build is needed by the downloader.
+- The archive expands directly to `Bairometer.app`, whose main executable,
   bundled helper, resources, and version metadata are present and valid.
 - The workflow fails before publication when tests, staging, archive creation,
   or code-sign verification fails.
@@ -1052,7 +1050,7 @@ the persistence paths needed for normal daily use.
   `AppModel`, and verify that the account, settings, and snapshot reload.
 - [x] Keep `./script/build_and_run.sh --verify` as the public smoke entrypoint.
   It runs the deterministic integration check, stages the normal debug `.app`
-  bundle, launches it through Launch Services, waits for the `AILimitBar`
+  bundle, launches it through Launch Services, waits for the `Bairometer`
   process, and fails when the process cannot start or exits immediately.
 - [x] Give the automated smoke path disposable storage. It must not read or
   write the user's normal Application Support database, Keychain, WebKit data,
@@ -1214,8 +1212,8 @@ changing the production menu-bar bundle or using real provider integrations.
 - [x] Add deterministic empty, healthy, mixed-state, Settings, and dirty-editor
   scenarios backed only by scripted synthetic adapters and isolated GRDB and
   `UserDefaults` state.
-- [x] Stage `AILimitBarUITestHost.app` with a distinct bundle ID,
-  `AILimitBarTest` process, `LSUIElement=false`, copied resources, and an ad-hoc
+- [x] Stage `BairometerUITestHost.app` with a distinct bundle ID,
+  `BairometerTest` process, `LSUIElement=false`, copied resources, and an ad-hoc
   signature. Preserve production bundle metadata and release staging.
 - [x] Add typed launch configuration, stable language-independent AX
   identifiers, a public launcher command, lifecycle cleanup, unit coverage, and
@@ -1246,7 +1244,7 @@ Acceptance:
 
 - App-owned dashboard and Settings behavior can be exercised through a regular
   AX-inspectable window with deterministic, privacy-safe state.
-- The production `AILimitBar.app`, status item lifecycle, provider clients, and
+- The production `Bairometer.app`, status item lifecycle, provider clients, and
   release workflow remain unchanged.
 - Host data and preferences are unique per launch and removed after normal exit;
   the launcher removes its exact temporary directory as a fallback.

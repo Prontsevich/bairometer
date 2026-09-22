@@ -6,9 +6,9 @@ Bairometer is a macOS menu bar app for monitoring AI provider usage limits in
 one place. The app should make it clear which limits are known precisely, which
 are estimates, and which require opening the provider's own usage page.
 
-Bairometer is the public product identity. The existing `AILimitBar` package,
-executables, bundle identifier, storage paths, signing identity, archive names,
-and repository remain technical compatibility identifiers.
+Bairometer is the public product identity and the technical identity for the
+package, executables, bundle identifier, storage paths, signing identity,
+archive names, and repository.
 
 The first version focuses on visibility and reliability, not on perfect
 coverage. A provider integration is acceptable only if the app can explain where
@@ -289,8 +289,8 @@ Selected initial confidence level: `local-estimate` for statusLine snapshots and
 
 Selected MVP source mode: configure a Bairometer-owned statusLine helper. The
 helper consumes only documented statusLine JSON and writes the normalized
-snapshot to `~/Library/Application Support/AI Limitbar/AI Limitbar.sqlite`; this
-retained path is part of the technical compatibility contract. The
+snapshot to `~/Library/Application Support/Bairometer/Bairometer.sqlite`; this
+current path is part of the app-owned storage contract. The
 user must explicitly add the generated `--account-id` command to
 `~/.claude/settings.json`; Bairometer does not edit Claude Code settings
 automatically.
@@ -491,10 +491,10 @@ the semantic usage-extraction script remain independent.
 Milestone 20 establishes a GitHub Release path for people who want the app
 without building from source. The current release target is macOS 15 or later
 on Apple Silicon or Intel and uses the stable bundle identifier
-`io.github.Prontsevich.AILimitBar`. A version tag must produce two
-architecture-specific assets, `AILimitBar-<version>-arm64.zip` and
-`AILimitBar-<version>-x86_64.zip`, each expanding directly to
-`AILimitBar.app`. Each ZIP is created with `ditto --keepParent` so Finder
+`io.github.Prontsevich.Bairometer`. A version tag must produce two
+architecture-specific assets, `Bairometer-<version>-arm64.zip` and
+`Bairometer-<version>-x86_64.zip`, each expanding directly to
+`Bairometer.app`. Each ZIP is created with `ditto --keepParent` so Finder
 preserves the application-bundle shape and macOS metadata.
 
 One shared staging script owns the app-bundle shape used by local development
@@ -509,7 +509,7 @@ secure timestamps, embeds the matching Developer ID provisioning profile,
 verifies the authorized default Keychain group, then validates a round trip
 through that architecture-specific ZIP archive. A separate local notarization
 wrapper requires an explicit caller-owned Keychain profile such as
-`AILIMITBAR_NOTARYTOOL_PROFILE=YOUR_NOTARYTOOL_PROFILE`. It creates a clearly
+`BAIROMETER_NOTARYTOOL_PROFILE=YOUR_NOTARYTOOL_PROFILE`. It creates a clearly
 named signed submission archive, waits for Apple `Accepted` status, staples the
 app extracted from that exact archive, and creates the final ZIP only after the
 stapled app passes exact metadata, architecture, signature, entitlement,
@@ -738,7 +738,7 @@ letters. Trusted adapters perform semantic normalization of their native
 currency instead of consulting a frozen contract registry; OpenRouter native
 currency is `USD`.
 
-`AILimitBarCore` contains a strict OpenRouter `URLSession` client as the first
+`BairometerCore` contains a strict OpenRouter `URLSession` client as the first
 native-currency transport built on Contract v1. Ordinary credentials have
 one fixed capability, `GET https://openrouter.ai/api/v1/key`; elevated
 management credentials have the separate fixed capability, `GET
@@ -806,7 +806,7 @@ The implementation-level field semantics, compatibility mapping from
 sanitized Codex/Claude/MiniMax/OpenRouter fixtures, and evidence gate for any
 future public schema or SDK are defined in
 [`docs/provider-integration-contract.md`](provider-integration-contract.md).
-Contract v1 is implemented in `AILimitBarCore` as portable `Codable` domain
+Contract v1 is implemented in `BairometerCore` as portable `Codable` domain
 models, pure validation, and a one-way legacy percentage bridge. The live
 `ProviderAdapter` API, `UsageSnapshot` dashboard projection, and existing GRDB
 snapshot schema remain backward compatible. OpenRouter native persistence is
@@ -836,12 +836,11 @@ available as local backups.
 
 Bairometer uses GRDB over SQLite as its single app-owned persistence
 engine. The database location is fixed at
-`~/Library/Application Support/AI Limitbar/AI Limitbar.sqlite`; the retained
-technical path is not a public-name migration. Users do not
+`~/Library/Application Support/Bairometer/Bairometer.sqlite`. Users do not
 select database or snapshot paths.
 
-GRDB is shared through `AILimitBarCore` by the menu bar app and the bundled
-`AILimitBarClaudeStatusLine` executable. SQLite WAL mode, foreign-key
+GRDB is shared through `BairometerCore` by the menu bar app and the bundled
+`BairometerClaudeStatusLine` executable. SQLite WAL mode, foreign-key
 enforcement, transactions, and a two-second busy timeout provide predictable
 cross-process behavior. SQLite still permits one writer at a time; each writer
 must make a short, validated transaction rather than holding a write lock while
@@ -909,28 +908,28 @@ removes the account and its database children.
 
 The locally staged DEBUG bundle is signed with an installed Apple Development
 identity and embeds the Xcode-managed Mac development provisioning profile for
-`io.github.Prontsevich.AILimitBar`. A minimal app target under
+`io.github.Prontsevich.Bairometer`. A minimal app target under
 `Support/LocalSigning` asks Xcode automatic signing to authorize the exact
 `com.apple.application-identifier` and default `keychain-access-groups` values;
 the staging script copies that profile and Xcode-expanded entitlements to the
 real SwiftPM-built bundle, then requires `codesign --verify --deep --strict`.
 The support target does not build or replace the product executable. DEBUG
 staging requires an explicit caller-owned team ID, for example
-`AILIMITBAR_DEVELOPMENT_TEAM=YOUR_TEAM_ID`; no developer Team ID is stored in
+`BAIROMETER_DEVELOPMENT_TEAM=YOUR_TEAM_ID`; no developer Team ID is stored in
 the repository.
 
 A free Personal Team profile is sufficient for local verification but expires
 seven days after issuance and must be refreshed by Xcode. It is not a
 distribution identity. Release staging instead requires explicit
-`AILIMITBAR_DEVELOPMENT_TEAM`, `AILIMITBAR_DEVELOPER_IDENTITY`, and
-`AILIMITBAR_PROVISIONING_PROFILE` inputs. The script verifies that the
+`BAIROMETER_DEVELOPMENT_TEAM`, `BAIROMETER_DEVELOPER_IDENTITY`, and
+`BAIROMETER_PROVISIONING_PROFILE` inputs. The script verifies that the
 Developer ID profile authorizes the exact application identifier and default
 Keychain group, contains the selected certificate, and targets all macOS
 devices. It signs the helper before the app with Hardened Runtime and secure
 timestamps and requires `codesign --verify --deep --strict` before and after
 the signing-only archive round trip. `script/notarize_release.sh` separately
-requires `AILIMITBAR_NOTARYTOOL_PROFILE=YOUR_NOTARYTOOL_PROFILE`, and accepts an
-explicit file-based Keychain through `AILIMITBAR_NOTARYTOOL_KEYCHAIN`. It
+requires `BAIROMETER_NOTARYTOOL_PROFILE=YOUR_NOTARYTOOL_PROFILE`, and accepts an
+explicit file-based Keychain through `BAIROMETER_NOTARYTOOL_KEYCHAIN`. It
 submits a private copy of the architecture-specific signed ZIP with
 `notarytool --wait`, requires `Accepted`, staples the exact submitted app, and
 revalidates the final app and extracted ZIP with codesign, stapler, and
@@ -947,19 +946,19 @@ and deletion without printing credential material:
 
 ```zsh
 verification_dir="$(mktemp -d)"
-AILIMITBAR_DEVELOPMENT_TEAM=YOUR_TEAM_ID \
+BAIROMETER_DEVELOPMENT_TEAM=YOUR_TEAM_ID \
   ./script/stage_app_bundle.sh --configuration debug
-dist/AILimitBar.app/Contents/MacOS/AILimitBar \
-  --ai-limitbar-keychain-verification create \
-  --ai-limitbar-storage-directory "$verification_dir"
-AILIMITBAR_DEVELOPMENT_TEAM=YOUR_TEAM_ID \
+dist/Bairometer.app/Contents/MacOS/Bairometer \
+  --bairometer-keychain-verification create \
+  --bairometer-storage-directory "$verification_dir"
+BAIROMETER_DEVELOPMENT_TEAM=YOUR_TEAM_ID \
   ./script/stage_app_bundle.sh --configuration debug
-dist/AILimitBar.app/Contents/MacOS/AILimitBar \
-  --ai-limitbar-keychain-verification replace \
-  --ai-limitbar-storage-directory "$verification_dir"
-dist/AILimitBar.app/Contents/MacOS/AILimitBar \
-  --ai-limitbar-keychain-verification delete \
-  --ai-limitbar-storage-directory "$verification_dir"
+dist/Bairometer.app/Contents/MacOS/Bairometer \
+  --bairometer-keychain-verification replace \
+  --bairometer-storage-directory "$verification_dir"
+dist/Bairometer.app/Contents/MacOS/Bairometer \
+  --bairometer-keychain-verification delete \
+  --bairometer-storage-directory "$verification_dir"
 ```
 
 The seam refuses to create when any account already exists and refuses replace
@@ -968,7 +967,7 @@ context tree, and slot. The second staging step is part of the verification: a
 same-build read is insufficient evidence that the provisioned application
 identifier and default Keychain access group remain stable across a changed
 code-directory hash. The command requires an Apple Account configured in Xcode;
-`AILIMITBAR_DEVELOPMENT_TEAM` selects that account's team, and automatic signing
+`BAIROMETER_DEVELOPMENT_TEAM` selects that account's team, and automatic signing
 registers the local Mac and refreshes the development profile when needed.
 
 Account display names are globally unique across all saved accounts, including
@@ -1000,7 +999,7 @@ Keychain and Ollama browser sessions remain in their per-account
 
 ### Future WidgetKit sharing
 
-Provisional App Group identifier: `group.com.lestroy.ai-limitbar`. This must be
+Provisional App Group identifier: `group.com.lestroy.bairometer`. This must be
 verified against the final Apple Developer Team and bundle identifiers after
 the Apple Developer Program membership gate is complete and before registering
 the App Group or signing a WidgetKit build.
@@ -1212,16 +1211,16 @@ not an always-on-top panel.
 ## Daily-Use Smoke Verification
 
 Milestone 22.2 keeps
-`AILIMITBAR_DEVELOPMENT_TEAM=YOUR_TEAM_ID ./script/build_and_run.sh --verify`
+`BAIROMETER_DEVELOPMENT_TEAM=YOUR_TEAM_ID ./script/build_and_run.sh --verify`
 as the single public smoke command. The command first exercises an app-layer
 integration scenario with a deterministic fake provider and disposable
 storage: create an account, change the refresh schedule, refresh, persist a
 normalized snapshot, recreate `AppModel`, and verify that account
 configuration, settings, and snapshot state reload. The targeted test is
-`AILimitBarTests.AppModelTests/testDailyUseSmokePersistsAccountSettingsAndSnapshot`.
+`BairometerTests.AppModelTests/testDailyUseSmokePersistsAccountSettingsAndSnapshot`.
 It then stages the normal debug `.app`, launches it through Launch Services with
-the internal `--ai-limitbar-storage-directory` argument, waits for a new
-`AILimitBar` process to remain alive, and fails if startup does not succeed.
+the internal `--bairometer-storage-directory` argument, waits for a new
+`Bairometer` process to remain alive, and fails if startup does not succeed.
 
 The automated path must not touch the user's normal Application Support
 database, Keychain, isolated WebKit stores, provider CLIs, or network sources.
@@ -1235,15 +1234,15 @@ explicit manual QA rather than being inferred from a running PID.
 ## Regular-Window UI Test Host
 
 Debug builds can stage a separate regular-window app at
-`dist/AILimitBarUITestHost.app`. The host reuses the production `AILimitBar`
+`dist/BairometerUITestHost.app`. The host reuses the production `Bairometer`
 executable and renders the real `MenuBarPanelView` and `SettingsView` with
 deterministic synthetic fixtures. Its runtime owns isolated GRDB and
 `UserDefaults` state, uses only scripted adapters with a single refresh attempt,
 and does not create the production status item, WebKit controller, provider
 clients, credentials, or executable overrides.
 
-The host bundle uses `io.github.Prontsevich.AILimitBar.UITestHost`, the
-`AILimitBarTest` process name, and `LSUIElement=false`. This lets accessibility
+The host bundle uses `io.github.Prontsevich.Bairometer.UITestHost`, the
+`BairometerTest` process name, and `LSUIElement=false`. This lets accessibility
 tooling inspect app-owned SwiftUI presentation and keyboard behavior while the
 production app remains running. Stable language-independent identifiers cover
 dashboard actions and meters, Settings navigation and options, account-name
@@ -1265,12 +1264,12 @@ stable are:
 
 - App-owned presentation strings use semantic `surface.section.element` keys in
   the English and Russian `Localizable.strings` tables under
-  `Sources/AILimitBar/Resources`. Each key carries its English fallback in code
+  `Sources/Bairometer/Resources`. Each key carries its English fallback in code
   and English/Russian table values; a missing Russian value therefore remains
   readable English instead of exposing a technical key. The package default
   localization and staged bundle development region are English, and the staging
   script places both `en.lproj` and `ru.lproj` directly in
-  `AILimitBar.app/Contents/Resources` so normal SwiftUI and Foundation lookup
+  `Bairometer.app/Contents/Resources` so normal SwiftUI and Foundation lookup
   work from the shipped app.
 - Automated localization regression coverage parses both catalogs and requires
   matching non-empty key/value sets plus compatible format placeholders. It
@@ -1347,6 +1346,6 @@ swift test
 Run and verify the menu bar app process:
 
 ```zsh
-AILIMITBAR_DEVELOPMENT_TEAM=YOUR_TEAM_ID \
+BAIROMETER_DEVELOPMENT_TEAM=YOUR_TEAM_ID \
   ./script/build_and_run.sh --verify
 ```

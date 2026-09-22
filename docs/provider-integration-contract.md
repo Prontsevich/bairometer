@@ -12,7 +12,7 @@ authentication, endpoint and command selection, requests, process execution,
 DOM access, parsing, validation, retry behavior, and normalization. Declarative
 metadata never contains executable request rules or credential values.
 
-Version 1 is implemented in `AILimitBarCore` as portable `Codable` domain
+Version 1 is implemented in `BairometerCore` as portable `Codable` domain
 models, pure validation rules, and a one-way legacy percentage bridge. That
 domain-model implementation has no SQLite, Keychain, URLSession, AppKit, or
 SwiftUI dependency. Trusted provider clients may depend on platform transport
@@ -444,7 +444,7 @@ Local DEBUG verification uses an Apple Development-signed app with an embedded
 Xcode-managed Mac development provisioning profile that authorizes the exact
 application identifier and default Keychain group. Personal Team profiles are
 valid for seven days and are refreshed through Xcode automatic signing. The
-caller supplies its team explicitly through `AILIMITBAR_DEVELOPMENT_TEAM`; no
+caller supplies its team explicitly through `BAIROMETER_DEVELOPMENT_TEAM`; no
 developer Team ID is stored in the repository. Release staging requires a
 caller-supplied Developer ID Application identity and matching Developer ID
 provisioning profile, then validates the exact application identifier and

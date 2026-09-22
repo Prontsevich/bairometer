@@ -4,7 +4,7 @@
 
 The debug-only UI test host exposes app-owned SwiftUI surfaces through a regular
 macOS window that accessibility tooling can inspect. It reuses the production
-`AILimitBar` executable, `MenuBarPanelView`, `SettingsView`, dashboard keyboard
+`Bairometer` executable, `MenuBarPanelView`, `SettingsView`, dashboard keyboard
 responder, localization, and resources. It does not alter the production
 `LSUIElement` bundle or release workflow.
 
@@ -18,7 +18,7 @@ client, executable override, credential, or personal account value.
 Stage and run a scenario through Launch Services:
 
 ```zsh
-AILIMITBAR_DEVELOPMENT_TEAM=YOUR_TEAM_ID \
+BAIROMETER_DEVELOPMENT_TEAM=YOUR_TEAM_ID \
   ./script/build_and_run.sh --ui-test-host dashboard-healthy \
   --ui-test-language en \
   --ui-test-appearance dark \
@@ -27,7 +27,7 @@ AILIMITBAR_DEVELOPMENT_TEAM=YOUR_TEAM_ID \
 
 Like every locally staged DEBUG bundle, the host requires an explicit
 caller-owned Apple Development Team ID through
-`AILIMITBAR_DEVELOPMENT_TEAM`; the repository does not store a default.
+`BAIROMETER_DEVELOPMENT_TEAM`; the repository does not store a default.
 
 Supported values:
 
@@ -43,16 +43,16 @@ missing or invalid UI-test values fail launch explicitly, while unrelated
 system-injected arguments are ignored.
 
 `script/stage_ui_test_host_bundle.sh` stages the debug production app, copies it
-to `dist/AILimitBarUITestHost.app`, changes only the copied bundle metadata, and
+to `dist/BairometerUITestHost.app`, changes only the copied bundle metadata, and
 ad-hoc signs and validates the result. The host identity is:
 
-- bundle ID: `io.github.Prontsevich.AILimitBar.UITestHost`;
+- bundle ID: `io.github.Prontsevich.Bairometer.UITestHost`;
 - display name: `Bairometer UI Test Host`;
-- executable and process: `AILimitBarTest`;
+- executable and process: `BairometerTest`;
 - `LSUIElement=false`.
 
-The launcher terminates only a previous `AILimitBarTest` process. A production
-`AILimitBar` process may remain running alongside it.
+The launcher terminates only a previous `BairometerTest` process. A production
+`Bairometer` process may remain running alongside it.
 
 ## Scenarios
 
@@ -97,7 +97,7 @@ have an explicit deterministic delay. Scheduled refresh is disabled.
 ## Accessibility Workflow
 
 Inspect the running app by bundle ID
-`io.github.Prontsevich.AILimitBar.UITestHost`. Stable language-independent
+`io.github.Prontsevich.Bairometer.UITestHost`. Stable language-independent
 identifiers include:
 
 - `ui-test-host.root.<scenario>`;

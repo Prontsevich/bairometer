@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-HOST_PROCESS="AILimitBarTest"
-HOST_APP_NAME="AILimitBarUITestHost"
-STORAGE_ARGUMENT="--ai-limitbar-storage-directory"
+HOST_PROCESS="BairometerTest"
+HOST_APP_NAME="BairometerUITestHost"
+STORAGE_ARGUMENT="--bairometer-storage-directory"
 
 usage() {
   echo "usage: $0 --ui-test-host <dashboard-empty|dashboard-healthy|dashboard-mixed|dashboard-openrouter|dashboard-minimax|settings|settings-dirty-editor|settings-openrouter|settings-openrouter-missing-management> [--ui-test-language en|ru] [--ui-test-appearance light|dark] [--ui-test-height compact|standard|tall]" >&2
@@ -59,7 +59,7 @@ esac
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 HOST_BUNDLE="$ROOT_DIR/dist/$HOST_APP_NAME.app"
-HOST_STORAGE_DIRECTORY="$(mktemp -d "${TMPDIR:-/tmp}/ai-limitbar-ui-test-host.XXXXXX")"
+HOST_STORAGE_DIRECTORY="$(mktemp -d "${TMPDIR:-/tmp}/bairometer-ui-test-host.XXXXXX")"
 HOST_PID=""
 OPEN_PID=""
 

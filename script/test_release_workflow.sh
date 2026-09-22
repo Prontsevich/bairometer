@@ -5,7 +5,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 WORKFLOW="$ROOT_DIR/.github/workflows/release.yml"
 SETUP_SCRIPT="$ROOT_DIR/script/setup_ci_release_credentials.sh"
 CLEANUP_SCRIPT="$ROOT_DIR/script/cleanup_ci_release_credentials.sh"
-FIXTURE_ROOT="$(mktemp -d "${TMPDIR:-/tmp}/AILimitBar-release-workflow-tests.XXXXXX")"
+FIXTURE_ROOT="$(mktemp -d "${TMPDIR:-/tmp}/Bairometer-release-workflow-tests.XXXXXX")"
 FAKE_TOOLS="$FIXTURE_ROOT/tools"
 FAKE_TOOL_LOG="$FIXTURE_ROOT/tool.log"
 mkdir -p "$FAKE_TOOLS"
@@ -172,7 +172,7 @@ if [[ "${1:-}" == "notarytool" && "${2:-}" == "store-credentials" ]]; then
         ;;
     esac
   done
-  [[ "$keychain_argument" == "${AILIMITBAR_CI_KEYCHAIN_PATH:?}" ]]
+  [[ "$keychain_argument" == "${BAIROMETER_CI_KEYCHAIN_PATH:?}" ]]
   [[ "$validate_argument" -eq 1 ]]
   printf 'notary-keychain-explicit\n' >>"${FAKE_TOOL_LOG:?}"
   exit "${FAKE_NOTARY_EXIT:-0}"
@@ -241,21 +241,21 @@ run_setup() {
   env \
     RUNNER_TEMP="$runner_temp" \
     GITHUB_ENV="$github_environment_file" \
-    AILIMITBAR_CI_PRIVATE_DIRECTORY="$runner_temp/AILimitBar-ci-release-private" \
-    AILIMITBAR_CI_KEYCHAIN_PATH="$runner_temp/AILimitBar-ci-release.keychain-db" \
-    AILIMITBAR_CI_DEVELOPER_ID_P12_BASE64="cDEyLWZpeHR1cmU=" \
-    AILIMITBAR_CI_DEVELOPER_ID_P12_PASSWORD="p12-fixture-password" \
-    AILIMITBAR_CI_PROVISIONING_PROFILE_BASE64="cHJvZmlsZS1maXh0dXJl" \
-    AILIMITBAR_CI_NOTARYTOOL_APPLE_ID="fixture@example.invalid" \
-    AILIMITBAR_CI_NOTARYTOOL_TEAM_ID="TESTTEAM01" \
-    AILIMITBAR_CI_NOTARYTOOL_PASSWORD="notary-fixture-password" \
-    AILIMITBAR_CI_CREDENTIAL_TEST_MODE=1 \
-    AILIMITBAR_TEST_SECURITY_COMMAND="$FAKE_TOOLS/security" \
-    AILIMITBAR_TEST_XCRUN_COMMAND="$FAKE_TOOLS/xcrun" \
-    AILIMITBAR_TEST_PLUTIL_COMMAND="$FAKE_TOOLS/plutil" \
-    AILIMITBAR_TEST_PLIST_BUDDY_COMMAND="$FAKE_TOOLS/plist-buddy" \
-    AILIMITBAR_TEST_OPENSSL_COMMAND="$FAKE_TOOLS/openssl" \
-    AILIMITBAR_TEST_UUIDGEN_COMMAND="$FAKE_TOOLS/uuidgen" \
+    BAIROMETER_CI_PRIVATE_DIRECTORY="$runner_temp/Bairometer-ci-release-private" \
+    BAIROMETER_CI_KEYCHAIN_PATH="$runner_temp/Bairometer-ci-release.keychain-db" \
+    BAIROMETER_CI_DEVELOPER_ID_P12_BASE64="cDEyLWZpeHR1cmU=" \
+    BAIROMETER_CI_DEVELOPER_ID_P12_PASSWORD="p12-fixture-password" \
+    BAIROMETER_CI_PROVISIONING_PROFILE_BASE64="cHJvZmlsZS1maXh0dXJl" \
+    BAIROMETER_CI_NOTARYTOOL_APPLE_ID="fixture@example.invalid" \
+    BAIROMETER_CI_NOTARYTOOL_TEAM_ID="TESTTEAM01" \
+    BAIROMETER_CI_NOTARYTOOL_PASSWORD="notary-fixture-password" \
+    BAIROMETER_CI_CREDENTIAL_TEST_MODE=1 \
+    BAIROMETER_TEST_SECURITY_COMMAND="$FAKE_TOOLS/security" \
+    BAIROMETER_TEST_XCRUN_COMMAND="$FAKE_TOOLS/xcrun" \
+    BAIROMETER_TEST_PLUTIL_COMMAND="$FAKE_TOOLS/plutil" \
+    BAIROMETER_TEST_PLIST_BUDDY_COMMAND="$FAKE_TOOLS/plist-buddy" \
+    BAIROMETER_TEST_OPENSSL_COMMAND="$FAKE_TOOLS/openssl" \
+    BAIROMETER_TEST_UUIDGEN_COMMAND="$FAKE_TOOLS/uuidgen" \
     FAKE_TOOL_LOG="$FAKE_TOOL_LOG" \
     "$@" \
     /bin/bash "$SETUP_SCRIPT"
@@ -264,17 +264,17 @@ run_setup() {
 assert_no_private_material() {
   local runner_temp="$1"
   local scenario="$2"
-  [[ ! -e "$runner_temp/AILimitBar-ci-release-private" &&
-     ! -L "$runner_temp/AILimitBar-ci-release-private" ]] || \
+  [[ ! -e "$runner_temp/Bairometer-ci-release-private" &&
+     ! -L "$runner_temp/Bairometer-ci-release-private" ]] || \
     fail "$scenario retained private diagnostics or decoded material"
-  [[ ! -e "$runner_temp/AILimitBar-ci-release.keychain-db" &&
-     ! -L "$runner_temp/AILimitBar-ci-release.keychain-db" ]] || \
+  [[ ! -e "$runner_temp/Bairometer-ci-release.keychain-db" &&
+     ! -L "$runner_temp/Bairometer-ci-release.keychain-db" ]] || \
     fail "$scenario retained the ephemeral keychain"
 }
 
 preexisting_private_runner="$FIXTURE_ROOT/preexisting-private-runner"
 preexisting_private_environment="$FIXTURE_ROOT/preexisting-private-github-env"
-preexisting_private="$preexisting_private_runner/AILimitBar-ci-release-private"
+preexisting_private="$preexisting_private_runner/Bairometer-ci-release-private"
 mkdir -p "$preexisting_private"
 printf 'caller-owned-marker' >"$preexisting_private/.credential-owner"
 printf 'caller-owned-private' >"$preexisting_private/caller-marker"
@@ -299,10 +299,10 @@ set -e
 set +e
 preexisting_private_cleanup_result="$(env \
   RUNNER_TEMP="$preexisting_private_runner" \
-  AILIMITBAR_CI_PRIVATE_DIRECTORY="$preexisting_private" \
-  AILIMITBAR_CI_KEYCHAIN_PATH="$preexisting_private_runner/AILimitBar-ci-release.keychain-db" \
-  AILIMITBAR_CI_CREDENTIAL_TEST_MODE=1 \
-  AILIMITBAR_TEST_SECURITY_COMMAND="$FAKE_TOOLS/security" \
+  BAIROMETER_CI_PRIVATE_DIRECTORY="$preexisting_private" \
+  BAIROMETER_CI_KEYCHAIN_PATH="$preexisting_private_runner/Bairometer-ci-release.keychain-db" \
+  BAIROMETER_CI_CREDENTIAL_TEST_MODE=1 \
+  BAIROMETER_TEST_SECURITY_COMMAND="$FAKE_TOOLS/security" \
   FAKE_TOOL_LOG="$FAKE_TOOL_LOG" \
   /bin/bash "$CLEANUP_SCRIPT" \
   2>&1)"
@@ -315,7 +315,7 @@ set -e
 
 preexisting_keychain_runner="$FIXTURE_ROOT/preexisting-keychain-runner"
 preexisting_keychain_environment="$FIXTURE_ROOT/preexisting-keychain-github-env"
-preexisting_keychain="$preexisting_keychain_runner/AILimitBar-ci-release.keychain-db"
+preexisting_keychain="$preexisting_keychain_runner/Bairometer-ci-release.keychain-db"
 mkdir -p "$preexisting_keychain_runner"
 printf 'caller-owned-keychain' >"$preexisting_keychain"
 : >"$preexisting_keychain_environment"
@@ -338,10 +338,10 @@ set -e
 set +e
 preexisting_keychain_cleanup_result="$(env \
   RUNNER_TEMP="$preexisting_keychain_runner" \
-  AILIMITBAR_CI_PRIVATE_DIRECTORY="$preexisting_keychain_runner/AILimitBar-ci-release-private" \
-  AILIMITBAR_CI_KEYCHAIN_PATH="$preexisting_keychain" \
-  AILIMITBAR_CI_CREDENTIAL_TEST_MODE=1 \
-  AILIMITBAR_TEST_SECURITY_COMMAND="$FAKE_TOOLS/security" \
+  BAIROMETER_CI_PRIVATE_DIRECTORY="$preexisting_keychain_runner/Bairometer-ci-release-private" \
+  BAIROMETER_CI_KEYCHAIN_PATH="$preexisting_keychain" \
+  BAIROMETER_CI_CREDENTIAL_TEST_MODE=1 \
+  BAIROMETER_TEST_SECURITY_COMMAND="$FAKE_TOOLS/security" \
   FAKE_TOOL_LOG="$FAKE_TOOL_LOG" \
   /bin/bash "$CLEANUP_SCRIPT" \
   2>&1)"
@@ -355,7 +355,7 @@ set -e
 private_symlink_runner="$FIXTURE_ROOT/private-symlink-runner"
 private_symlink_environment="$FIXTURE_ROOT/private-symlink-github-env"
 private_symlink_target="$FIXTURE_ROOT/private-symlink-target"
-private_symlink="$private_symlink_runner/AILimitBar-ci-release-private"
+private_symlink="$private_symlink_runner/Bairometer-ci-release-private"
 mkdir -p "$private_symlink_runner" "$private_symlink_target"
 printf 'caller-owned-symlink-target' >"$private_symlink_target/marker"
 /bin/ln -s "$private_symlink_target" "$private_symlink"
@@ -376,7 +376,7 @@ set -e
 keychain_symlink_runner="$FIXTURE_ROOT/keychain-symlink-runner"
 keychain_symlink_environment="$FIXTURE_ROOT/keychain-symlink-github-env"
 keychain_symlink_target="$FIXTURE_ROOT/keychain-symlink-target"
-keychain_symlink="$keychain_symlink_runner/AILimitBar-ci-release.keychain-db"
+keychain_symlink="$keychain_symlink_runner/Bairometer-ci-release.keychain-db"
 mkdir -p "$keychain_symlink_runner"
 printf 'caller-owned-keychain-target' >"$keychain_symlink_target"
 /bin/ln -s "$keychain_symlink_target" "$keychain_symlink"
@@ -403,7 +403,7 @@ set +e
 missing_result="$(run_setup \
   "$missing_runner" \
   "$missing_environment" \
-  AILIMITBAR_CI_DEVELOPER_ID_P12_BASE64= \
+  BAIROMETER_CI_DEVELOPER_ID_P12_BASE64= \
   2>&1)"
 missing_status=$?
 set -e
@@ -494,35 +494,35 @@ valid_result="$(run_setup "$valid_runner" "$valid_environment" 2>&1)" || \
   fail "valid credential fixture failed: $valid_result"
 [[ "$valid_result" == "Configured ephemeral protected release credentials." ]] || \
   fail "valid credential fixture emitted unexpected public output"
-[[ -s "$valid_runner/AILimitBar-ci-release.keychain-db" ]] || \
+[[ -s "$valid_runner/Bairometer-ci-release.keychain-db" ]] || \
   fail "valid credential fixture did not create the ephemeral keychain"
-[[ -d "$valid_runner/AILimitBar-ci-release-private" ]] || \
+[[ -d "$valid_runner/Bairometer-ci-release-private" ]] || \
   fail "valid credential fixture did not retain private material for the release step"
 grep -q '^notary-keychain-explicit$' "$FAKE_TOOL_LOG" || \
   fail "notary profile was not stored in the exact ephemeral keychain"
-grep -q '^AILIMITBAR_DEVELOPMENT_TEAM=TESTTEAM01$' "$valid_environment" || \
+grep -q '^BAIROMETER_DEVELOPMENT_TEAM=TESTTEAM01$' "$valid_environment" || \
   fail "derived signing team was not exported"
-grep -q '^AILIMITBAR_DEVELOPER_IDENTITY=Developer ID Application: Fixture (TESTTEAM01)$' \
+grep -q '^BAIROMETER_DEVELOPER_IDENTITY=Developer ID Application: Fixture (TESTTEAM01)$' \
   "$valid_environment" || \
   fail "matching Developer ID identity was not derived"
-grep -q "^AILIMITBAR_NOTARYTOOL_KEYCHAIN=$valid_runner/AILimitBar-ci-release.keychain-db$" \
+grep -q "^BAIROMETER_NOTARYTOOL_KEYCHAIN=$valid_runner/Bairometer-ci-release.keychain-db$" \
   "$valid_environment" || \
   fail "exact notary keychain was not exported"
 valid_owner_token="$(
-  /usr/bin/sed -n 's/^AILIMITBAR_CI_CREDENTIAL_OWNER=//p' "$valid_environment"
+  /usr/bin/sed -n 's/^BAIROMETER_CI_CREDENTIAL_OWNER=//p' "$valid_environment"
 )"
 [[ "$valid_owner_token" =~ ^[A-Za-z0-9-]{16,128}$ ]] || \
   fail "credential ownership token was not exported"
-[[ "$(/bin/cat "$valid_runner/AILimitBar-ci-release-private/.credential-owner")" == "$valid_owner_token" ]] || \
+[[ "$(/bin/cat "$valid_runner/Bairometer-ci-release-private/.credential-owner")" == "$valid_owner_token" ]] || \
   fail "credential ownership marker does not match the current invocation"
 
 cleanup_result="$(env \
   RUNNER_TEMP="$valid_runner" \
-  AILIMITBAR_CI_PRIVATE_DIRECTORY="$valid_runner/AILimitBar-ci-release-private" \
-  AILIMITBAR_CI_KEYCHAIN_PATH="$valid_runner/AILimitBar-ci-release.keychain-db" \
-  AILIMITBAR_CI_CREDENTIAL_OWNER="$valid_owner_token" \
-  AILIMITBAR_CI_CREDENTIAL_TEST_MODE=1 \
-  AILIMITBAR_TEST_SECURITY_COMMAND="$FAKE_TOOLS/security" \
+  BAIROMETER_CI_PRIVATE_DIRECTORY="$valid_runner/Bairometer-ci-release-private" \
+  BAIROMETER_CI_KEYCHAIN_PATH="$valid_runner/Bairometer-ci-release.keychain-db" \
+  BAIROMETER_CI_CREDENTIAL_OWNER="$valid_owner_token" \
+  BAIROMETER_CI_CREDENTIAL_TEST_MODE=1 \
+  BAIROMETER_TEST_SECURITY_COMMAND="$FAKE_TOOLS/security" \
   FAKE_TOOL_LOG="$FAKE_TOOL_LOG" \
   /bin/bash "$CLEANUP_SCRIPT" \
   2>&1)" || fail "explicit credential cleanup failed: $cleanup_result"
@@ -532,16 +532,16 @@ assert_no_private_material "$valid_runner" "explicit credential cleanup"
 
 unsafe_runner="$FIXTURE_ROOT/unsafe-runner"
 unsafe_private="$FIXTURE_ROOT/caller-owned-private"
-unsafe_keychain="$unsafe_runner/AILimitBar-ci-release.keychain-db"
+unsafe_keychain="$unsafe_runner/Bairometer-ci-release.keychain-db"
 mkdir -p "$unsafe_runner" "$unsafe_private"
 printf 'caller-owned' >"$unsafe_private/marker"
 set +e
 unsafe_result="$(env \
   RUNNER_TEMP="$unsafe_runner" \
-  AILIMITBAR_CI_PRIVATE_DIRECTORY="$unsafe_private" \
-  AILIMITBAR_CI_KEYCHAIN_PATH="$unsafe_keychain" \
-  AILIMITBAR_CI_CREDENTIAL_TEST_MODE=1 \
-  AILIMITBAR_TEST_SECURITY_COMMAND="$FAKE_TOOLS/security" \
+  BAIROMETER_CI_PRIVATE_DIRECTORY="$unsafe_private" \
+  BAIROMETER_CI_KEYCHAIN_PATH="$unsafe_keychain" \
+  BAIROMETER_CI_CREDENTIAL_TEST_MODE=1 \
+  BAIROMETER_TEST_SECURITY_COMMAND="$FAKE_TOOLS/security" \
   FAKE_TOOL_LOG="$FAKE_TOOL_LOG" \
   /bin/bash "$CLEANUP_SCRIPT" \
   2>&1)"

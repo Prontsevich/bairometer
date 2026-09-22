@@ -73,7 +73,7 @@ KEYCHAIN_GROUP="$(
   exit 1
 }
 
-TEMP_DIRECTORY="$(mktemp -d "${TMPDIR:-/tmp}/AILimitBar-entitlements.XXXXXX")"
+TEMP_DIRECTORY="$(mktemp -d "${TMPDIR:-/tmp}/Bairometer-entitlements.XXXXXX")"
 REMAINDER_PLIST="$TEMP_DIRECTORY/remainder.plist"
 cp "$ENTITLEMENTS_PLIST" "$REMAINDER_PLIST"
 

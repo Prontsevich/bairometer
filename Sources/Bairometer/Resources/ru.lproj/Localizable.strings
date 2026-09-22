@@ -1,0 +1,402 @@
+/* Terminal fieldset title for the account list */
+"menu_bar.accounts.title" = "АККАУНТЫ";
+
+/* Menu bar footer action */
+"menu_bar.action.about" = "О приложении";
+
+/* Tooltip and accessibility label for the About action */
+"menu_bar.action.about_bairometer" = "О Биирометре";
+
+/* Menu bar footer action */
+"menu_bar.action.quit" = "Выйти";
+
+/* Menu bar footer action */
+"menu_bar.action.settings" = "Настройки";
+
+/* Empty menu bar dashboard recovery instruction */
+"menu_bar.empty.create_account_in_settings" = "Создайте аккаунт в настройках.";
+
+/* Empty menu bar dashboard message */
+"menu_bar.empty.no_enabled_accounts" = "Нет включённых аккаунтов.";
+
+/* Accessibility value while the menu bar refresh is idle */
+"menu_bar.ready" = "Готово";
+
+/* Accessibility label and tooltip for the menu bar refresh button */
+"menu_bar.refresh_all_accounts" = "Обновить все аккаунты";
+
+/* Tooltip when no enabled accounts can be refreshed */
+"menu_bar.refresh_help.no_enabled_accounts" = "Нет включённых аккаунтов для обновления.";
+
+/* Tooltip while the menu bar refresh is active */
+"menu_bar.refresh_help.refreshing_all_accounts" = "Обновляются все аккаунты.";
+
+/* Tooltip while an account refresh is active */
+"menu_bar.refresh_help.wait_for_current_refresh" = "Дождитесь завершения обновления текущего аккаунта.";
+
+/* Accessibility value while the menu bar refresh is active */
+"menu_bar.refreshing" = "Обновление";
+
+/* App language option for English */
+"settings.language.choice.english" = "Английский";
+
+/* App language option for Russian */
+"settings.language.choice.russian" = "Русский";
+
+/* App language option that follows the current system locale */
+"settings.language.choice.system_default" = "Как в системе";
+
+/* Description below the app language selector */
+"settings.language.description" = "Выберите язык интерфейса Биирометра.";
+
+/* Accessibility label for the app language selector */
+"settings.language.selection" = "Язык приложения";
+
+/* Terminal fieldset title for the app language preference */
+"settings.language.title" = "ЯЗЫК";
+
+"common.action.cancel" = "Отмена";
+"common.action.save" = "Сохранить";
+"common.action.create" = "Создать";
+"common.action.delete" = "Удалить";
+"common.action.ok" = "ОК";
+"common.action.refresh" = "Обновить";
+"common.status.refreshing" = "Обновление";
+"common.status.ready" = "Готово";
+"common.field.enabled" = "Активно";
+"common.selection.selected" = "Выбрано";
+"common.selection.not_selected" = "Не выбрано";
+"common.toggle.on" = "ДА";
+"common.toggle.off" = "НЕТ";
+"common.toggle.on_accessibility" = "Включено";
+"common.toggle.off_accessibility" = "Выключено";
+"common.usage.no_data" = "Нет данных о лимитах";
+"common.usage.unavailable" = "Данные о лимитах недоступны";
+"common.source.manual" = "Вручную";
+"common.source.live" = "В реальном времени";
+"common.source.delayed" = "С задержкой";
+"common.source.local_estimate" = "Локальная оценка";
+"common.source.unknown" = "Неизвестно";
+"common.status.unavailable" = "Недоступно";
+"common.status.warning" = "Предупреждение";
+"common.status.error" = "Ошибка";
+"common.status.failed" = "Не удалось";
+"common.status.stale" = "Устарело";
+"common.status.supported" = "Поддерживается";
+"common.account.selected" = "выбранный аккаунт";
+"common.status.idle" = "Готово";
+"common.status.updated" = "Обновлено";
+"common.source.managed_status_line" = "Управляемый statusLine";
+"common.source.usage_cli_experimental" = "/usage CLI (экспериментальный)";
+"common.source.web_page_experimental" = "Экспериментальная веб-страница";
+"common.source.app_server_experimental" = "Экспериментальный app-server";
+"common.source.local_snapshot" = "Локальный снимок";
+"common.interval.manual" = "Вручную";
+"common.interval.one_minute" = "1 мин";
+"common.interval.five_minutes" = "5 мин";
+"common.interval.ten_minutes" = "10 мин";
+"common.interval.fifteen_minutes" = "15 мин";
+"common.interval.thirty_minutes" = "30 мин";
+"common.interval.one_hour" = "1 ч";
+"common.height.compact" = "Компактная";
+"common.height.standard" = "Стандартная";
+"common.height.tall" = "Высокая";
+
+"display_mode.used" = "Ушло";
+"display_mode.left" = "Ещё";
+"display_mode.use_global" = "Как в общих";
+
+"dashboard.usage.used" = "Ушло %@";
+"dashboard.usage.left" = "Ещё %@";
+"dashboard.usage.accessibility" = "Лимит: израсходовано %@";
+"dashboard.usage.toggle_help" = "%@: %@. Активируйте, чтобы показать %@.";
+"dashboard.usage.toggle_hint" = "Переключает между потраченным и оставшимся.";
+"dashboard.reset.future" = "сброс %@";
+"dashboard.reset.past" = "сброс %@";
+"dashboard.action.refresh_account" = "Обновить %@";
+"dashboard.refresh_help.account_disabled" = "%@ выключен.";
+"dashboard.refresh_help.refreshing_account" = "Обновляется %@.";
+"dashboard.action.show_details" = "Показать сведения об аккаунте";
+"dashboard.action.show_details_for_account" = "Показать сведения об %@";
+"dashboard.status.refresh_failed" = "Не удалось обновить";
+"dashboard.body.manual_source" = "Ручной источник — откройте страницу лимитов у провайдера";
+"dashboard.body.no_data" = "Нет данных о лимитах";
+"dashboard.body.refresh_failed" = "Не удалось обновить";
+"dashboard.window.session" = "Сеанс";
+"dashboard.window.weekly" = "За неделю";
+"dashboard.window.five_hour" = "5 часов";
+"dashboard.window.seven_day" = "7 дней";
+"dashboard.accessibility.highest_usage" = "Максимальный расход: %@";
+"dashboard.accessibility.no_usage_available" = "Нет данных о лимитах";
+"dashboard.accessibility.no_enabled_accounts" = "Нет включённых аккаунтов";
+"dashboard.accessibility.warning_summary" = "Предупреждение: одному или нескольким включённым аккаунтам нужно внимание. %@";
+"dashboard.accessibility.error_summary" = "Ошибка: одному или нескольким включённым аккаунтам нужно внимание. %@";
+"dashboard.diagnostics.source_unsupported" = "Этот режим источника не поддерживается адаптером провайдера.";
+"dashboard.diagnostics.last_refresh_failed" = "Последнее обновление не удалось.";
+"dashboard.diagnostics.connect_before_refresh" = "Подключите этот аккаунт через Биирометр перед обновлением.";
+"dashboard.diagnostics.source_supported" = "Настроенный источник поддерживается.";
+"dashboard.diagnostics.ollama_source_summary" = "Данные о лимитах читаются со страницы настроек авторизованного Ollama в Биирометре.";
+"dashboard.diagnostics.claude_status_line_summary" = "Данные rate limit читаются из управляемого снимка statusLine Claude Code.";
+"dashboard.diagnostics.claude_usage_summary" = "Лимиты плана читаются локальной командой Claude Code /usage.";
+"dashboard.diagnostics.codex_source_summary" = "Текущие окна rate limit читаются из локального app-server Codex.";
+
+"storage.provider_settings_save" = "Не удалось сохранить настройки провайдера.";
+"storage.refresh_settings_save" = "Не удалось сохранить настройки обновления.";
+"storage.usage_display_preferences_load" = "Не удалось загрузить настройки отображения лимитов.";
+"storage.usage_display_preferences_save" = "Не удалось сохранить настройки отображения лимитов.";
+"storage.snapshots_save" = "Не удалось сохранить снимки.";
+"storage.diagnostics_save" = "Не удалось сохранить диагностику провайдера.";
+"storage.refresh_state_save" = "Не удалось сохранить состояние обновления провайдера.";
+"storage.legacy_migration" = "Не удалось перенести прежние данные JSON. Существующие данные базы остаются доступны.";
+"storage.temporary_storage" = "Application Support недоступен. Активно временное хранилище.";
+"storage.unavailable" = "Хранилище Биирометра недоступно. Изменения не будут сохранены.";
+
+"settings.navigation.label" = "Раздел настроек";
+"settings.navigation.general" = "Основные";
+"settings.navigation.accounts" = "Аккаунты";
+"settings.navigation.provider_setup" = "Провайдеры";
+"settings.general.title" = "ОСНОВНЫЕ";
+"settings.general.description" = "Настройте параметры, общие для всех аккаунтов Биирометра.";
+"settings.schedule.title" = "РАСПИСАНИЕ";
+"settings.schedule.interval" = "Интервал";
+"settings.schedule.accessibility" = "Интервал обновления";
+"settings.schedule.manual_refresh_help" = "Ручное обновление остаётся доступно в панели menu bar.";
+"settings.dashboard.title" = "ПАНЕЛЬ";
+"settings.dashboard.height" = "Высота";
+"settings.dashboard.height_accessibility" = "Высота панели";
+"settings.dashboard.height_help" = "Управляет максимальной видимой высотой панели menu bar. Длинные списки аккаунтов прокручиваются.";
+"settings.dashboard.display_limits" = "Лимиты";
+"settings.dashboard.display_limits_accessibility" = "Отображение лимитов";
+"settings.dashboard.display_limits_help" = "Задаёт default для окон, использующих глобальный режим отображения.";
+"settings.accounts.title" = "АККАУНТЫ";
+"settings.accounts.delete_title" = "Удалить аккаунт?";
+"settings.accounts.delete_message" = "Это удалит %@ и его сохранённый снимок из Биирометра.";
+"settings.accounts.delete_openrouter_message" = "Это безопасно удалит %@, все сохранённые для него ключи OpenRouter и данные capacity из Биирометра.";
+"settings.accounts.move_up" = "Переместить выше";
+"settings.accounts.move_down" = "Переместить ниже";
+"settings.accounts.add" = "Добавить аккаунт";
+"settings.accounts.delete_selected" = "Удалить выбранный аккаунт";
+"settings.accounts.select_or_add" = "Выберите аккаунт или добавьте новый, чтобы настроить его.";
+"settings.accounts.no_account_selected" = "Аккаунт не выбран";
+"settings.accounts.discard_title" = "Отменить изменения?";
+"settings.accounts.discard" = "Отменить изменения";
+"settings.accounts.keep_editing" = "Продолжить редактирование";
+"settings.accounts.discard_message" = "Изменения аккаунта не были сохранены.";
+"settings.provider_setup.title" = "ПРОВАЙДЕРЫ";
+"settings.provider_setup.description" = "Откройте страницу лимитов у нужного провайдера.";
+"settings.provider_setup.providers" = "ДОСТУПНЫЕ ПРОВАЙДЕРЫ";
+"settings.provider_setup.open_usage" = "Открыть лимиты";
+"settings.provider_setup.no_configured_source" = "Страница лимитов недоступна";
+"settings.detail.status" = "СТАТУС";
+"settings.detail.source" = "Источник";
+"settings.detail.refresh" = "Обновление";
+"settings.detail.last_updated" = "Последнее обновление";
+"settings.detail.configuration" = "КОНФИГУРАЦИЯ";
+"settings.detail.provider" = "Провайдер";
+"settings.detail.account_status" = "Статус аккаунта";
+"settings.detail.migration" = "МИГРАЦИЯ";
+"settings.detail.codex_executable" = "Исполняемый файл Codex";
+"settings.detail.claude_executable" = "Исполняемый файл Claude";
+"settings.detail.edit_account" = "Изменить аккаунт";
+"settings.detail.connect_ollama" = "Подключить Ollama";
+"settings.detail.reconnect_ollama" = "Подключить Ollama заново";
+"settings.detail.refreshing" = "Обновление…";
+
+"settings.editor.new_account" = "Новый аккаунт";
+"settings.editor.edit_account" = "Изменить аккаунт";
+"settings.editor.new_description" = "Добавьте аккаунт провайдера, чтобы следить за его лимитами.";
+"settings.editor.edit_description" = "Сохраните изменения конфигурации аккаунта.";
+"settings.editor.account" = "АККАУНТ";
+"settings.editor.account_name" = "Название аккаунта";
+"settings.editor.source" = "ИСТОЧНИК";
+"settings.editor.mode" = "Режим";
+"settings.editor.provider" = "Провайдер";
+"settings.editor.manual_source_description" = "Ручной источник: открывайте страницу лимитов Claude, когда нужно проверить лимиты плана. В этом режиме Биирометр не запускает Claude Code и не сохраняет вывод провайдера.";
+"settings.editor.status_line_title" = "Помощник statusLine Claude Code";
+"settings.editor.status_line_description" = "Помощник читает официальный JSON statusLine Claude Code и записывает локальную оценку rate limit в управляемую базу Биирометра. Путь к JSON не настраивается и не сохраняется.";
+"settings.editor.install_helper" = "Установить или восстановить помощник";
+"settings.editor.save_first" = "Сначала сохраните этот аккаунт, затем установите его конфигурацию помощника.";
+"settings.editor.usage_cli_description" = "Экспериментальный источник: Биирометр запускает аутентифицированный локальный CLI Claude Code в безопасном неинтерактивном режиме и сохраняет только нормализованные окна лимитов плана. Не сохраняются raw output, атрибуция активности, stderr и метаданные сессии.";
+"settings.editor.ollama_source_description" = "Экспериментальный источник: Биирометр открывает изолированную сессию WebKit для https://ollama.com/settings. Сессия никогда не копируется из другого браузера, а raw content страницы не сохраняется.";
+"settings.editor.codex_source_description" = "Экспериментальный источник: Биирометр запускает краткоживущий локальный app-server Codex для чтения текущих окон rate limit. Он не читает credentials Codex, файлы сессии, данные браузера или вывод терминала.";
+"settings.editor.leave_blank_claude" = "Оставьте пустым, чтобы найти Claude автоматически.";
+"settings.editor.leave_blank_codex" = "Оставьте пустым, чтобы найти Codex автоматически.";
+"settings.editor.browse" = "Выбрать…";
+"settings.editor.more_actions" = "Другие действия с аккаунтом";
+"settings.editor.provider_accessibility" = "Провайдер";
+"settings.editor.select_provider" = "Выберите провайдера";
+"settings.editor.provider_hint" = "Нажмите Space или Return, чтобы открыть список провайдеров. Перемещайтесь по списку стрелками, затем нажмите Space или Return, чтобы выбрать провайдера.";
+"settings.editor.claude_path" = "Путь к Claude";
+"settings.editor.codex_path" = "Путь к Codex";
+"settings.editor.claude_executable_placeholder" = "Путь к исполняемому файлу Claude";
+"settings.editor.codex_executable_placeholder" = "Путь к исполняемому файлу Codex";
+"settings.editor.claude_source_accessibility" = "Источник Claude Code";
+"settings.editor.app_server_conflict" = "Только один аккаунт OpenAI Codex может использовать локальный источник app-server, потому что он читает активную локальную сессию Codex CLI.";
+"settings.editor.usage_cli_conflict" = "Только один аккаунт Claude Code может использовать /usage CLI, потому что он читает активную локальную identity Claude CLI, в том числе когда другой аккаунт выключен.";
+"settings.editor.display_name_conflict" = "Названия аккаунтов должны быть уникальны глобально, включая выключенные аккаунты.";
+"settings.editor.save_before_helper" = "Сохраните аккаунт перед установкой его помощника statusLine.";
+"settings.editor.helper_installed" = "Установлено в %@. Добавьте этот объект в ~/.claude/settings.json:\n\n%@";
+
+"ollama.connection.title" = "Подключение Ollama";
+"ollama.connection.unavailable" = "Подключение Ollama недоступно.";
+"ollama.connection.save_before_connecting" = "Сохраните аккаунт перед подключением Ollama через Биирометр.";
+"ollama.connection.connect" = "Подключить Ollama";
+"ollama.connection.reconnect" = "Подключить Ollama заново";
+"ollama.connection.description" = "Войдите в Ollama прямо в этом изолированном окне Биирометра. Cookies, tokens, passwords и raw content страницы остаются внутри WebKit и никогда не экспортируются в хранилище Биирометра.";
+"ollama.connection.profile_unavailable" = "Профиль подключения недоступен";
+"ollama.connection.save_before_opening" = "Сохраните этот аккаунт перед открытием сценария подключения Ollama.";
+"ollama.connection.try_again" = "Повторить";
+"ollama.connection.loading" = "Загружаются настройки Ollama…";
+"ollama.connection.cancelled" = "Подключение отменено.";
+"ollama.connection.failed" = "Не удалось подключить Ollama. Подключитесь заново и повторите попытку.";
+"ollama.connection.window_unavailable" = "Подключение Ollama недоступно";
+"ollama.connection.choose_from_account" = "Сначала выберите «Подключить Ollama» или «Подключить Ollama заново» в аккаунте Ollama.";
+
+"about.build_information" = "Информация о сборке";
+"about.open_github" = "Открыть GitHub";
+"about.open_github_accessibility" = "Открыть Биирометр на GitHub";
+"about.feedback" = "Обратная связь";
+"about.report_issue" = "Сообщить о проблеме";
+"about.report_issue_accessibility" = "Сообщить о проблеме Биирометра на GitHub";
+"about.email" = "Электронная почта";
+"about.email_accessibility" = "Написать разработчику Биирометра";
+"about.telegram" = "Telegram";
+"about.telegram_accessibility" = "Написать разработчику Биирометра в Telegram";
+"about.support_text" = "Если Биирометр полезен вам, спасибо за поддержку его разработки.";
+"about.support_boosty" = "Поддержать на Boosty";
+"about.support_boosty_accessibility" = "Поддержать Биирометр на Boosty";
+"about.accessibility" = "О Биирометре";
+"about.development_build" = "Сборка для разработки";
+"about.version" = "Версия %@ (сборка %@)";
+
+"account_details.title" = "Сведения об аккаунте %@";
+"account_details.refresh" = "ОБНОВЛЕНИЕ";
+"account_details.source_state" = "СОСТОЯНИЕ ИСТОЧНИКА";
+"account_details.last_success" = "ПОСЛЕДНИЙ УСПЕХ";
+"account_details.source" = "ИСТОЧНИК";
+"account_details.confidence" = "ДОСТОВЕРНОСТЬ";
+"account_details.plan" = "ПЛАН";
+"account_details.usage" = "ЛИМИТЫ";
+"account_details.display_mode" = "РЕЖИМ %@";
+"account_details.display_mode_accessibility" = "Режим отображения для %@";
+"account_details.reset" = "СБРОС %@";
+"account_details.diagnostics" = "Диагностика";
+"account_details.last_refresh_failed" = "Последнее обновление не удалось";
+"account_details.no_error_details" = "Дополнительные сведения об ошибке не предоставлены.";
+"account_details.stale_data" = "Устаревшие данные";
+"account_details.stale_detail" = "Снимок старше настроенного окна свежести.";
+"account_details.warnings" = "Предупреждения";
+"account_details.test_connection" = "Проверить подключение";
+"account_details.open_usage" = "Открыть лимиты";
+"account_details.connect" = "Подключить";
+"account_details.reconnect" = "Подключить заново";
+"account_details.ollama_connect_first" = "Подключите Ollama, чтобы загрузить экспериментальный источник со страницы настроек.";
+"account_details.codex_refresh_first" = "Обновите этот аккаунт, чтобы прочитать экспериментальный локальный источник app-server Codex.";
+"account_details.claude_usage_refresh_first" = "Обновите этот аккаунт, чтобы прочитать экспериментальный локальный источник Claude /usage.";
+"account_details.refresh_or_test_first" = "Обновите или проверьте этот аккаунт, чтобы загрузить снимок.";
+"account_details.succeeded_at" = "Успешно в %@";
+"account_details.failed_at" = "Не удалось в %@";
+
+"window.settings.title" = "Настройки Биирометра";
+"window.ollama.title" = "Подключить Ollama";
+"window.about.title" = "О Биирометре";
+"common.status.unlimited" = "Без ограничений";
+"storage.openrouter_credentials" = "Не удалось загрузить metadata ключей OpenRouter.";
+"openrouter.shared_credits" = "ОБЩИЕ КРЕДИТЫ";
+"openrouter.api_keys" = "API-КЛЮЧИ";
+"openrouter.metric.account_credits" = "Кредиты аккаунта";
+"openrouter.metric.key_credit_limit" = "Кредитный лимит ключа";
+"openrouter.metric.total_usage" = "Расход за всё время";
+"openrouter.metric.daily_usage" = "Расход за день";
+"openrouter.metric.weekly_usage" = "Расход за неделю";
+"openrouter.metric.monthly_usage" = "Расход за месяц";
+"openrouter.metric.total_byok_usage" = "Расход BYOK за всё время";
+"openrouter.metric.daily_byok_usage" = "Расход BYOK за день";
+"openrouter.metric.weekly_byok_usage" = "Расход BYOK за неделю";
+"openrouter.metric.monthly_byok_usage" = "Расход BYOK за месяц";
+"openrouter.value.remaining_of" = "Осталось %@ %@ из %@";
+"openrouter.value.remaining" = "Осталось %@";
+"openrouter.value.available" = "Доступно";
+"openrouter.value.available_of" = "Доступно %@ из %@";
+"openrouter.value.limit" = "Лимит %@";
+"openrouter.value.used" = "Использовано %@";
+"openrouter.value.total" = "Всего %@";
+"openrouter.value.credit_summary" = "Осталось %@ · Использовано %@";
+"openrouter.table.left" = "Осталось";
+"openrouter.table.used" = "Использовано";
+"openrouter.table.scope" = "Период";
+"openrouter.table.reset" = "Сброс";
+"openrouter.table.usage" = "Расход";
+"openrouter.table.byok" = "BYOK";
+"openrouter.scope.day" = "День";
+"openrouter.scope.week" = "Неделя";
+"openrouter.scope.month" = "Месяц";
+"openrouter.scope.total" = "Всего";
+"openrouter.scope.limit" = "Лимит";
+"openrouter.section.key_limit" = "ЛИМИТ КЛЮЧА";
+"openrouter.section.usage" = "РАСХОД";
+"openrouter.section.reset_schedule" = "РАСПИСАНИЕ СБРОСА";
+"openrouter.reset.none" = "Без сброса";
+"openrouter.reset.unknown" = "Время сброса неизвестно";
+"openrouter.reset.future" = "Сброс %@";
+"openrouter.reset.past" = "Сброс был %@";
+"openrouter.freshness.updated" = "Обновлено %@";
+"openrouter.freshness.stale_updated" = "Устарело · обновлено %@";
+"openrouter.status.partial" = "Частично";
+"openrouter.status.current" = "Актуально";
+"openrouter.status.disabled" = "Отключено";
+"openrouter.status.recovery_required" = "Требуется восстановление";
+"openrouter.status.deletion_pending" = "Ожидается безопасное удаление";
+"openrouter.status.authentication_failed" = "Аутентификация ключа не пройдена";
+"openrouter.status.privilege_insufficient" = "Недостаточно прав ключа";
+"openrouter.status.throttled" = "Refresh ограничен";
+"openrouter.status.temporary_failure" = "Временная ошибка refresh";
+"openrouter.status.credential_unavailable" = "Ключ недоступен";
+"openrouter.no_ordinary_keys" = "Добавьте хотя бы один ключ для загрузки метрик ключа.";
+"openrouter.management_unavailable" = "Общие кредиты недоступны, пока не настроен и не обновлён опциональный management-ключ.";
+"openrouter.unnamed_key" = "API-ключ без имени";
+"openrouter.metrics_accessibility" = "%@, %@, %@";
+"openrouter.settings.credentials_title" = "КЛЮЧИ";
+"openrouter.settings.management_title" = "ДОСТУП К ОБЩИМ КРЕДИТАМ";
+"openrouter.settings.add_key" = "Добавить ключ";
+"openrouter.settings.add_management" = "Добавить management-ключ";
+"openrouter.settings.credential_actions" = "Другие действия для %@";
+"openrouter.settings.enable" = "Включить";
+"openrouter.settings.disable" = "Отключить";
+"openrouter.settings.not_configured" = "Не настроено";
+"openrouter.value.no_key_limit" = "Нет лимита ключа";
+"openrouter.settings.rename" = "Переименовать";
+"openrouter.settings.replace" = "Заменить ключ";
+"openrouter.settings.recover" = "Восстановить ключ";
+"openrouter.settings.remove" = "Удалить";
+"openrouter.settings.management_credential" = "Management-ключ";
+"openrouter.settings.stored_securely" = "Сохранённые ключи остаются в macOS Data Protection Keychain и больше никогда не показываются.";
+"openrouter.settings.management_disclosure" = "Опциональный ключ с повышенными правами. Биирометр использует его только для чтения общих кредитов аккаунта через /api/v1/credits. Он никогда не используется для обновления метрик отдельных ключей.";
+"openrouter.settings.ordinary_disclosure" = "Этот ключ с локальным именем обновляется независимо через /api/v1/key.";
+"openrouter.settings.delete_title" = "Удалить ключ?";
+"openrouter.settings.delete_message" = "%@ будет безопасно удалён из Keychain вместе с локальным capacity context.";
+"openrouter.editor.add_key_title" = "Добавить ключ";
+"openrouter.editor.key_details" = "ДАННЫЕ КЛЮЧА";
+"openrouter.editor.add_management_title" = "Добавить management-ключ";
+"openrouter.editor.rename_title" = "Переименовать API-ключ";
+"openrouter.editor.replace_title" = "Заменить ключ";
+"openrouter.editor.recover_title" = "Восстановить ключ";
+"openrouter.editor.key_name" = "Имя";
+"openrouter.editor.credential" = "Ключ";
+"openrouter.editor.credential_placeholder" = "Вставьте ключ";
+"openrouter.editor.no_readback" = "Введённый ключ записывается прямо в Keychain. Биирометр не покажет сохранённый ключ после закрытия этого окна.";
+"openrouter.error.title" = "Ошибка ключа OpenRouter";
+"openrouter.error.invalid_account" = "Аккаунт OpenRouter недоступен.";
+"openrouter.error.invalid_name" = "Введите локальное имя этого API-ключа.";
+"openrouter.error.duplicate_name" = "Имена API-ключей должны быть уникальны внутри аккаунта.";
+"openrouter.error.empty_credential" = "Введите значение ключа.";
+"openrouter.error.management_exists" = "У этого аккаунта уже есть management-ключ.";
+"openrouter.error.pending_deletion" = "Ожидается безопасное удаление. Повторите удаление перед заменой ключа.";
+"openrouter.error.credential_unavailable" = "Выбранный ключ недоступен. Перезагрузите Settings и попробуйте снова.";
+"openrouter.error.keychain" = "Ошибка доступа к Keychain. Сохранённый ключ не отображался.";
+"openrouter.error.storage" = "Не удалось сохранить настройки ключей OpenRouter.";
+"openrouter.settings.source_description" = "Сохраните аккаунт, затем добавьте один или несколько ключей. Для общих кредитов нужен отдельный опциональный management-ключ.";
+"openrouter.details.expanded" = "Развёрнуто";
+"openrouter.details.collapsed" = "Свёрнуто";
+"openrouter.details.show" = "Показать данные ключа.";
+"openrouter.details.hide" = "Скрыть данные ключа.";

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-FIXTURE_ROOT="$(mktemp -d "${TMPDIR:-/tmp}/AILimitBar-notarization-tests.XXXXXX")"
+FIXTURE_ROOT="$(mktemp -d "${TMPDIR:-/tmp}/Bairometer-notarization-tests.XXXXXX")"
 FAKE_TOOLS="$FIXTURE_ROOT/tools"
 PRIVATE_TEMP="$FIXTURE_ROOT/private-tmp"
 TOOL_LOG="$FIXTURE_ROOT/tool.log"
@@ -26,8 +26,8 @@ VERSION="$1"
 BUILD_NUMBER="$2"
 ARCHITECTURE="$3"
 [[ "${4:-}" == "--signed-submission" ]]
-OUTPUT_DIRECTORY="${AILIMITBAR_RELEASE_OUTPUT_DIRECTORY:?}"
-APP="$OUTPUT_DIRECTORY/AILimitBar.app"
+OUTPUT_DIRECTORY="${BAIROMETER_RELEASE_OUTPUT_DIRECTORY:?}"
+APP="$OUTPUT_DIRECTORY/Bairometer.app"
 rm -rf "$APP"
 mkdir -p \
   "$APP/Contents/MacOS" \
@@ -42,7 +42,7 @@ cat >"$APP/Contents/Info.plist" <<PLIST
 <plist version="1.0">
 <dict>
   <key>CFBundleIdentifier</key>
-  <string>io.github.Prontsevich.AILimitBar</string>
+  <string>io.github.Prontsevich.Bairometer</string>
   <key>CFBundleShortVersionString</key>
   <string>$VERSION</string>
   <key>CFBundleVersion</key>
@@ -59,17 +59,17 @@ cat >"$APP/Contents/Info.plist" <<PLIST
 </plist>
 PLIST
 
-printf '#!/usr/bin/env bash\nexit 0\n' >"$APP/Contents/MacOS/AILimitBar"
-printf '#!/usr/bin/env bash\nexit 0\n' >"$APP/Contents/Helpers/AILimitBarClaudeStatusLine"
+printf '#!/usr/bin/env bash\nexit 0\n' >"$APP/Contents/MacOS/Bairometer"
+printf '#!/usr/bin/env bash\nexit 0\n' >"$APP/Contents/Helpers/BairometerClaudeStatusLine"
 chmod +x \
-  "$APP/Contents/MacOS/AILimitBar" \
-  "$APP/Contents/Helpers/AILimitBarClaudeStatusLine"
+  "$APP/Contents/MacOS/Bairometer" \
+  "$APP/Contents/Helpers/BairometerClaudeStatusLine"
 printf 'icon' >"$APP/Contents/Resources/AppIcon.icns"
 printf 'profile' >"$APP/Contents/embedded.provisionprofile"
 printf '"fixture" = "fixture";\n' >"$APP/Contents/Resources/en.lproj/Localizable.strings"
 printf '"fixture" = "fixture";\n' >"$APP/Contents/Resources/ru.lproj/Localizable.strings"
 
-ARCHIVE="$OUTPUT_DIRECTORY/AILimitBar-$VERSION-$ARCHITECTURE-signed.zip"
+ARCHIVE="$OUTPUT_DIRECTORY/Bairometer-$VERSION-$ARCHITECTURE-signed.zip"
 rm -f "$ARCHIVE"
 /usr/bin/ditto -c -k --sequesterRsrc --keepParent "$APP" "$ARCHIVE"
 printf 'package %s\n' "$ARCHIVE" >>"${FAKE_TOOL_LOG:?}"
@@ -112,8 +112,8 @@ if [[ "$1" == "--verify" ]]; then
   exit "${FAKE_CODESIGN_VERIFY_EXIT:-0}"
 fi
 if [[ "$1" == "-dvvv" ]]; then
-  printf 'Authority=%s\n' "${AILIMITBAR_DEVELOPER_IDENTITY:?}" >&2
-  printf 'TeamIdentifier=%s\n' "${AILIMITBAR_DEVELOPMENT_TEAM:?}" >&2
+  printf 'Authority=%s\n' "${BAIROMETER_DEVELOPER_IDENTITY:?}" >&2
+  printf 'TeamIdentifier=%s\n' "${BAIROMETER_DEVELOPMENT_TEAM:?}" >&2
   printf 'flags=0x10000(runtime)\n' >&2
   printf 'Timestamp=fixture\n' >&2
   exit 0
@@ -125,12 +125,12 @@ if [[ " $* " == *" --entitlements "* ]]; then
 <plist version="1.0">
 <dict>
   <key>com.apple.application-identifier</key>
-  <string>${AILIMITBAR_DEVELOPMENT_TEAM}.io.github.Prontsevich.AILimitBar</string>
+  <string>${BAIROMETER_DEVELOPMENT_TEAM}.io.github.Prontsevich.Bairometer</string>
   <key>com.apple.developer.team-identifier</key>
-  <string>${AILIMITBAR_DEVELOPMENT_TEAM}</string>
+  <string>${BAIROMETER_DEVELOPMENT_TEAM}</string>
   <key>keychain-access-groups</key>
   <array>
-    <string>${AILIMITBAR_DEVELOPMENT_TEAM}.io.github.Prontsevich.AILimitBar</string>
+    <string>${BAIROMETER_DEVELOPMENT_TEAM}.io.github.Prontsevich.Bairometer</string>
   </array>
 </dict>
 </plist>
@@ -232,23 +232,23 @@ run_fixture() {
   mkdir -p "$output_directory"
   env \
     TMPDIR="$PRIVATE_TEMP" \
-    AILIMITBAR_DEVELOPMENT_TEAM="TEST_TEAM" \
-    AILIMITBAR_DEVELOPER_IDENTITY="Developer ID Application: Fixture (TEST_TEAM)" \
-    AILIMITBAR_PROVISIONING_PROFILE="$FIXTURE_ROOT/fixture.provisionprofile" \
-    AILIMITBAR_NOTARYTOOL_PROFILE="FIXTURE_PRIVATE_PROFILE" \
-    AILIMITBAR_NOTARYTOOL_KEYCHAIN="$FIXTURE_ROOT/fixture.keychain-db" \
-    AILIMITBAR_NOTARIZATION_TEST_MODE=1 \
-    AILIMITBAR_TEST_OUTPUT_DIRECTORY="$output_directory" \
-    AILIMITBAR_TEST_PACKAGE_RELEASE_SCRIPT="$FAKE_TOOLS/package-release" \
-    AILIMITBAR_TEST_RELEASE_VALIDATOR="$FAKE_TOOLS/release-validator" \
-    AILIMITBAR_TEST_XCRUN_COMMAND="$FAKE_TOOLS/xcrun" \
-    AILIMITBAR_TEST_DITTO_COMMAND="$FAKE_TOOLS/ditto" \
-    AILIMITBAR_TEST_CODESIGN_COMMAND="$FAKE_TOOLS/codesign" \
-    AILIMITBAR_TEST_LIPO_COMMAND="$FAKE_TOOLS/lipo" \
-    AILIMITBAR_TEST_SPCTL_COMMAND="$FAKE_TOOLS/spctl" \
-    AILIMITBAR_TEST_PUBLISH_COPY_COMMAND="$FAKE_TOOLS/publish-copy" \
-    AILIMITBAR_TEST_PUBLISH_COMPARE_COMMAND="$FAKE_TOOLS/publish-compare" \
-    AILIMITBAR_TEST_PUBLISH_RENAME_COMMAND="$FAKE_TOOLS/publish-rename" \
+    BAIROMETER_DEVELOPMENT_TEAM="TEST_TEAM" \
+    BAIROMETER_DEVELOPER_IDENTITY="Developer ID Application: Fixture (TEST_TEAM)" \
+    BAIROMETER_PROVISIONING_PROFILE="$FIXTURE_ROOT/fixture.provisionprofile" \
+    BAIROMETER_NOTARYTOOL_PROFILE="FIXTURE_PRIVATE_PROFILE" \
+    BAIROMETER_NOTARYTOOL_KEYCHAIN="$FIXTURE_ROOT/fixture.keychain-db" \
+    BAIROMETER_NOTARIZATION_TEST_MODE=1 \
+    BAIROMETER_TEST_OUTPUT_DIRECTORY="$output_directory" \
+    BAIROMETER_TEST_PACKAGE_RELEASE_SCRIPT="$FAKE_TOOLS/package-release" \
+    BAIROMETER_TEST_RELEASE_VALIDATOR="$FAKE_TOOLS/release-validator" \
+    BAIROMETER_TEST_XCRUN_COMMAND="$FAKE_TOOLS/xcrun" \
+    BAIROMETER_TEST_DITTO_COMMAND="$FAKE_TOOLS/ditto" \
+    BAIROMETER_TEST_CODESIGN_COMMAND="$FAKE_TOOLS/codesign" \
+    BAIROMETER_TEST_LIPO_COMMAND="$FAKE_TOOLS/lipo" \
+    BAIROMETER_TEST_SPCTL_COMMAND="$FAKE_TOOLS/spctl" \
+    BAIROMETER_TEST_PUBLISH_COPY_COMMAND="$FAKE_TOOLS/publish-copy" \
+    BAIROMETER_TEST_PUBLISH_COMPARE_COMMAND="$FAKE_TOOLS/publish-compare" \
+    BAIROMETER_TEST_PUBLISH_RENAME_COMMAND="$FAKE_TOOLS/publish-rename" \
     FAKE_VALIDATOR_COUNTER="$output_directory/validator-count" \
     FAKE_TOOL_LOG="$TOOL_LOG" \
     REAL_RELEASE_VALIDATOR="$ROOT_DIR/script/validate_release_bundle.sh" \
@@ -285,13 +285,13 @@ assert_full_publish_order() {
 prepare_existing_final() {
   local output_directory="$1"
   mkdir -p "$output_directory"
-  printf 'caller-owned-final' >"$output_directory/AILimitBar-1.2.3-arm64.zip"
+  printf 'caller-owned-final' >"$output_directory/Bairometer-1.2.3-arm64.zip"
 }
 
 assert_existing_final_preserved() {
   local output_directory="$1"
   local scenario="$2"
-  [[ "$(/bin/cat "$output_directory/AILimitBar-1.2.3-arm64.zip")" == "caller-owned-final" ]] || \
+  [[ "$(/bin/cat "$output_directory/Bairometer-1.2.3-arm64.zip")" == "caller-owned-final" ]] || \
     fail "$scenario replaced a caller-owned final archive"
 }
 
@@ -299,7 +299,7 @@ assert_no_publish_temporary() {
   local output_directory="$1"
   local scenario="$2"
   if find "$output_directory" -maxdepth 1 \
-    -name '.AILimitBar-*.publish.*' \
+    -name '.Bairometer-*.publish.*' \
     -print -quit | grep -q .; then
     fail "$scenario left a task-owned publish temporary"
   fi
@@ -307,13 +307,13 @@ assert_no_publish_temporary() {
 
 set +e
 missing_result="$({
-  AILIMITBAR_NOTARYTOOL_PROFILE= \
+  BAIROMETER_NOTARYTOOL_PROFILE= \
     /bin/bash "$ROOT_DIR/script/notarize_release.sh" 1.2.3 7 arm64
 } 2>&1)"
 missing_status=$?
 set -e
 [[ "$missing_status" -ne 0 ]] || fail "missing Keychain profile unexpectedly passed"
-[[ "$missing_result" == *"requires AILIMITBAR_NOTARYTOOL_PROFILE"* ]] || \
+[[ "$missing_result" == *"requires BAIROMETER_NOTARYTOOL_PROFILE"* ]] || \
   fail "missing Keychain profile error was not actionable"
 
 accepted_output="$FIXTURE_ROOT/accepted"
@@ -324,12 +324,12 @@ accepted_result="$(run_fixture "$accepted_output" 2>&1)" || \
   fail "Keychain profile value leaked to public output"
 [[ "$accepted_result" != *"$FIXTURE_ROOT/fixture.keychain-db"* ]] || \
   fail "Keychain path leaked to public output"
-[[ -s "$accepted_output/AILimitBar-1.2.3-arm64-signed.zip" ]] || \
+[[ -s "$accepted_output/Bairometer-1.2.3-arm64-signed.zip" ]] || \
   fail "signed submission archive is missing"
-[[ -s "$accepted_output/AILimitBar-1.2.3-arm64.zip" ]] || \
+[[ -s "$accepted_output/Bairometer-1.2.3-arm64.zip" ]] || \
   fail "final notarized archive is missing"
-[[ -f "$accepted_output/AILimitBar-1.2.3-arm64.zip" &&
-   ! -L "$accepted_output/AILimitBar-1.2.3-arm64.zip" ]] || \
+[[ -f "$accepted_output/Bairometer-1.2.3-arm64.zip" &&
+   ! -L "$accepted_output/Bairometer-1.2.3-arm64.zip" ]] || \
   fail "successful publication is not an exact regular final file"
 [[ "$accepted_result" == *"Created notarized release"* ]] || \
   fail "successful publication did not report the final archive"
@@ -337,9 +337,9 @@ accepted_result="$(run_fixture "$accepted_output" 2>&1)" || \
 accepted_extract="$FIXTURE_ROOT/accepted-extract"
 mkdir -p "$accepted_extract"
 /usr/bin/ditto -x -k \
-  "$accepted_output/AILimitBar-1.2.3-arm64.zip" \
+  "$accepted_output/Bairometer-1.2.3-arm64.zip" \
   "$accepted_extract"
-[[ -s "$accepted_extract/AILimitBar.app/Contents/_CodeSignature/notarization-ticket" ]] || \
+[[ -s "$accepted_extract/Bairometer.app/Contents/_CodeSignature/notarization-ticket" ]] || \
   fail "final archive did not preserve the stapled ticket"
 [[ "$(grep -c '^xcrun stapler validate ' "$TOOL_LOG")" -eq 2 ]] || \
   fail "stapler validation did not run for both final app copies"
@@ -356,10 +356,10 @@ default_keychain_output="$FIXTURE_ROOT/default-keychain"
 : >"$TOOL_LOG"
 default_keychain_result="$(run_fixture \
   "$default_keychain_output" \
-  AILIMITBAR_NOTARYTOOL_KEYCHAIN= \
+  BAIROMETER_NOTARYTOOL_KEYCHAIN= \
   2>&1)" || \
   fail "default Keychain notarization fixture failed: $default_keychain_result"
-[[ -s "$default_keychain_output/AILimitBar-1.2.3-arm64.zip" ]] || \
+[[ -s "$default_keychain_output/Bairometer-1.2.3-arm64.zip" ]] || \
   fail "default Keychain fixture did not create the final archive"
 default_keychain_submit="$(
   grep '^xcrun notarytool submit ' "$TOOL_LOG" | /usr/bin/head -n 1
@@ -372,7 +372,7 @@ default_keychain_submit="$(
   fail "default Keychain profile value leaked to public output"
 
 directory_obstruction_output="$FIXTURE_ROOT/directory-obstruction"
-directory_obstruction="$directory_obstruction_output/AILimitBar-1.2.3-arm64.zip"
+directory_obstruction="$directory_obstruction_output/Bairometer-1.2.3-arm64.zip"
 mkdir -p "$directory_obstruction"
 printf 'caller-owned-marker' >"$directory_obstruction/marker"
 : >"$TOOL_LOG"
@@ -406,7 +406,7 @@ fi
 symlink_obstruction_output="$FIXTURE_ROOT/symlink-obstruction"
 mkdir -p "$symlink_obstruction_output"
 symlink_target="$symlink_obstruction_output/caller-owned-target"
-symlink_obstruction="$symlink_obstruction_output/AILimitBar-1.2.3-arm64.zip"
+symlink_obstruction="$symlink_obstruction_output/Bairometer-1.2.3-arm64.zip"
 printf 'caller-owned-target' >"$symlink_target"
 /bin/ln -s "caller-owned-target" "$symlink_obstruction"
 : >"$TOOL_LOG"
@@ -447,13 +447,13 @@ set -e
 [[ "$invalid_status" -ne 0 ]] || fail "Invalid notarization unexpectedly passed"
 [[ "$invalid_result" == *"submission ID: invalid-submission; status: Invalid"* ]] || \
   fail "Invalid notarization did not report safe submission metadata"
-[[ "$invalid_result" == *'--keychain-profile "$AILIMITBAR_NOTARYTOOL_PROFILE"'* ]] || \
+[[ "$invalid_result" == *'--keychain-profile "$BAIROMETER_NOTARYTOOL_PROFILE"'* ]] || \
   fail "Invalid notarization did not provide a safe private-log command"
 [[ "$invalid_result" != *"FIXTURE_PRIVATE_PROFILE"* ]] || \
   fail "Keychain profile value leaked on failure"
 [[ "$invalid_result" != *"PRIVATE_NOTARY_LOG_CONTENT"* ]] || \
   fail "private notarytool output leaked on failure"
-[[ ! -e "$invalid_output/AILimitBar-1.2.3-arm64.zip" ]] || \
+[[ ! -e "$invalid_output/Bairometer-1.2.3-arm64.zip" ]] || \
   fail "Invalid notarization created a final archive"
 if grep -q '^xcrun stapler staple ' "$TOOL_LOG"; then
   fail "Invalid notarization proceeded to stapling"
@@ -474,7 +474,7 @@ set -e
   fail "nonzero notarytool exit unexpectedly passed"
 [[ "$submit_failure_result" == *"submission ID: nonzero-submission; status: Accepted"* ]] || \
   fail "nonzero notarytool exit did not report safe submission metadata"
-[[ ! -e "$submit_failure_output/AILimitBar-1.2.3-arm64.zip" ]] || \
+[[ ! -e "$submit_failure_output/Bairometer-1.2.3-arm64.zip" ]] || \
   fail "nonzero notarytool exit created a final archive"
 if grep -q '^xcrun stapler staple ' "$TOOL_LOG"; then
   fail "nonzero notarytool exit proceeded to stapling"
@@ -599,7 +599,7 @@ set -e
 [[ "$staple_status" -ne 0 ]] || fail "stapler failure unexpectedly passed"
 assert_existing_final_preserved "$staple_output" "stapler failure"
 assert_no_publish_temporary "$staple_output" "stapler failure"
-[[ -s "$staple_output/AILimitBar-1.2.3-arm64-signed.zip" ]] || \
+[[ -s "$staple_output/Bairometer-1.2.3-arm64-signed.zip" ]] || \
   fail "stapler failure removed the signed submission archive"
 
 echo "PASS: notarization fixtures"

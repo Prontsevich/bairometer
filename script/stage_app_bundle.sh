@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-APP_NAME="AILimitBar"
-BUNDLE_ID="io.github.Prontsevich.AILimitBar"
+APP_NAME="Bairometer"
+BUNDLE_ID="io.github.Prontsevich.Bairometer"
 MIN_SYSTEM_VERSION="15.0"
-HELPER_NAME="AILimitBarClaudeStatusLine"
+HELPER_NAME="BairometerClaudeStatusLine"
 
 CONFIGURATION="debug"
 VERSION=""
@@ -98,31 +98,31 @@ APP_RESOURCES="$APP_CONTENTS/Resources"
 INFO_PLIST="$APP_CONTENTS/Info.plist"
 ASSET_CATALOG="$ROOT_DIR/Resources/Assets.xcassets"
 APP_RESOURCE_BUNDLE="$APP_NAME"_"$APP_NAME".bundle
-LOCAL_SIGNING_PROJECT="$ROOT_DIR/Support/LocalSigning/AILimitBarLocalSigning.xcodeproj"
-LOCAL_SIGNING_SCHEME="AILimitBarLocalSigning"
+LOCAL_SIGNING_PROJECT="$ROOT_DIR/Support/LocalSigning/BairometerLocalSigning.xcodeproj"
+LOCAL_SIGNING_SCHEME="BairometerLocalSigning"
 LOCAL_SIGNING_DERIVED_DATA="$ROOT_DIR/.build/local-signing"
-DEVELOPMENT_TEAM="${AILIMITBAR_DEVELOPMENT_TEAM:-}"
-DEVELOPER_IDENTITY="${AILIMITBAR_DEVELOPER_IDENTITY:-}"
-PROVISIONING_PROFILE="${AILIMITBAR_PROVISIONING_PROFILE:-}"
+DEVELOPMENT_TEAM="${BAIROMETER_DEVELOPMENT_TEAM:-}"
+DEVELOPER_IDENTITY="${BAIROMETER_DEVELOPER_IDENTITY:-}"
+PROVISIONING_PROFILE="${BAIROMETER_PROVISIONING_PROFILE:-}"
 
 if [[ "$CONFIGURATION" == "debug" && -z "$DEVELOPMENT_TEAM" ]]; then
-  echo "error: DEBUG staging requires AILIMITBAR_DEVELOPMENT_TEAM." >&2
+  echo "error: DEBUG staging requires BAIROMETER_DEVELOPMENT_TEAM." >&2
   echo "Set it to your Apple Development Team ID, for example:" >&2
-  echo "  AILIMITBAR_DEVELOPMENT_TEAM=YOUR_TEAM_ID $0 --configuration debug" >&2
+  echo "  BAIROMETER_DEVELOPMENT_TEAM=YOUR_TEAM_ID $0 --configuration debug" >&2
   exit 1
 fi
 
 if [[ "$CONFIGURATION" == "release" ]]; then
   if [[ -z "$DEVELOPMENT_TEAM" ]]; then
-    echo "error: RELEASE staging requires AILIMITBAR_DEVELOPMENT_TEAM." >&2
+    echo "error: RELEASE staging requires BAIROMETER_DEVELOPMENT_TEAM." >&2
     exit 1
   fi
   if [[ -z "$DEVELOPER_IDENTITY" ]]; then
-    echo "error: RELEASE staging requires AILIMITBAR_DEVELOPER_IDENTITY." >&2
+    echo "error: RELEASE staging requires BAIROMETER_DEVELOPER_IDENTITY." >&2
     exit 1
   fi
   if [[ -z "$PROVISIONING_PROFILE" || ! -f "$PROVISIONING_PROFILE" ]]; then
-    echo "error: RELEASE staging requires an existing AILIMITBAR_PROVISIONING_PROFILE." >&2
+    echo "error: RELEASE staging requires an existing BAIROMETER_PROVISIONING_PROFILE." >&2
     exit 1
   fi
 fi
@@ -182,7 +182,7 @@ for localization in en ru; do
   }
 done
 
-ASSET_INFO_PLIST="$(mktemp "${TMPDIR:-/tmp}/AILimitBar-assets.XXXXXX")"
+ASSET_INFO_PLIST="$(mktemp "${TMPDIR:-/tmp}/Bairometer-assets.XXXXXX")"
 xcrun actool \
   --compile "$APP_RESOURCES" \
   --platform macosx \
@@ -286,7 +286,7 @@ if [[ "$CONFIGURATION" == "debug" ]]; then
     exit 1
   }
 
-  SIGNING_TEMP_DIRECTORY="$(mktemp -d "${TMPDIR:-/tmp}/AILimitBar-signing.XXXXXX")"
+  SIGNING_TEMP_DIRECTORY="$(mktemp -d "${TMPDIR:-/tmp}/Bairometer-signing.XXXXXX")"
   SIGNING_ENTITLEMENTS="$SIGNING_TEMP_DIRECTORY/entitlements.plist"
   SIGNING_PROFILE_PLIST="$SIGNING_TEMP_DIRECTORY/profile.plist"
   STAGED_ENTITLEMENTS="$SIGNING_TEMP_DIRECTORY/staged-entitlements.plist"
@@ -342,7 +342,8 @@ if [[ "$CONFIGURATION" == "debug" ]]; then
     echo "error: local development profile belongs to an unexpected team" >&2
     exit 1
   }
-  [[ "$PROFILE_APP_IDENTIFIER" == "$EXPECTED_APP_IDENTIFIER" ]] || {
+  [[ "$PROFILE_APP_IDENTIFIER" == "$EXPECTED_APP_IDENTIFIER" ||
+     "$PROFILE_APP_IDENTIFIER" == "$PROFILE_TEAM.*" ]] || {
     echo "error: local development profile does not authorize the app identifier" >&2
     exit 1
   }
@@ -388,7 +389,7 @@ if [[ "$CONFIGURATION" == "debug" ]]; then
     --generate-entitlement-der \
     "$APP_BUNDLE"
 else
-  SIGNING_TEMP_DIRECTORY="$(mktemp -d "${TMPDIR:-/tmp}/AILimitBar-signing.XXXXXX")"
+  SIGNING_TEMP_DIRECTORY="$(mktemp -d "${TMPDIR:-/tmp}/Bairometer-signing.XXXXXX")"
   SIGNING_ENTITLEMENTS="$SIGNING_TEMP_DIRECTORY/entitlements.plist"
   SIGNING_PROFILE_PLIST="$SIGNING_TEMP_DIRECTORY/profile.plist"
   PROFILE_CERTIFICATE_BASE64="$SIGNING_TEMP_DIRECTORY/profile-certificate.base64"

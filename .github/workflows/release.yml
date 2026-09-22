@@ -103,14 +103,14 @@ jobs:
       - name: Configure ephemeral release credentials
         id: release_credentials
         env:
-          AILIMITBAR_CI_PRIVATE_DIRECTORY: ${{ runner.temp }}/AILimitBar-ci-release-private
-          AILIMITBAR_CI_KEYCHAIN_PATH: ${{ runner.temp }}/AILimitBar-ci-release.keychain-db
-          AILIMITBAR_CI_DEVELOPER_ID_P12_BASE64: ${{ secrets.DEVELOPER_ID_P12_BASE64 }}
-          AILIMITBAR_CI_DEVELOPER_ID_P12_PASSWORD: ${{ secrets.DEVELOPER_ID_P12_PASSWORD }}
-          AILIMITBAR_CI_PROVISIONING_PROFILE_BASE64: ${{ secrets.DEVELOPER_ID_PROVISIONING_PROFILE_BASE64 }}
-          AILIMITBAR_CI_NOTARYTOOL_APPLE_ID: ${{ secrets.NOTARYTOOL_APPLE_ID }}
-          AILIMITBAR_CI_NOTARYTOOL_TEAM_ID: ${{ secrets.NOTARYTOOL_TEAM_ID }}
-          AILIMITBAR_CI_NOTARYTOOL_PASSWORD: ${{ secrets.NOTARYTOOL_PASSWORD }}
+          BAIROMETER_CI_PRIVATE_DIRECTORY: ${{ runner.temp }}/Bairometer-ci-release-private
+          BAIROMETER_CI_KEYCHAIN_PATH: ${{ runner.temp }}/Bairometer-ci-release.keychain-db
+          BAIROMETER_CI_DEVELOPER_ID_P12_BASE64: ${{ secrets.DEVELOPER_ID_P12_BASE64 }}
+          BAIROMETER_CI_DEVELOPER_ID_P12_PASSWORD: ${{ secrets.DEVELOPER_ID_P12_PASSWORD }}
+          BAIROMETER_CI_PROVISIONING_PROFILE_BASE64: ${{ secrets.DEVELOPER_ID_PROVISIONING_PROFILE_BASE64 }}
+          BAIROMETER_CI_NOTARYTOOL_APPLE_ID: ${{ secrets.NOTARYTOOL_APPLE_ID }}
+          BAIROMETER_CI_NOTARYTOOL_TEAM_ID: ${{ secrets.NOTARYTOOL_TEAM_ID }}
+          BAIROMETER_CI_NOTARYTOOL_PASSWORD: ${{ secrets.NOTARYTOOL_PASSWORD }}
         run: /bin/bash script/setup_ci_release_credentials.sh
 
       - name: Build, notarize, and staple release
@@ -120,8 +120,8 @@ jobs:
           RELEASE_ARCHITECTURE: ${{ matrix.architecture }}
         run: |
           set -euo pipefail
-          pipeline_log="$AILIMITBAR_CI_PRIVATE_DIRECTORY/release-pipeline.log"
-          if ! TMPDIR="$AILIMITBAR_CI_PRIVATE_DIRECTORY" \
+          pipeline_log="$BAIROMETER_CI_PRIVATE_DIRECTORY/release-pipeline.log"
+          if ! TMPDIR="$BAIROMETER_CI_PRIVATE_DIRECTORY" \
             /bin/bash script/notarize_release.sh \
               "$RELEASE_VERSION" \
               "$RELEASE_BUILD_NUMBER" \
@@ -142,23 +142,23 @@ jobs:
           RELEASE_ARCHITECTURE: ${{ matrix.architecture }}
         run: |
           set -euo pipefail
-          archive="$GITHUB_WORKSPACE/dist/AILimitBar-$RELEASE_VERSION-$RELEASE_ARCHITECTURE.zip"
+          archive="$GITHUB_WORKSPACE/dist/Bairometer-$RELEASE_VERSION-$RELEASE_ARCHITECTURE.zip"
           [[ -f "$archive" && ! -L "$archive" && -s "$archive" ]] || {
             echo "::error::Expected notarized archive is missing or unsafe."
             exit 1
           }
           verification_directory="$(
             /usr/bin/mktemp -d \
-              "$AILIMITBAR_CI_PRIVATE_DIRECTORY/final-verification.XXXXXX"
+              "$BAIROMETER_CI_PRIVATE_DIRECTORY/final-verification.XXXXXX"
           )"
           /usr/bin/ditto -x -k "$archive" "$verification_directory"
-          app="$verification_directory/AILimitBar.app"
+          app="$verification_directory/Bairometer.app"
           [[ -d "$app" ]] || {
-            echo "::error::Final archive does not expand to AILimitBar.app."
+            echo "::error::Final archive does not expand to Bairometer.app."
             exit 1
           }
           if find "$verification_directory" -mindepth 1 -maxdepth 1 \
-            ! -name AILimitBar.app \
+            ! -name Bairometer.app \
             ! -name __MACOSX \
             -print -quit | grep -q .; then
             echo "::error::Final archive contains an unexpected top-level item."
@@ -170,7 +170,7 @@ jobs:
             "$RELEASE_BUILD_NUMBER" \
             "$RELEASE_ARCHITECTURE" \
             --require-notarization \
-            >"$AILIMITBAR_CI_PRIVATE_DIRECTORY/final-validation.log" \
+            >"$BAIROMETER_CI_PRIVATE_DIRECTORY/final-validation.log" \
             2>&1; then
             echo "::error::Independent release trust validation failed."
             exit 1
@@ -183,8 +183,8 @@ jobs:
       - name: Upload architecture-specific artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: AILimitBar-${{ inputs.version }}-${{ matrix.architecture }}
-          path: dist/AILimitBar-${{ inputs.version }}-${{ matrix.architecture }}.zip
+          name: Bairometer-${{ inputs.version }}-${{ matrix.architecture }}
+          path: dist/Bairometer-${{ inputs.version }}-${{ matrix.architecture }}.zip
           if-no-files-found: error
           retention-days: 3
           compression-level: 0

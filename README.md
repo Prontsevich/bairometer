@@ -46,17 +46,14 @@ the `Experimental` label is informational, not a warning.
 **Requirements:** macOS 15+ on Apple Silicon or Intel
 
 Download the matching archive from the
-[latest GitHub Release](https://github.com/Prontsevich/ai-limitbar/releases/latest):
+[latest GitHub Release](https://github.com/Prontsevich/bairometer/releases/latest):
 
-The public product name is Bairometer. Release archives and the app bundle
-intentionally retain their existing `AILimitBar` technical names for
-compatibility:
+Release archives and the app bundle use the Bairometer technical identity:
 
-- `AILimitBar-<version>-arm64.zip` for Apple Silicon Macs
-- `AILimitBar-<version>-x86_64.zip` for Intel Macs
+- `Bairometer-<version>-arm64.zip` for Apple Silicon Macs
+- `Bairometer-<version>-x86_64.zip` for Intel Macs
 
-Unpack the archive and move `AILimitBar.app` to Applications; its displayed
-name is Bairometer.
+Unpack the archive and move `Bairometer.app` to Applications.
 
 New releases created through the verified draft flow will be signed with a
 Developer ID Application certificate and notarized by Apple. Historical
@@ -101,7 +98,7 @@ setup, and release procedures.
 ## Feedback And Support
 
 Report bugs and feature ideas through the public
-[GitHub issue forms](https://github.com/Prontsevich/ai-limitbar/issues/new/choose), send
+[GitHub issue forms](https://github.com/Prontsevich/bairometer/issues/new/choose), send
 direct feedback to [prontsevich@gmail.com](mailto:prontsevich@gmail.com), or
 message [@s_prontsevich](https://t.me/s_prontsevich) on Telegram.
 

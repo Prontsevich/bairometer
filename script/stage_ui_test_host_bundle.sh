@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PRODUCTION_APP_NAME="AILimitBar"
-HOST_APP_NAME="AILimitBarUITestHost"
-HOST_EXECUTABLE="AILimitBarTest"
-HOST_BUNDLE_ID="io.github.Prontsevich.AILimitBar.UITestHost"
+PRODUCTION_APP_NAME="Bairometer"
+HOST_APP_NAME="BairometerUITestHost"
+HOST_EXECUTABLE="BairometerTest"
+HOST_BUNDLE_ID="io.github.Prontsevich.Bairometer.UITestHost"
 HOST_DISPLAY_NAME="Bairometer UI Test Host"
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"

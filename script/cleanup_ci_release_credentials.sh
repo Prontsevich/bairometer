@@ -3,12 +3,12 @@ set -euo pipefail
 umask 077
 
 RUNNER_TEMP_DIRECTORY="${RUNNER_TEMP:-}"
-PRIVATE_DIRECTORY="${AILIMITBAR_CI_PRIVATE_DIRECTORY:-}"
-KEYCHAIN_PATH="${AILIMITBAR_CI_KEYCHAIN_PATH:-}"
-OWNERSHIP_TOKEN="${AILIMITBAR_CI_CREDENTIAL_OWNER:-}"
+PRIVATE_DIRECTORY="${BAIROMETER_CI_PRIVATE_DIRECTORY:-}"
+KEYCHAIN_PATH="${BAIROMETER_CI_KEYCHAIN_PATH:-}"
+OWNERSHIP_TOKEN="${BAIROMETER_CI_CREDENTIAL_OWNER:-}"
 SECURITY_COMMAND="/usr/bin/security"
-if [[ "${AILIMITBAR_CI_CREDENTIAL_TEST_MODE:-0}" == "1" ]]; then
-  SECURITY_COMMAND="${AILIMITBAR_TEST_SECURITY_COMMAND:?}"
+if [[ "${BAIROMETER_CI_CREDENTIAL_TEST_MODE:-0}" == "1" ]]; then
+  SECURITY_COMMAND="${BAIROMETER_TEST_SECURITY_COMMAND:?}"
 fi
 
 [[ -n "$RUNNER_TEMP_DIRECTORY" && "$RUNNER_TEMP_DIRECTORY" == /* &&
@@ -16,11 +16,11 @@ fi
   echo "error: refusing release credential cleanup with an unsafe RUNNER_TEMP" >&2
   exit 1
 }
-[[ "$PRIVATE_DIRECTORY" == "$RUNNER_TEMP_DIRECTORY/AILimitBar-ci-release-private" ]] || {
+[[ "$PRIVATE_DIRECTORY" == "$RUNNER_TEMP_DIRECTORY/Bairometer-ci-release-private" ]] || {
   echo "error: refusing to remove an unexpected private release directory" >&2
   exit 1
 }
-[[ "$KEYCHAIN_PATH" == "$RUNNER_TEMP_DIRECTORY/AILimitBar-ci-release.keychain-db" ]] || {
+[[ "$KEYCHAIN_PATH" == "$RUNNER_TEMP_DIRECTORY/Bairometer-ci-release.keychain-db" ]] || {
   echo "error: refusing to remove an unexpected release keychain" >&2
   exit 1
 }

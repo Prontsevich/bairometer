@@ -1,6 +1,6 @@
 # Claude Code StatusLine Source
 
-Claude Code can run the bundled `AILimitBarClaudeStatusLine` helper. It reads the
+Claude Code can run the bundled `BairometerClaudeStatusLine` helper. It reads the
 documented `statusLine` JSON from stdin and writes a normalized Bairometer
 snapshot to the app-owned SQLite database. This is a local estimate, not
 authoritative account-level quota.
@@ -16,8 +16,8 @@ settings automatically. The generated command contains that account's stable
 `--account-id`; it does not accept a database path or a user-managed snapshot
 path.
 
-The database remains at `~/Library/Application Support/AI Limitbar/AI Limitbar.sqlite`;
-these are retained technical storage names. Bairometer enables SQLite WAL mode,
+The database remains at `~/Library/Application Support/Bairometer/Bairometer.sqlite`;
+Bairometer enables SQLite WAL mode,
 foreign keys, and a bounded write timeout so
 the helper can update it while the app is closed or reading. Invalid helper input
 does not change the last stored snapshot.

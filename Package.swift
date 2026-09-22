@@ -3,48 +3,48 @@
 import PackageDescription
 
 let package = Package(
-    name: "AILimitBar",
+    name: "Bairometer",
     defaultLocalization: "en",
     platforms: [
         .macOS(.v15)
     ],
     products: [
-        .executable(name: "AILimitBar", targets: ["AILimitBar"]),
-        .executable(name: "AILimitBarClaudeStatusLine", targets: ["AILimitBarClaudeStatusLine"]),
-        .library(name: "AILimitBarCore", targets: ["AILimitBarCore"])
+        .executable(name: "Bairometer", targets: ["Bairometer"]),
+        .executable(name: "BairometerClaudeStatusLine", targets: ["BairometerClaudeStatusLine"]),
+        .library(name: "BairometerCore", targets: ["BairometerCore"])
     ],
     dependencies: [
         .package(url: "https://github.com/groue/GRDB.swift.git", from: "7.10.0")
     ],
     targets: [
         .executableTarget(
-            name: "AILimitBar",
-            dependencies: ["AILimitBarCore"],
-            path: "Sources/AILimitBar",
+            name: "Bairometer",
+            dependencies: ["BairometerCore"],
+            path: "Sources/Bairometer",
             resources: [.process("Resources")]
         ),
         .executableTarget(
-            name: "AILimitBarClaudeStatusLine",
-            dependencies: ["AILimitBarCore"],
-            path: "Sources/AILimitBarClaudeStatusLine"
+            name: "BairometerClaudeStatusLine",
+            dependencies: ["BairometerCore"],
+            path: "Sources/BairometerClaudeStatusLine"
         ),
         .target(
-            name: "AILimitBarCore",
+            name: "BairometerCore",
             dependencies: [
                 .product(name: "GRDB", package: "GRDB.swift")
             ],
-            path: "Sources/AILimitBarCore"
+            path: "Sources/BairometerCore"
         ),
         .testTarget(
-            name: "AILimitBarCoreTests",
-            dependencies: ["AILimitBarCore"],
-            path: "Tests/AILimitBarCoreTests",
+            name: "BairometerCoreTests",
+            dependencies: ["BairometerCore"],
+            path: "Tests/BairometerCoreTests",
             resources: [.copy("Fixtures")]
         ),
         .testTarget(
-            name: "AILimitBarTests",
-            dependencies: ["AILimitBar"],
-            path: "Tests/AILimitBarTests"
+            name: "BairometerTests",
+            dependencies: ["Bairometer"],
+            path: "Tests/BairometerTests"
         )
     ],
     swiftLanguageModes: [.v6]

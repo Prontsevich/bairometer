@@ -5,7 +5,7 @@ Guidance for AI coding agents working in this repository.
 ## Project Overview
 
 Bairometer is a macOS menu-bar-only app (`LSUIElement`) for viewing normalized
-AI provider usage snapshots. `AILimitBar` remains its technical identity for
+AI provider usage snapshots. `Bairometer` remains its technical identity for
 packages, targets, executables, storage, signing, and bundle identifiers. Built
 with SwiftUI on Swift 6.2 / macOS 15+.
 
@@ -14,7 +14,7 @@ with SwiftUI on Swift 6.2 / macOS 15+.
 ```zsh
 swift build                                           # Build all targets
 swift test                                            # Run full test suite
-AILIMITBAR_DEVELOPMENT_TEAM=YOUR_TEAM_ID \
+BAIROMETER_DEVELOPMENT_TEAM=YOUR_TEAM_ID \
   ./script/build_and_run.sh                           # Stage DEBUG .app and launch
 ```
 
@@ -22,7 +22,7 @@ Useful run modes: `--verify`, `--debug`, `--logs`, `--telemetry`.
 
 The run script builds the SwiftPM product, stages the DEBUG `.app` bundle in
 `dist/`, and launches it. DEBUG staging requires the caller's explicit
-`AILIMITBAR_DEVELOPMENT_TEAM`; Xcode automatic signing supplies an installed
+`BAIROMETER_DEVELOPMENT_TEAM`; Xcode automatic signing supplies an installed
 Apple Development identity and an Xcode-managed profile that authorizes the
 restricted application-identifier and default Keychain-group entitlements.
 Release staging requires an explicit Developer ID Application identity and a
@@ -30,9 +30,9 @@ matching Developer ID provisioning profile supplied outside the repository. It
 signs the helper before the app, enables Hardened Runtime, requests secure
 timestamps, and preserves the authorized default Keychain group. Local trusted
 packaging additionally requires a caller-owned Keychain profile such as
-`AILIMITBAR_NOTARYTOOL_PROFILE=YOUR_NOTARYTOOL_PROFILE`; callers using an
+`BAIROMETER_NOTARYTOOL_PROFILE=YOUR_NOTARYTOOL_PROFILE`; callers using an
 isolated file-based Keychain also provide its path through
-`AILIMITBAR_NOTARYTOOL_KEYCHAIN`. The wrapper submits the signed architecture-
+`BAIROMETER_NOTARYTOOL_KEYCHAIN`. The wrapper submits the signed architecture-
 specific ZIP, staples the accepted app, and revalidates the final archive with
 codesign, stapler, and Gatekeeper. The manual-only protected CI workflow runs
 the same pipeline on native Apple Silicon and Intel runners and uploads short-
@@ -46,29 +46,29 @@ same bundle shape.
 
 | Target | Type | Purpose |
 | --- | --- | --- |
-| `AILimitBar` | Executable | Main menu-bar app (SwiftUI `MenuBarExtra`) |
-| `AILimitBarClaudeStatusLine` | Executable | Bundled helper for Claude Code `statusLine` |
-| `AILimitBarCore` | Library | Shared models, providers, services, stores |
-| `AILimitBarCoreTests` | Tests | Core layer: providers, DB, snapshots, refresh |
-| `AILimitBarTests` | Tests | App layer: orchestration, dashboard presentation |
+| `Bairometer` | Executable | Main menu-bar app (SwiftUI `MenuBarExtra`) |
+| `BairometerClaudeStatusLine` | Executable | Bundled helper for Claude Code `statusLine` |
+| `BairometerCore` | Library | Shared models, providers, services, stores |
+| `BairometerCoreTests` | Tests | Core layer: providers, DB, snapshots, refresh |
+| `BairometerTests` | Tests | App layer: orchestration, dashboard presentation |
 
 ### Layers
 
 ```
-AILimitBar (app)
+Bairometer (app)
 ├── App/        — SwiftUI app entry, lifecycle
 ├── Models/     — Dashboard presentation models
 ├── Support/    — Telemetry, statusLine installer, WebKit controller
 ├── ViewModels/ — AppModel and extensions (accounts, persistence, refresh)
 └── Views/      — MenuBarPanel, Settings, account details, terminal styling
 
-AILimitBarCore (library)
+BairometerCore (library)
 ├── Models/    — UsageSnapshot, ProviderConfiguration, RefreshSettings
 ├── Providers/ — ProviderAdapter protocol + 5 adapters (Codex, Claude, Ollama, Mock, Manual)
 ├── Services/  — CodexAppServerClient, ClaudeCodeStatusLine, Keychain, RefreshCoordinator
 └── Stores/    — GRDB/SQLite database, stores, legacy importer
 
-AILimitBarClaudeStatusLine (helper)
+BairometerClaudeStatusLine (helper)
 └── main.swift — Reads statusLine JSON from stdin, writes snapshot to SQLite
 ```
 
@@ -137,7 +137,7 @@ AILimitBarClaudeStatusLine (helper)
   current Codex Computer Use connection cannot discover or inspect its
   `LSUIElement` menu-bar process. Do not retry it against the production app.
   Use `./script/build_and_run.sh --ui-test-host <scenario>` with explicit
-  `AILIMITBAR_DEVELOPMENT_TEAM=YOUR_TEAM_ID` for app-owned dashboard and
+  `BAIROMETER_DEVELOPMENT_TEAM=YOUR_TEAM_ID` for app-owned dashboard and
   Settings AX/visual checks; see `docs/ui-test-host.md`. The host does not cover
   the production status item, `NSPopover` anchoring,
   `LSUIElement` activation/Spaces, OAuth/WebKit, or real providers. Keep those

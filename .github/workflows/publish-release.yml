@@ -146,7 +146,7 @@ jobs:
 
           archives=()
           for architecture in arm64 x86_64; do
-            artifact_name="AILimitBar-$RELEASE_VERSION-$architecture"
+            artifact_name="Bairometer-$RELEASE_VERSION-$architecture"
             archive_name="$artifact_name.zip"
             mapfile -t artifact_ids < <(
               gh api --paginate "repos/$GH_REPO/actions/runs/$VALIDATION_RUN_ID/artifacts" \

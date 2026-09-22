@@ -86,7 +86,7 @@ captures were temporary and are not available in the repository.
 6. A later product decision added persisted Compact, Standard, and Tall
    dashboard viewport presets; code, Settings copy, the design contract, and
    staged-app manual verification were completed on 2026-07-15.
-7. Computer Use still cannot inspect `AILimitBar`, its bundle identifier, or
+7. Computer Use still cannot inspect `Bairometer`, its bundle identifier, or
    `SystemUIServer`; every attempt ends with
    `Computer Use server error -10005: timeoutReached`.
 8. Supplied OpenRouter dashboard, Info, Settings, overflow-menu, and key-editor
@@ -154,4 +154,4 @@ captures were temporary and are not available in the repository.
 ## Final Result
 
 passed — manual Light/Dark staged-app verification completed on 2026-07-15;
-the public QA record is [GitHub issue #2](https://github.com/Prontsevich/ai-limitbar/issues/2).
+the public QA record is [GitHub issue #2](https://github.com/Prontsevich/bairometer/issues/2).
