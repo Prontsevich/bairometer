@@ -1,6 +1,6 @@
-# AI Limitbar Execute Tasks Adapter
+# Bairometer Execute Tasks Adapter
 
-Use this adapter with the global `execute-tasks` skill in the AI Limitbar
+Use this adapter with the global `execute-tasks` skill in the Bairometer
 repository. The global skill owns orchestration; this file defines
 repository-specific task sources, task boundaries, lifecycle, review,
 verification, and commit policy.
@@ -121,7 +121,7 @@ the independent review.
 
 ## Working-tree safety and exploration
 
-Preserve all pre-existing changes. AI Limitbar frequently has active
+Preserve all pre-existing changes. Bairometer frequently has active
 uncommitted research or implementation artifacts; do not stage, rewrite, or
 delete them unless the selected work unit explicitly owns those paths.
 
