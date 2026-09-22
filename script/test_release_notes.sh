@@ -58,6 +58,61 @@ if ! diff -u "${temporary_directory}/expected" "${temporary_directory}/actual"; 
     fail 'v0.5.0 output did not match the release notes source'
 fi
 
+"$renderer" v0.6.0 >"${temporary_directory}/actual"
+
+cat >"${temporary_directory}/expected" <<'EOF'
+## English
+
+### Added
+
+- Ollama Cloud's experimental web-page source now recognizes the monthly
+  `Included usage` meter and shows its used amount, limit, percentage, and reset
+  time when available.
+- Ollama usage refreshes now accept whichever supported usage sections the
+  settings page exposes: Session, Weekly, Monthly, or a combination of them.
+
+### Changed
+
+- Bairometer now uses its final technical identity throughout the app bundle,
+  helper, storage, Keychain service, signing, and release archives.
+
+### Upgrade Notes
+
+- This is a breaking pre-release rename. Provider accounts, isolated web
+  sessions, Keychain credentials, and Claude Code `statusLine` configuration
+  from an earlier pre-release installation are not migrated automatically.
+  Configure affected accounts again and reinstall the bundled `statusLine`
+  helper from Settings.
+
+## Русский
+
+### Добавлено
+
+- Экспериментальный источник Ollama Cloud теперь распознаёт месячный индикатор
+  `Included usage` и показывает использованную сумму, лимит, процент и время
+  сброса, когда они доступны.
+- Обновление использования Ollama теперь принимает любые поддерживаемые
+  разделы страницы Settings: Session, Weekly, Monthly или их сочетание.
+
+### Изменено
+
+- Bairometer теперь использует окончательную техническую идентичность в
+  bundle приложения, helper, хранилище, сервисе Keychain, signing и архивах
+  релиза.
+
+### При обновлении
+
+- Это несовместимое prerelease-переименование. Аккаунты провайдеров,
+  изолированные web-сессии, credentials в Keychain и конфигурация Claude Code
+  `statusLine` из прежней prerelease-установки автоматически не переносятся.
+  Настройте нужные аккаунты заново и переустановите bundled `statusLine`
+  helper из Settings.
+EOF
+
+if ! diff -u "${temporary_directory}/expected" "${temporary_directory}/actual"; then
+    fail 'v0.6.0 output did not match the release notes source'
+fi
+
 assert_rejected 'missing version'
 assert_rejected 'invalid semantic version' 0.5.0
 assert_rejected 'noncanonical semantic version' v01.2.3

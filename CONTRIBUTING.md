@@ -109,9 +109,14 @@ must succeed before the architecture-specific ZIP is uploaded for three days.
 An invocation-specific ownership marker prevents collision failures from
 removing pre-existing paths. Success and failure paths delete only their owned
 temporary Keychain, decoded material, and private diagnostics, and cleanup must
-succeed before upload. Workflow artifacts remain protected validation outputs;
-tag-triggered GitHub Release publication stays disabled until the separate
-publication and clean-Mac gates are complete.
+succeed before upload. Workflow artifacts remain protected validation outputs.
+
+After a successful validation run, dispatch `Publish Draft Release` from the
+protected `main` branch with the same version, build number, and validation run
+ID. It verifies that exact successful validation, creates an annotated tag, and
+attaches both validated archives to a GitHub draft with bilingual notes and
+SHA-256 checksums. Review the draft, its notes, and its assets before manually
+publishing it. Tag-triggered publication remains disabled.
 
 ## Architecture
 

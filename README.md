@@ -34,7 +34,7 @@ No real provider credentials are required to start.
 | --- | --- | --- |
 | **OpenAI Codex** | App-server | 🟢 Live rate-limit windows |
 | **Claude Code** | Helper + `/usage` CLI | 🟡 Local estimate / 🟢 Live plan limits |
-| **Ollama Cloud** | Web page (isolated WebKit) | 🟢 Live session/weekly |
+| **Ollama Cloud** | Web page (isolated WebKit) | 🟢 Live session/weekly/monthly |
 
 Experimental sources are opt-in. A successful experimental read is `OK`;
 the `Experimental` label is informational, not a warning.
